@@ -61,10 +61,10 @@ withDefaults(
             
             <!-- Marca / Logo Izquierda -->
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-700 flex items-center justify-center text-white font-bold text-xl shadow-sm">
-                   CR
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-950 to-red-300 flex items-center justify-center text-white font-bold text-xl shadow-sm">
+                   <img src="img/logo-car.PNG" alt="CAR">
                 </div>
-                <span class="font-extrabold text-xl tracking-tight hidden sm:block">Carlos<span class="text-red-600 dark:text-green-500">Ramirez</span></span>
+                <span class="font-extrabold text-xl tracking-tight hidden sm:block">Carlos<span class="text-red-600">Ramirez</span></span>
             </div>
 
             <!-- Navegación Interna (Secciones) -->
@@ -102,25 +102,15 @@ withDefaults(
             <section id="inicio" class="w-full mb-24 relative flex flex-col lg:flex-row items-center justify-between min-h-[50vh] lg:min-h-0 scroll-mt-32">
                 
                 <!-- Forma Gráfica (Fondo en móvil, Izquierda en Desktop) -->
-                <div class="absolute inset-0 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15 dark:opacity-10 lg:opacity-100 pointer-events-none z-0 lg:order-2">
-                    <svg class="w-[150%] max-w-none lg:w-full lg:max-w-md transform translate-x-10 lg:translate-x-0" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="url(#gradient-blob)" d="M54.8,-60.1C70.2,-46.8,81,-26.7,82.4,-5.9C83.8,14.9,75.8,36.4,61.4,52.3C47,68.2,26.2,78.5,4.7,74.7C-16.9,70.9,-37.8,53,-52.1,35.6C-66.4,18.2,-74.1,1.3,-71.3,-14.2C-68.5,-29.7,-55.2,-43.8,-40.1,-57.1C-25,-70.4,-8.1,-82.9,6.5,-90.6C21.1,-98.3,42.2,-101.2,54.8,-60.1Z" transform="translate(100 100) scale(1.1)" />
-                        <defs>
-                            <linearGradient id="gradient-blob" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#86efac" /> <!-- green-300 -->
-                                <stop offset="100%" stop-color="#059669" /> <!-- emerald-600 -->
-                            </linearGradient>
-                        </defs>
-                        <!-- Capa superpuesta para más profundidad -->
-                        <path fill="currentColor" class="text-blue-500/20 dark:text-blue-400/20" d="M38.1,-46.3C52.4,-35.1,69.2,-25.9,73.1,-12.9C77,0.1,68,16.8,56.1,30.3C44.2,43.8,29.4,54.1,12.7,59.3C-4,64.5,-22.6,64.6,-37.3,56.6C-52,48.6,-62.8,32.5,-66.9,15.1C-71,-2.3,-68.4,-21,-58.5,-35.2C-48.6,-49.4,-31.4,-59.1,-16.1,-63.4C-0.8,-67.7,12.6,-66.6,23.8,-57.5Z" transform="translate(100 100) scale(1.2) rotate(45)" />
-                    </svg>
+                <div class="absolute inset-0 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15  dark:opacity-100 lg:opacity-60 pointer-events-none z-0 lg:order-2">
+                    <img src="favicon.svg" alt="CA">
                 </div>
 
                 <!-- Texto (Izquierda en Desktop, Centrado en Móvil) -->
                 <div class="w-full lg:w-3/5 lg:pr-12 text-center lg:text-left relative z-10 lg:order-1 pt-12 lg:pt-0">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
                         Soluciones Digitales <br class="hidden md:block lg:hidden xl:block" />
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-700 dark:from-green-400 dark:to-emerald-500">Orientadas a Resultados</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 dark:from-red-400 dark:to-red-500">Orientadas a Resultados</span>
                     </h1>
                     
                     <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-10 text-justify lg:text-left relative z-10">
