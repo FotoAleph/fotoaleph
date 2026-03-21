@@ -4,6 +4,8 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import '../css/app.css';
 import { initializeTheme } from '@/composables/useAppearance';
+// 1. Importamos el plugin de traducciones para Laravel + Vue
+import { i18nVue } from 'laravel-vue-i18n';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -17,8 +19,19 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            // 2. Registramos el plugin i18nVue y configuramos la carga dinámica
+            .use(i18nVue, {
+                resolve: async (lang: string) => {
+                    const langs = import.meta.glob('../../lang/*.json');
+                    const path = `../../lang/${lang}.json`;
+                    if (langs[path]) {
+                        return await langs[path]();
+                    }
+                },
+            })
             .mount(el);
     },
+    
     progress: {
         color: '#4B5563',
     },

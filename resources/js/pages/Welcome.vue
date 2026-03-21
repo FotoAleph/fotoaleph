@@ -69,9 +69,9 @@ withDefaults(
 
             <!-- Navegación Interna (Secciones) -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
-                <a href="#inicio" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Inicio</a>
-                <a href="#proyectos" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Proyectos</a>
-                <a href="#experiencia" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Experiencia</a>
+                <a href="#inicio" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">{{$t('Home') }}</a>
+                <a href="#proyectos" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">{{ $t('Proyects') }}</a>
+                <a href="#experiencia" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">{{ $t('Know-how') }}</a>
                 <a href="#contacto" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Contacto</a>
             </nav>
 
@@ -85,11 +85,11 @@ withDefaults(
                 <template v-else>
                     <Link :href="login()"
                         class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                        Entrar
+                       {{ $t('Login')}}
                     </Link>
                     <Link v-if="canRegister" :href="register()"
                         class="hidden sm:inline-block px-4 py-1.5 rounded-md text-sm font-medium bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-sm">
-                        Registrarse
+                        {{$t('Register')}}
                     </Link>
                 </template>
             </div>
@@ -168,30 +168,35 @@ withDefaults(
                                 </button>
                             </div>
                         </div>
-                        <div class="flex-1 flex items-center justify-center relative z-10 lg:pl-6 mt-auto mb-auto">
+                        <div class="grid items-center justify-center relative z-10 lg:pl-6 mt-auto mb-auto gap-0">
                             <a href="https://dinamycode.com" target="_blank" rel="noopener noreferrer" class="block w-full overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-600 shadow-lg hover:scale-[1.03] transition-transform duration-500 ring-4 ring-white dark:ring-gray-800">
                                 <img class="w-full object-cover aspect-auto lg:h-full lg:object-cover" 
                                     src="https://dinamycode.com/img/dinamycode_title.png" 
                                     loading="lazy" 
                                     alt="Dinamycode Logo">
                             </a>
-                        </div>
-                        <div class="hidden lg:flex items-center gap-3 mt-6">
+                        <div class="flex w-full justify-end gap-3 mt-2">
                             <a href="#" aria-label="Facebook de DinamyCode" class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors">
-                                <img src="/svg/Facebook.svg" alt="" class="w-4 h-4 opacity-55" aria-hidden="true">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path :d="socialNetworks[1].icon" />
+                                </svg>
                             </a>
                             <a href="#" aria-label="Instagram de DinamyCode" class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors">
-                                <img src="/svg/Instagram.svg" alt="" class="w-4 h-4 opacity-55" aria-hidden="true">
-                            </a>
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path :d="socialNetworks[6].icon" />
+                                </svg>  
+                             </a>
                             <a href="https://www.linkedin.com/company/dinamycode/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de DinamyCode" class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors">
-                                <img src="/svg/Linkedin.svg" alt="" class="w-4 h-4 opacity-55" aria-hidden="true">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path :d="socialNetworks[3].icon" />
+                                </svg>
                             </a>
-                            <a href="https://wa.me/573132635848" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de DinamyCode" class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors">
-                                <img src="/svg/WhatsApp.svg" alt="" class="w-4 h-4 opacity-55" aria-hidden="true">
-                            </a>
+            
                         </div>
                     </div>
                 </div>
+
+                        </div>
 
                 <!-- Tarjeta 2: Github (Bloque oscuro, arriba derecha) -->
                 <div class="md:col-span-1 lg:col-span-1 bg-[#0d1117] rounded-[2rem] shadow-lg overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:shadow-2xl duration-500 relative group border border-gray-800">
