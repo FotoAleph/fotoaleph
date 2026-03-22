@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Pqr extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'type',
+        'subject',
+        'message',
+        'status',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
