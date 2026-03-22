@@ -73,8 +73,7 @@
                             </table>
                         </div>
 
-                        <div class="mt-6">
-                            <Pagination :links="tenants.links" />
+                        <div class="mt-6" v-html="tenants.links">
                         </div>
                     </div>
                 </div>
@@ -84,8 +83,7 @@
 </template>
 
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Pagination from '@/Components/Pagination.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
 defineProps({

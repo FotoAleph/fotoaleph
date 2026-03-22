@@ -1,8 +1,8 @@
 <template>
-    <AppLayout title="Create Tenant">
+    <AppLayout title="Edit Tenant">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create New Tenant
+                Edit Tenant
             </h2>
         </template>
 
@@ -38,7 +38,7 @@
                                 :disabled="form.processing"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                             >
-                                Create Tenant
+                                Update Tenant
                             </button>
                         </div>
                     </form>
@@ -49,14 +49,18 @@
 </template>
 
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
 
+defineProps({
+    tenant: Object,
+});
+
 const form = useForm({
-    razon_social: '',
+    razon_social: props.tenant.razon_social,
 });
 
 const submit = () => {
-    form.post(route('tenants.store'));
+    form.put(route('tenants.update', props.tenant.id));
 };
 </script>
