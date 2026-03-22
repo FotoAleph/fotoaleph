@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+    $this->call(SocialNetworkTypesSeeder::class);
     $this->call(TenantSeeder::class);
 
     }
