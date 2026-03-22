@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model
 {
     protected $fillable = [
-        "razon_social",
+        "razon_social"
     ];
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function sitios()
@@ -30,5 +30,9 @@ class Tenant extends Model
     public function redesSociales()
     {
         return $this->morphMany(SocialNetwork::class, 'socialable');    
+    }
+    public function aleatoriasRedesSociales()
+    {
+        return $this->morphMany(SocialNetwork::class, 'socialable')->inRandomOrder()->limit(2);    
     }
 }

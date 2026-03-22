@@ -15,11 +15,11 @@ class TenantSeeder extends Seeder
     {
         // 1. Crear Tenant: Dinamycode
         $dinamycode = Tenant::firstOrCreate(['razon_social' => 'Dinamycode']);
-        $this->assignUser($dinamycode, 1);
+        $dinamycode->users()->attach(2);
 
         // 2. Crear Tenant: Fotoaleph
         $fotoAleph = Tenant::firstOrCreate(['razon_social' => 'Fotoaleph']);
-        $this->assignUser($fotoAleph, 3);
+        $fotoAleph->users()->attach(3);
 
         // Relaciones de Fotoaleph
         $fotoAleph->direcciones()->create([
@@ -39,14 +39,14 @@ class TenantSeeder extends Seeder
 
         // 3. Crear Tenant: Biotek
         $biotek = Tenant::firstOrCreate(['razon_social' => 'Biotek']);
-        $this->assignUser($biotek, 2);
+        $biotek->users()->attach(1);
 
         // 4. Crear Tenant: Casa Angel
         Tenant::firstOrCreate(['razon_social' => 'Casa Angel']);
 
         // 5. Crear Tenant: Sport Bogota
         $sportBogota = Tenant::firstOrCreate(['razon_social' => 'Sport Bogota']);
-        $this->assignUser($sportBogota, 4);
+        $biotek->users()->attach(4);
 
         $sportBogota->direcciones()->create([
             'nomenclatura' => 'Calle 123 #45-67',

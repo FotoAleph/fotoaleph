@@ -15,5 +15,7 @@ class SocialNetwork extends Model
         'icon',
     ];
 
+    
+
     protected $table = 'redes_sociales';
 }
