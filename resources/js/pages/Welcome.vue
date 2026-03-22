@@ -1,30 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { dashboard, login, register } from '@/routes';
-import axios from 'axios'
+
 
 // Declaramos la variable reactiva para el botón "Ver más"
 const showFullDinamycode = ref(false);
 
-const activeSocials = ref([])
-const loading = ref(true)
-const error = ref(null)
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      'http://127.0.0.1:8000/api/redes-sociales/tenant/2/aleatorias'
-    )
-
-    activeSocials.value = response.data
-  } catch (e) {
-    console.error(e)
-    error.value = 'No se pudieron cargar redes sociales'
-  } finally {
-    loading.value = false
-  }
-})
 
 withDefaults(
     defineProps<{
@@ -373,11 +355,7 @@ withDefaults(
                 
                 <!-- Redes Sociales Rotativas -->
                 <div class="flex items-center gap-3 pr-3 border-r border-gray-300 dark:border-gray-700">
-                    <a v-for="social in activeSocials" :key="social.name" :href="social.url" target="_blank" rel="noopener noreferrer" :aria-label="social.name" :title="social.name" class="text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path :d="social.icon" />
-                        </svg>
-                    </a>
+                    <i class="fab facebook"></i>
                 </div>
                 
                 <!-- Copyright Responsivo -->
