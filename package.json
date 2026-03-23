@@ -34,6 +34,7 @@
         "vue-tsc": "^2.2.4"
     },
     "dependencies": {
+        "@fontsource/inter": "^5.2.8",
         "@inertiajs/vue3": "^2.3.7",
         "@vueuse/core": "^12.8.2",
         "axios": "^1.13.6",

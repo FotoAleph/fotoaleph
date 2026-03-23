@@ -33,6 +33,12 @@ class Tenant extends Model
     }
     public function aleatoriasRedesSociales()
     {
-        return $this->morphMany(SocialNetwork::class, 'socialable')->inRandomOrder()->limit(2);    
+        return $this->morphMany(SocialNetwork::class, 'socialable')->with('socialNetworkType')->inRandomOrder()->limit(2)->get()->map(function ($network) {
+            return [
+                'name' => $network->socialNetworkType->name,
+                'url' => $network->url,
+                'icon' => '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="' . $network->socialNetworkType->icon . '"/></svg>',
+            ];
+        });
     }
 }

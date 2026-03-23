@@ -3,11 +3,10 @@
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\TenantController;
+use App\Http\Controllers\WelcomeController;
 use Laravel\Fortify\Features;
 
-Route::inertia('/', 'Welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');

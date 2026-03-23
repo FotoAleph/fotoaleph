@@ -3,6 +3,9 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import '../css/app.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/700.css';
 import { initializeTheme } from '@/composables/useAppearance';
 // 1. Importamos el plugin de traducciones para Laravel + Vue
 import { i18nVue } from 'laravel-vue-i18n';
