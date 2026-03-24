@@ -1,5 +1,5 @@
 <template>
-    <AppLayout title="Tenants">
+    <AdminLayout title="Tenants">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Tenants
@@ -94,10 +94,11 @@
                 </div>
             </div>
         </div>
-    </AppLayout>
+    </AdminLayout>
 </template>
 
 <script setup>
+import AdminLayout from '@/layouts/AdminLayout.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
