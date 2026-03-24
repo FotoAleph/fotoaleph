@@ -45,7 +45,7 @@ class DashboardController extends Controller
                     'stats' => $this->getAdminStats(),
                 ]);
 
-            case 'empleado':
+            case 'coordinador':
                 return array_merge($baseConfig, [
                     'layout' => 'EmployeeLayout',
                     'sidebar_items' => $this->getEmployeeSidebarItems(),

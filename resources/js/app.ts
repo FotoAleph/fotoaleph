@@ -9,6 +9,8 @@ import '@fontsource/inter/700.css';
 import { initializeTheme } from '@/composables/useAppearance';
 // 1. Importamos el plugin de traducciones para Laravel + Vue
 import { i18nVue } from 'laravel-vue-i18n';
+// 2. Importamos el plugin de rutas
+import routePlugin from '@/plugins/routePlugin';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -20,9 +22,13 @@ createInertiaApp({
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+        const app = createApp({ render: () => h(App, props) })
             .use(plugin)
-            // 2. Registramos el plugin i18nVue y configuramos la carga dinámica
+            // 3. Registrar plugin de rutas
+            .use(routePlugin);
+        
+        app
+            // 4. Registramos el plugin i18nVue y configuramos la carga dinámica
             .use(i18nVue, {
                 resolve: async (lang: string) => {
                     const langs = import.meta.glob('../../lang/*.json');

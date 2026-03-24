@@ -49,7 +49,7 @@ const formattedStats = computed(() => {
                 { label: 'Total PQRs', value: stats.total_pqrs || 0 },
                 { label: 'Total Cotizaciones', value: stats.total_cotizaciones || 0 },
             ];
-        case 'empleado':
+        case 'coordinador':
             return [
                 { label: 'Mis PQRs', value: stats.my_pqrs || 0 },
                 { label: 'Cotizaciones Pendientes', value: stats.pending_cotizaciones || 0 },

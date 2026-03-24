@@ -25,10 +25,10 @@ class RoleSeeder extends Seeder
 
         // Crear usuario empleado
         User::create([
-            'name' => 'Employee User',
-            'email' => 'employee@fotoaleph.com',
+            'name' => 'Cordinador',
+            'email' => 'coordinador@fotoaleph.com',
             'password' => Hash::make('password'),
-            'role' => 'empleado',
+            'role' => 'coordinador',
             'email_verified_at' => now(),
         ]);
 
@@ -42,7 +42,7 @@ class RoleSeeder extends Seeder
         ]);
 
         // Crear más usuarios de prueba
-        User::factory(5)->create(['role' => 'cliente']);
-        User::factory(3)->create(['role' => 'empleado']);
+        User::factory(5)->create(['role' => 'coordinador']);
+        User::factory(13)->create(['role' => 'cliente']);
     }
 }

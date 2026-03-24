@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         
         User::factory()->create([
             'name' => 'Sport Bogota',
-            'email' => 'sportbogotafc@gmail.com ',
+            'email' => 'sportbogotafc@gmail.com',
             'role' => 'coordinador',
             'password' => bcrypt('PassDinamycode!'),
         ]);

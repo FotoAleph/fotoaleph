@@ -44,6 +44,65 @@
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
         @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
+        
+        {{-- Exponer función route() de Laravel como global en JavaScript --}}
+        <script>
+            window.route = function(name, params = {}) {
+                // Helper para reemplazar parámetros en URLs
+                const replaceParams = (url) => {
+                    if (!params || typeof params !== 'object') return url;
+                    
+                    Object.entries(params).forEach(([key, value]) => {
+                        if (value !== undefined && value !== null) {
+                            // Reemplazar {id}, {user}, {tenant}, etc.
+                            url = url.replace(new RegExp(`\\{${key}\\}`), value);
+                            // También reemplazar parámetros opcionales {id?}
+                            url = url.replace(new RegExp(`\\{${key}\\?\\}`), value);
+                        }
+                    });
+                    
+                    // Remover parámetros opcionales sin valor
+                    url = url.replace(/\/\{[^}]+\??\}/g, '');
+                    
+                    return url;
+                };
+                
+                const baseUrl = '{{ url("/") }}';
+                
+                // Mapeo de rutas compiladas desde Laravel
+                const routeMap = {
+                    'dashboard': '/dashboard',
+                    'users.index': '/users',
+                    'users.create': '/users/create',
+                    'users.store': '/users',
+                    'users.show': '/users/{user}',
+                    'users.edit': '/users/{user}/edit',
+                    'users.update': '/users/{user}',
+                    'users.destroy': '/users/{user}',
+                    'customers.index': '/customers',
+                    'tenants.index': '/tenants',
+                    'tenants.create': '/tenants/create',
+                    'tenants.store': '/tenants',
+                    'tenants.show': '/tenants/{tenant}',
+                    'tenants.edit': '/tenants/{tenant}/edit',
+                    'tenants.update': '/tenants/{tenant}',
+                    'tenants.destroy': '/tenants/{tenant}',
+                    'pqrs.index': '/pqrs',
+                    'cotizaciones.index': '/cotizaciones',
+                };
+                
+                let url = routeMap[name];
+                
+                if (!url) {
+                    console.warn(`Route '${name}' not found in route map`);
+                    return '#';
+                }
+                
+                url = baseUrl + url;
+                return replaceParams(url);
+            };
+        </script>
+        
         @inertiaHead
     </head>
     <body class="font-sans antialiased">

@@ -81,8 +81,7 @@ const footerNavItems: NavItem[] = [
 
         <SidebarFooter>
             <NavUser />
-            <NavMain :items="footerNavItems" />
-            <NavFooter />
+            <NavFooter :items="footerNavItems" />
         </SidebarFooter>
     </Sidebar>
 </template>

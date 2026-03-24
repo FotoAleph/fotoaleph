@@ -61,6 +61,6 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('tenants.update', props.tenant.id));
+    form.put(route('tenants.update', { tenant: props.tenant.id }));
 };
 </script>

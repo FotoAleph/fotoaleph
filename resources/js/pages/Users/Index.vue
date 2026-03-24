@@ -1,8 +1,8 @@
 <template>
-    <AppLayout title="Tenants">
+    <AdminLayout title="Usuarios">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Tenants
+                Gestión de Usuarios
             </h2>
         </template>
 
@@ -12,15 +12,18 @@
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-2xl font-medium text-gray-900">
-                                Tenant Management
+                                Administración de Usuarios
                             </h3>
                             <Link
-                                v-if="$page.props.auth.user.role === 'admin'"
-                                :href="route('tenants.create')"
+                                :href="route('users.create')"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
-                                Create New Tenant
+                                Crear Nuevo Usuario
                             </Link>
+                        </div>
+
+                        <div v-if="$page.props.flash?.success" class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                            {{ $page.props.flash.success }}
                         </div>
 
                         <div class="overflow-x-auto">
@@ -28,44 +31,44 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Razon Social
+                                            Nombre
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Users
+                                            Email
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
+                                            Rol
+                                        </th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Acciones
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="tenant in tenants.data" :key="tenant.id">
+                                    <tr v-for="user in users.data" :key="user.id">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {{ tenant.razon_social }}
+                                            {{ user.name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ tenant.users.length }}
+                                            {{ user.email }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <span :class="getRoleClass(user.role)">
+                                                {{ getRoleLabel(user.role) }}
+                                            </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <Link
-                                                :href="route('tenants.show', { tenant: tenant.id })"
+                                                :href="route('users.edit', { user: user.id })"
                                                 class="text-indigo-600 hover:text-indigo-900 mr-4"
                                             >
-                                                View
-                                            </Link>
-                                            <Link
-                                                v-if="$page.props.auth.user.role === 'admin'"
-                                                :href="route('tenants.edit', { tenant: tenant.id })"
-                                                class="text-indigo-600 hover:text-indigo-900 mr-4"
-                                            >
-                                                Edit
+                                                Editar
                                             </Link>
                                             <button
-                                                v-if="$page.props.auth.user.role === 'admin'"
-                                                @click="deleteTenant(tenant.id)"
+                                                @click="deleteUser(user.id, user.name)"
                                                 class="text-red-600 hover:text-red-900"
                                             >
-                                                Delete
+                                                Eliminar
                                             </button>
                                         </td>
                                     </tr>
@@ -73,10 +76,10 @@
                             </table>
                         </div>
 
-                        <div class="mt-6" v-if="tenants.links ">
-        <div class="flex justify-center gap-2">
+                        <div v-if="users.links" class="mt-6">
+                            <div class="flex justify-center gap-2">
                                 <Link
-                                    v-for="link in tenants.links"
+                                    v-for="link in users.links"
                                     :key="link.label"
                                     :href="link.url || '#'"
                                     :class="[
@@ -94,20 +97,42 @@
                 </div>
             </div>
         </div>
-    </AppLayout>
+    </AdminLayout>
 </template>
 
 <script setup>
-import AppLayout from '@/layouts/AppLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import AdminLayout from '@/layouts/AdminLayout.vue';
+import { Link, useForm } from '@inertiajs/vue3';
+import { useRoleRedirect } from '@/composables/useRoleRedirect';
 
 defineProps({
-    tenants: Object,
+    users: Object,
 });
 
-const deleteTenant = (id) => {
-    if (confirm('Are you sure you want to delete this tenant?')) {
-        // Implement delete logic
+// Solo administradores pueden acceder aquí
+useRoleRedirect('admin');
+
+const deleteUser = (id, name) => {
+    if (confirm(`¿Estás seguro de que deseas eliminar el usuario "${name}"?`)) {
+        useForm().delete(route('users.destroy', { user: id }));
     }
+};
+
+const getRoleLabel = (role) => {
+    const roles = {
+        admin: 'Administrador',
+        coordinador: 'Coordinador',
+        cliente: 'Cliente'
+    };
+    return roles[role] || role;
+};
+
+const getRoleClass = (role) => {
+    const classes = {
+        admin: 'px-2 py-1 bg-red-100 text-red-800 rounded',
+        coordinador: 'px-2 py-1 bg-yellow-100 text-yellow-800 rounded',
+        cliente: 'px-2 py-1 bg-blue-100 text-blue-800 rounded'
+    };
+    return classes[role] || 'px-2 py-1 bg-gray-100 text-gray-800 rounded';
 };
 </script>
