@@ -82,7 +82,7 @@
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                                 required
                             >
-                                <option value="admin">Administrador</option>
+                                
                                 <option value="coordinador">Coordinador</option>
                                 <option value="cliente">Cliente</option>
                             </select>

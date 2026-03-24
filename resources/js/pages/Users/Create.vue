@@ -85,7 +85,7 @@
                                 required
                             >
                                 <option value="">Selecciona un rol</option>
-                                <option value="admin">Administrador</option>
+                               
                                 <option value="coordinador">Coordinador</option>
                                 <option value="cliente">Cliente</option>
                             </select>
