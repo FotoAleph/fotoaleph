@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import {
+    FolderTree,
     LayoutGrid,
     MessageSquare,
     Plus,
+    Tags,
     User
 } from 'lucide-vue-next';
 import AppLogo from '@/components/AppLogo.vue';
@@ -37,6 +39,16 @@ const mainNavItems: NavItem[] = [
         title: 'Nueva Cotización',
         href: '/cotizaciones/create',
         icon: Plus,
+    },
+    {
+        title: 'Grupos',
+        href: '/grupos',
+        icon: FolderTree,
+    },
+    {
+        title: 'Categorías',
+        href: '/categorias',
+        icon: Tags,
     },
 ];
 

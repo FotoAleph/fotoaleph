@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\PqrController;
+use App\Http\Controllers\SitioController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -18,6 +21,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('pqrs', PqrController::class);
     Route::resource('cotizaciones', CotizacionController::class);
     Route::resource('users', UserController::class);
+    Route::resource('sitios', SitioController::class);
+    Route::resource('grupos', GrupoController::class);
+    Route::resource('categorias', CategoriaController::class);
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
 });
 

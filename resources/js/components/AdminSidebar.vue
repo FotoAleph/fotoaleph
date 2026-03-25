@@ -2,10 +2,13 @@
 import { Link } from '@inertiajs/vue3';
 import {
     Building,
+    FolderTree,
     FileText,
+    Globe,
     LayoutGrid,
     MessageSquare,
     Settings,
+    Tags,
     Users
 } from 'lucide-vue-next';
 import AppLogo from '@/components/AppLogo.vue';
@@ -39,6 +42,21 @@ const mainNavItems: NavItem[] = [
         title: 'Tenants',
         href: '/tenants',
         icon: Building,
+    },
+    {
+        title: 'Sitios',
+        href: '/sitios',
+        icon: Globe,
+    },
+    {
+        title: 'Grupos',
+        href: '/grupos',
+        icon: FolderTree,
+    },
+    {
+        title: 'Categorías',
+        href: '/categorias',
+        icon: Tags,
     },
     {
         title: 'PQRs',

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
-            $table->string('estado')->default('activo');          
+            $table->string('estado')->default('activo');
+                      
             $table->timestamps();
         });
     }
