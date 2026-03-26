@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Multimedia;
+use App\Models\Proyectos;
 use Illuminate\Http\Request;
 
-class FotoController extends Controller
+class ProyectosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class FotoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Multimedia $foto)
+    public function show(Proyectos $proyectos)
     {
         //
     }
@@ -42,7 +42,7 @@ class FotoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Multimedia $foto)
+    public function edit(Proyectos $proyectos)
     {
         //
     }
@@ -50,7 +50,7 @@ class FotoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Multimedia $foto)
+    public function update(Request $request, Proyectos $proyectos)
     {
         //
     }
@@ -58,7 +58,7 @@ class FotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Multimedia $foto)
+    public function destroy(Proyectos $proyectos)
     {
         //
     }
