@@ -5,7 +5,7 @@ export const useRoleGuard = () => {
     const page = usePage();
     
     const user = computed(() => page.props.auth.user);
-    const userRole = computed(() => user.value?.role);
+    const userRole = computed<string | undefined>(() => user.value?.role as string | undefined);
     
     const isAdmin = computed(() => userRole.value === 'admin');
     const isCoordinator = computed(() => userRole.value === 'coordinador');
@@ -13,7 +13,7 @@ export const useRoleGuard = () => {
     
     const hasRole = (role: string | string[]) => {
         if (Array.isArray(role)) {
-            return role.includes(userRole.value);
+            return userRole.value ? role.includes(userRole.value) : false;
         }
         return userRole.value === role;
     };

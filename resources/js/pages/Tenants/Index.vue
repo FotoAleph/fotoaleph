@@ -12,14 +12,15 @@
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-2xl font-medium text-gray-900">
-                                Tenant Management
+                             {{ $t('Tenant Management')}}
                             </h3>
                             <Link
                                 v-if="$page.props.auth.user.role === 'admin'"
                                 :href="route('tenants.create')"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
-                                Create New Tenant
+                            
+                               {{ $t('Create New :name', { name: $t('Tenant') })}}
                             </Link>
                         </div>
 

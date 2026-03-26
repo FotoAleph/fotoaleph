@@ -29,5 +29,11 @@ declare module 'vue' {
         $inertia: typeof Router;
         $page: Page;
         $headManager: ReturnType<typeof createHeadManager>;
+        route: (...args: any[]) => any;
     }
+}
+
+declare global {
+    var route: (...args: any[]) => any;
+    function route(...args: any[]): any;
 }

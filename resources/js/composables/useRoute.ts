@@ -3,10 +3,6 @@
  * Esta función genera URLs para rutas nombradas de Laravel Breeze
  */
 
-declare global {
-    function route(name: string, params?: Record<string, any>): string;
-}
-
 export const useRoute = () => {
     if (typeof window !== 'undefined' && (window as any).route) {
         return (window as any).route;
