@@ -74,7 +74,7 @@
                             </table>
                         </div>
 
-                        <div class="mt-6" v-if="tenants.links ">
+        <div class="mt-6" v-if="tenants.links ">
         <div class="flex justify-center gap-2">
                                 <Link
                                     v-for="link in tenants.links"
@@ -100,7 +100,6 @@
 
 <script setup>
 import AdminLayout from '@/layouts/AdminLayout.vue';
-import AppLayout from '@/layouts/AppLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
 defineProps({
