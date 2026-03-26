@@ -25,7 +25,7 @@ class DashboardRoleTest extends TestCase
         );
     }
 
-    public function test_coordinador_can_access_dashboard_with_employee_layout()
+    public function test_coordinador_can_access_dashboard_with_coordinador_layout()
     {
         $coordinador = User::factory()->create(['role' => 'coordinador']);
 
@@ -34,7 +34,7 @@ class DashboardRoleTest extends TestCase
         $response->assertOk();
         $response->assertInertia(fn ($page) => $page
             ->has('layout')
-            ->where('layout', 'EmployeeLayout')
+            ->where('layout', 'CoordinadorLayout')
             ->has('stats')
             ->has('sidebar_items')
         );
@@ -72,7 +72,7 @@ class DashboardRoleTest extends TestCase
         );
     }
 
-    public function test_coordinador_sees_employee_sidebar_items()
+    public function test_coordinador_sees_coordinador_sidebar_items()
     {
         $coordinador = User::factory()->create(['role' => 'coordinador']);
 

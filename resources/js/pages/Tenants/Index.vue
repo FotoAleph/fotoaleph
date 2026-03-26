@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout title="Tenants">
+    <RoleLayout title="Tenants">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Tenants
@@ -12,7 +12,7 @@
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-2xl font-medium text-gray-900">
-                             {{ $t('Tenant Management')}}
+                                Gestion de tenants
                             </h3>
                             <Link
                                 v-if="$page.props.auth.user.role === 'admin'"
@@ -20,7 +20,7 @@
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
                             
-                               {{ $t('Create New :name', { name: $t('Tenant') })}}
+                                Crear nuevo tenant
                             </Link>
                         </div>
 
@@ -32,10 +32,10 @@
                                             Razon Social
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Users
+                                            Usuarios
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
+                                            Acciones
                                         </th>
                                     </tr>
                                 </thead>
@@ -52,21 +52,21 @@
                                                 :href="route('tenants.show', { tenant: tenant.id })"
                                                 class="text-indigo-600 hover:text-indigo-900 mr-4"
                                             >
-                                                View
+                                                Ver
                                             </Link>
                                             <Link
                                                 v-if="$page.props.auth.user.role === 'admin'"
                                                 :href="route('tenants.edit', { tenant: tenant.id })"
                                                 class="text-indigo-600 hover:text-indigo-900 mr-4"
                                             >
-                                                Edit
+                                                Editar
                                             </Link>
                                             <button
                                                 v-if="$page.props.auth.user.role === 'admin'"
                                                 @click="deleteTenant(tenant.id)"
                                                 class="text-red-600 hover:text-red-900"
                                             >
-                                                Delete
+                                                Eliminar
                                             </button>
                                         </td>
                                     </tr>
@@ -95,11 +95,11 @@
                 </div>
             </div>
         </div>
-    </AdminLayout>
+    </RoleLayout>
 </template>
 
 <script setup>
-import AdminLayout from '@/layouts/AdminLayout.vue';
+import RoleLayout from '@/layouts/RoleLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
 defineProps({
@@ -107,7 +107,7 @@ defineProps({
 });
 
 const deleteTenant = (id) => {
-    if (confirm('Are you sure you want to delete this tenant?')) {
+    if (confirm('Estas seguro de que deseas eliminar este tenant?')) {
         // Implement delete logic
     }
 };

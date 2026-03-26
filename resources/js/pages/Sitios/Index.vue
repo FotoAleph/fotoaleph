@@ -32,7 +32,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     <tr v-for="sitio in sitios.data" :key="sitio.id">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ sitio.name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sitio.tenant?.razon_social || 'N/A' }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sitio.tenant?.razon_social || 'No disponible' }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ sitio.estado }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <Link :href="route('sitios.show', { sitio: sitio.id })" class="text-indigo-600 hover:text-indigo-900 mr-4">Ver</Link>

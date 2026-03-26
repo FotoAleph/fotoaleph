@@ -1,8 +1,8 @@
 <template>
-    <AppLayout title="Edit Tenant">
+    <RoleLayout title="Editar tenant">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit Tenant
+                Editar tenant
             </h2>
         </template>
 
@@ -31,28 +31,28 @@
                                 :href="route('tenants.index')"
                                 class="mr-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                             >
-                                Cancel
+                                Cancelar
                             </Link>
                             <button
                                 type="submit"
                                 :disabled="form.processing"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                             >
-                                Update Tenant
+                                Actualizar tenant
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </AppLayout>
+    </RoleLayout>
 </template>
 
 <script setup>
-import AppLayout from '@/layouts/AppLayout.vue';
+import RoleLayout from '@/layouts/RoleLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     tenant: Object,
 });
 

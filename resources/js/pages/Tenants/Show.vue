@@ -1,5 +1,5 @@
 <template>
-    <AppLayout title="Tenant Details">
+    <RoleLayout title="Detalle del tenant">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Tenant: {{ tenant.razon_social }}
@@ -11,12 +11,12 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                         <div class="mb-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">{{$t('Basic Information')}}</h3>
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Informacion basica</h3>
                             <p><strong>Razon Social:</strong> {{ tenant.razon_social }}</p>
                         </div>
 
                         <div class="mb-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Users</h3>
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Usuarios</h3>
                             <ul class="list-disc list-inside">
                                 <li v-for="user in tenant.users" :key="user.id">
                                     {{ user.name }} ({{ user.email }})
@@ -56,7 +56,7 @@
                                 :href="route('tenants.index')"
                                 class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                             >
-                                {{$t('Back to :attribute', { attribute: 'Tenants' })}}
+                                Volver a tenants
                             </Link>
                         </div>
                     </div>
@@ -65,11 +65,11 @@
         </div>
 
 
-    </AppLayout>
+    </RoleLayout>
 </template>
 
 <script setup>
-import AppLayout from '@/layouts/AppLayout.vue';
+import RoleLayout from '@/layouts/RoleLayout.vue';
 import { Link } from '@inertiajs/vue3';
 
 defineProps({

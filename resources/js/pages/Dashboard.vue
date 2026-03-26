@@ -3,9 +3,8 @@ import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
-import EmployeeLayout from '@/layouts/EmployeeLayout.vue';
+import CoordinadorLayout from '@/layouts/CoordinadorLayout.vue';
 import ClientLayout from '@/layouts/ClientLayout.vue';
-import AppLayout from '@/layouts/AppLayout.vue';
 import type { BreadcrumbItem } from '@/types';
 
 type Props = {
@@ -19,7 +18,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
     sidebar_items: () => [],
-    layout: 'AppLayout',
+    layout: 'ClientLayout',
     stats: () => ({}),
     user_role: 'cliente',
 });
@@ -29,12 +28,12 @@ const layoutComponent = computed(() => {
     switch (props.layout) {
         case 'AdminLayout':
             return AdminLayout;
-        case 'EmployeeLayout':
-            return EmployeeLayout;
+        case 'CoordinadorLayout':
+            return CoordinadorLayout;
         case 'ClientLayout':
             return ClientLayout;
         default:
-            return AppLayout;
+            return ClientLayout;
     }
 });
 

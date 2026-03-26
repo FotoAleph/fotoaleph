@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout title="Crear Usuario">
+    <RoleLayout title="Crear Usuario">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Crear Nuevo Usuario
@@ -113,11 +113,11 @@
                 </div>
             </div>
         </div>
-    </AdminLayout>
+    </RoleLayout>
 </template>
 
 <script setup>
-import AdminLayout from '@/layouts/AdminLayout.vue';
+import RoleLayout from '@/layouts/RoleLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { useRoleRedirect } from '@/composables/useRoleRedirect';
 

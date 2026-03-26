@@ -41,9 +41,9 @@ withDefaults(
 
             <!-- Navegación Interna (Secciones) -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
-                <a href="#inicio" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">{{$t('Home') }}</a>
-                <a href="#proyectos" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">{{ $t('Proyects') }}</a>
-                <a href="#experiencia" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">{{ $t('Know-how') }}</a>
+                <a href="#inicio" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Inicio</a>
+                <a href="#proyectos" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Proyectos</a>
+                <a href="#experiencia" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Experiencia</a>
                 <a href="#contacto" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Contacto</a>
             </nav>
 
@@ -52,16 +52,16 @@ withDefaults(
 
                 <Link v-if="$page.props.auth?.user" :href="dashboard()"
                     class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                    Dashboard
+                    Panel
                 </Link>
                 <template v-else>
                     <Link :href="login()"
                         class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                       {{ $t('Login')}}
+                        Iniciar sesion
                     </Link>
                     <Link v-if="canRegister" :href="register()"
                         class="hidden sm:inline-block px-4 py-1.5 rounded-md text-sm font-medium bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-sm">
-                        {{$t('Register')}}
+                        Registrarse
                     </Link>
                 </template>
             </div>
@@ -200,7 +200,7 @@ withDefaults(
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">Experiencia</h2>
                     <p class="text-gray-600 dark:text-gray-400 text-lg">
-                        Soy muy bueno en esto, pero seguro quieres la opinión de alguien más. Puedes hablar con uno de los usuarios de mis proyectos anteriores. Si desconfías, puedes hablar con todos 😉.
+                        Puedo contarte lo que hago, pero tambien puedes contrastarlo con personas que ya han trabajado conmigo en proyectos anteriores.
                     </p>
                 </div>
 
@@ -211,7 +211,7 @@ withDefaults(
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">Vidrios y Estructuras JyM</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseño y desarrollo del sitio WEB</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseno y desarrollo del sitio web</p>
                         
                         <a href="https://vidriosyestructurasjym.com.co/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
                             <img class="w-16 h-16 object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300" src="https://vidriosyestructurasjym.com.co/IMG/Logo.png" alt="Vidrios y Estructuras JyM">
@@ -230,7 +230,7 @@ withDefaults(
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">Casa Angel Eventos</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseño y desarrollo del sitio WEB</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseno y desarrollo del sitio web</p>
                         
                         <a href="https://www.eventoscasaangel.com/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
                             <img class="w-24 h-auto object-contain rounded drop-shadow-sm group-hover:scale-110 transition-transform duration-300" src="https://www.eventoscasaangel.com/IMGes/logo.jpg" alt="Casa Angel Eventos">

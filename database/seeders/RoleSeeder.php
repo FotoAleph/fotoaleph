@@ -23,9 +23,9 @@ class RoleSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        // Crear usuario empleado
+        // Crear usuario coordinador
         User::create([
-            'name' => 'Cordinador',
+            'name' => 'Coordinador',
             'email' => 'coordinador@fotoaleph.com',
             'password' => Hash::make('password'),
             'role' => 'coordinador',

@@ -1,5 +1,5 @@
 <template>
-    <AdminLayout title="Editar Usuario">
+    <RoleLayout title="Editar Usuario">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Editar Usuario
@@ -110,11 +110,11 @@
                 </div>
             </div>
         </div>
-    </AdminLayout>
+    </RoleLayout>
 </template>
 
 <script setup>
-import AdminLayout from '@/layouts/AdminLayout.vue';
+import RoleLayout from '@/layouts/RoleLayout.vue';
 import { Link, useForm } from '@inertiajs/vue3';
 import { useRoleRedirect } from '@/composables/useRoleRedirect';
 

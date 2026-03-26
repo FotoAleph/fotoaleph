@@ -5,7 +5,7 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200 space-y-4">
                         <h2 class="text-2xl font-semibold text-gray-900">{{ sitio.name }}</h2>
-                        <p><strong>Tenant:</strong> {{ sitio.tenant?.razon_social || 'N/A' }}</p>
+                        <p><strong>Tenant:</strong> {{ sitio.tenant?.razon_social || 'No disponible' }}</p>
                         <p><strong>Descripción:</strong> {{ sitio.description || 'Sin descripción' }}</p>
                         <p><strong>URL:</strong> {{ sitio.url || 'No definida' }}</p>
                         <p><strong>Fecha inicio:</strong> {{ sitio.fecha_inicio || 'No definida' }}</p>

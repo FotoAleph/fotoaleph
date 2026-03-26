@@ -47,9 +47,9 @@ class DashboardController extends Controller
 
             case 'coordinador':
                 return array_merge($baseConfig, [
-                    'layout' => 'EmployeeLayout',
-                    'sidebar_items' => $this->getEmployeeSidebarItems(),
-                    'stats' => $this->getEmployeeStats(),
+                    'layout' => 'CoordinadorLayout',
+                    'sidebar_items' => $this->getCoordinadorSidebarItems(),
+                    'stats' => $this->getCoordinadorStats(),
                 ]);
 
             case 'cliente':
@@ -93,7 +93,7 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getEmployeeSidebarItems(): array
+    private function getCoordinadorSidebarItems(): array
     {
         return [
             [
@@ -155,7 +155,7 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getEmployeeStats(): array
+    private function getCoordinadorStats(): array
     {
         $user = auth()->user();
         return [

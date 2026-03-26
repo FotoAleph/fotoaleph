@@ -1,5 +1,5 @@
 <template>
-    <component :is="layoutComponent" title="Clientes">
+    <RoleLayout title="Clientes">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Gestión de Clientes
@@ -87,25 +87,16 @@
                 </div>
             </div>
         </div>
-    </component>
+    </RoleLayout>
 </template>
 
 <script setup>
-import AdminLayout from '@/layouts/AdminLayout.vue';
-import ClientLayout from '@/layouts/ClientLayout.vue';
+import RoleLayout from '@/layouts/RoleLayout.vue';
 import { Link } from '@inertiajs/vue3';
-import { computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import { useRoleGuard } from '@/composables/useRoleGuard';
 
 defineProps({
     customers: Object,
 });
-
-const { isAdmin, isCoordinator } = useRoleGuard();
-const layoutComponent = computed(() => 
-    (isAdmin.value || isCoordinator.value) ? AdminLayout : ClientLayout
-);
 
 const formatDate = (date) => {
     if (!date) return '-';
