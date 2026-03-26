@@ -7,6 +7,30 @@ import { dashboard, login, register } from '@/routes';
 // Declaramos la variable reactiva para el botón "Ver más"
 const showFullDinamycode = ref(false);
 
+const heroHighlights = [
+    'Sitios web personalizados con foco comercial',
+    'Automatización de procesos y operaciones',
+    'Sistemas escalables con Laravel y frontend moderno',
+];
+
+const dinamycodeHighlights = [
+    'Facturación electrónica y reportes fiscales (FEV)',
+    'Optimización de ventas, registros y flujos internos',
+    'Arquitectura mantenible, escalable y orientada al dato',
+];
+
+const githubHighlights = [
+    'Experimentos, prototipos y proyectos personales',
+    'Ideas en evolución que muestran proceso y criterio técnico',
+    'Un espacio honesto para ver cómo construyo y aprendo',
+];
+
+const laravelHighlights = [
+    'Permite avanzar rápido sin sacrificar estructura.',
+    'Escala bien desde productos pequeños hasta plataformas complejas.',
+    'Tiene un ecosistema maduro y una comunidad que acelera el desarrollo.',
+];
+
 
 withDefaults(
     defineProps<{
@@ -21,8 +45,8 @@ withDefaults(
 </script>
 
 <template>
-    <Head title="Carlos Ramirez | Desarrollador de Software y Soluciones Web">
-        <meta name="description" content="Especialista en desarrollo de software, automatización de procesos y soluciones digitales. Carlos Ramirez crea aplicaciones web a medida con Laravel, Vue y React." />
+    <Head title="Carlos Ramírez | Desarrollador de Software y Soluciones Web">
+        <meta name="description" content="Especialista en desarrollo de software, automatización de procesos y soluciones digitales. Carlos Ramírez crea aplicaciones web a medida con Laravel, Vue y React." />
     </Head>
 
     <!-- Contenedor Principal -->
@@ -36,7 +60,7 @@ withDefaults(
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-950 to-red-300 flex items-center justify-center text-white font-bold text-xl shadow-sm">
                    <img src="img/logo-car.PNG" alt="CAR">
                 </div>
-                <span class="font-extrabold text-xl tracking-tight hidden sm:block">Carlos<span class="text-red-600">Ramirez</span></span>
+                <span class="font-extrabold text-xl tracking-tight hidden sm:block">Carlos<span class="text-red-600">Ramírez</span></span>
             </div>
 
             <!-- Navegación Interna (Secciones) -->
@@ -57,7 +81,7 @@ withDefaults(
                 <template v-else>
                     <Link :href="login()"
                         class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                        Iniciar sesion
+                        Iniciar sesión
                     </Link>
                     <Link v-if="canRegister" :href="register()"
                         class="hidden sm:inline-block px-4 py-1.5 rounded-md text-sm font-medium bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-sm">
@@ -85,9 +109,26 @@ withDefaults(
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 dark:from-red-400 dark:to-red-500">Orientadas a Resultados</span>
                     </h1>
                     
-                    <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-10 text-justify lg:text-left relative z-10">
-                        Especialista en desarrollo de software y soluciones digitales orientadas a resultados. Diseño y desarrollo sitios web personalizados y aplicaciones a medida que convierten visitantes en clientes, optimizando la presencia digital y la eficiencia operativa de las organizaciones. Experiencia en automatización de procesos, desarrollo de sistemas empresariales y crecimiento digital mediante estrategias de SEO y visibilidad online. Trabajo con tecnologías modernas y frameworks robustos como Laravel, aprovechando su ecosistema para crear soluciones escalables, seguras y de código limpio, integrables con interfaces modernas en React, Vue o Svelte. Mi enfoque combina tecnología, diseño y estrategia digital para impulsar productividad, control operativo y expansión digital de los negocios.
-                    </p>
+                    <div class="space-y-5 mb-10 relative z-10">
+                        <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
+                            Desarrollo software y soluciones digitales con un objetivo claro: que la tecnología se traduzca en resultados medibles para el negocio.
+                        </p>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                            Diseño sitios web, aplicaciones a medida y automatizaciones que mejoran la presencia digital, ordenan la operación y ayudan a convertir visitas en oportunidades reales.
+                        </p>
+                        <div class="grid gap-3 sm:grid-cols-3 max-w-4xl">
+                            <div
+                                v-for="highlight in heroHighlights"
+                                :key="highlight"
+                                class="rounded-2xl border border-gray-200/80 dark:border-gray-700 bg-white/80 dark:bg-gray-800/70 px-4 py-4 text-left shadow-sm backdrop-blur-sm"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <span class="mt-1 h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                                    <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{{ highlight }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Nube de Palabras / Etiquetas Interactiva -->
                     <div class="flex flex-wrap justify-center lg:justify-start gap-3 md:gap-4 relative z-10">
@@ -120,17 +161,32 @@ withDefaults(
                             </span>
                             <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">Dinamycode</h2>
                             
-                            <div class="text-gray-600 dark:text-gray-300 text-sm md:text-base leading-relaxed text-justify mb-8">
+                            <div class="text-gray-600 dark:text-gray-300 text-sm md:text-base leading-relaxed mb-8">
                                 <p>
-                                    En Dinamycode desarrollo soluciones de software enfocadas en la automatización de procesos empresariales y la modernización de operaciones digitales. Este proyecto nace de la combinación entre mi interés por la ingeniería de software y la oportunidad de colaborar con profesionales que admiro, en un entorno orientado a la construcción de tecnología útil para el contexto empresarial colombiano.
+                                    En Dinamycode desarrollo soluciones de software enfocadas en automatizar procesos empresariales y modernizar operaciones digitales, con especial atención al contexto real de las empresas colombianas.
                                 </p>
                                 
                                 <div v-show="showFullDinamycode" class="mt-4 space-y-4">
                                     <p>
-                                        Actualmente trabajamos en el diseño y desarrollo de una plataforma que busca simplificar y automatizar procesos relacionados con la facturación electrónica y los reportes fiscales (FEV), al tiempo que optimiza los flujos de ventas, registros operativos y gestión de información dentro de las organizaciones. La solución se construye sobre arquitecturas web modernas, aprovechando frameworks robustos y prácticas de desarrollo que priorizan la escalabilidad, mantenibilidad y claridad del código.
+                                        El proyecto nace del cruce entre ingeniería de software, trabajo colaborativo y la intención de construir tecnología útil, clara y sostenible para la operación diaria.
                                     </p>
+                                    <div class="rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700 p-4">
+                                        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-3">
+                                            En qué estamos trabajando
+                                        </p>
+                                        <ul class="space-y-2">
+                                            <li
+                                                v-for="highlight in dinamycodeHighlights"
+                                                :key="highlight"
+                                                class="flex items-start gap-3"
+                                            >
+                                                <span class="mt-1.5 h-2 w-2 rounded-full bg-green-500"></span>
+                                                <span>{{ highlight }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <p>
-                                        El objetivo es crear herramientas que permitan a las empresas reducir fricción operativa, mejorar el control de sus procesos y acelerar su transformación digital, integrando tecnología web actual, automatización y experiencias de usuario orientadas a la eficiencia y la toma de decisiones basada en datos.
+                                        El objetivo es reducir fricción operativa, mejorar el control de los procesos y acelerar la transformación digital con herramientas pensadas para la eficiencia y la toma de decisiones basada en datos.
                                     </p>
                                 </div>
                                 
@@ -148,7 +204,7 @@ withDefaults(
                                     alt="Dinamycode Logo">
                             </a>
                         <div class="flex w-full justify-end gap-3 mt-2">
-                            <a v-for="network in socialNetworks" :key="network.name" :href="network.url" target="_blank" rel="noopener noreferrer" :aria-label="`${network.name} de DinamyCode`" class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors" v-html="network.icon">
+                            <a v-for="network in socialNetworks" :key="network.name" :href="network.url" target="_blank" rel="noopener noreferrer" :aria-label="`${network.name} de Dinamycode`" class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors" v-html="network.icon">
                             </a>
             
                         </div>
@@ -171,9 +227,19 @@ withDefaults(
                             </div>
                             <h2 class="text-xl font-bold text-white tracking-wide">GitHub</h2>
                         </div>
-                        <p class="text-gray-400 text-sm leading-relaxed text-justify">
-                            Supongo que todo debe tener un inicio. Échale un vistazo a mi repositorio de GitHub. Verás muchos proyectos (algunos sin terminar) que he realizado en mi tiempo libre. Como todos sabemos, en el mundo de la programación es común que algunos proyectos se queden a medio camino. Aunque la recomendación es no dejarlos incompletos, a veces surgen nuevas ideas o prioridades que nos desvían. Sin embargo, nunca se sabe, tal vez algún día me dé el tiempo para retomar y terminar esos proyectos.
+                        <p class="text-gray-400 text-sm leading-relaxed mb-5">
+                            Mi GitHub reúne proyectos personales, pruebas y desarrollos en distintas etapas. No todo está terminado, pero sí refleja cómo pienso, experimento y construyo.
                         </p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li
+                                v-for="highlight in githubHighlights"
+                                :key="highlight"
+                                class="flex items-start gap-3"
+                            >
+                                <span class="mt-1 h-2 w-2 rounded-full bg-blue-400"></span>
+                                <span>{{ highlight }}</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -187,9 +253,19 @@ withDefaults(
                             <span class="inline-block px-3 py-1 bg-white/10 text-white border border-white/20 text-xs font-bold rounded-full tracking-wider uppercase backdrop-blur-sm">Framework Favorito</span>
                         </div>
                         <h2 class="text-2xl font-bold text-white tracking-wide mb-4">Laravel</h2>
-                        <p class="text-red-100 text-sm leading-relaxed text-justify">
-                            Todos tenemos un framework favorito (aunque no deberíamos). El mío, debo confesar, es Laravel. Me parece simple y dinámico, con la capacidad de abarcar una gran escala de proyectos, desde los más pequeños hasta los más complejos. Su sintaxis elegante, su amplia documentación y la gran comunidad que lo respalda hacen que el desarrollo sea mucho más ágil y placentero. Aunque sé que la elección del framework debe basarse en las necesidades del proyecto, Laravel siempre ha sido una opción confiable para mí. Seguro que en tu equipo también tienen su framework favorito, ¿verdad? Apuesto a que podría convertirse en el mío también.
+                        <p class="text-red-100 text-sm leading-relaxed mb-5">
+                            Tengo debilidad por Laravel porque me permite construir con rapidez, orden y buena base técnica, aunque siempre procuro elegir la herramienta según lo que necesite el proyecto.
                         </p>
+                        <ul class="space-y-3 text-sm text-red-50">
+                            <li
+                                v-for="highlight in laravelHighlights"
+                                :key="highlight"
+                                class="flex items-start gap-3"
+                            >
+                                <span class="mt-1 h-2 w-2 rounded-full bg-white"></span>
+                                <span>{{ highlight }}</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -200,7 +276,7 @@ withDefaults(
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">Experiencia</h2>
                     <p class="text-gray-600 dark:text-gray-400 text-lg">
-                        Puedo contarte lo que hago, pero tambien puedes contrastarlo con personas que ya han trabajado conmigo en proyectos anteriores.
+                        Puedo contarte lo que hago, pero también puedes contrastarlo con personas que ya han trabajado conmigo en proyectos anteriores.
                     </p>
                 </div>
 
@@ -211,7 +287,7 @@ withDefaults(
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">Vidrios y Estructuras JyM</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseno y desarrollo del sitio web</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseño y desarrollo del sitio web</p>
                         
                         <a href="https://vidriosyestructurasjym.com.co/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
                             <img class="w-16 h-16 object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300" src="https://vidriosyestructurasjym.com.co/IMG/Logo.png" alt="Vidrios y Estructuras JyM">
@@ -230,7 +306,7 @@ withDefaults(
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">Casa Angel Eventos</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseno y desarrollo del sitio web</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseño y desarrollo del sitio web</p>
                         
                         <a href="https://www.eventoscasaangel.com/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
                             <img class="w-24 h-auto object-contain rounded drop-shadow-sm group-hover:scale-110 transition-transform duration-300" src="https://www.eventoscasaangel.com/IMGes/logo.jpg" alt="Casa Angel Eventos">
@@ -274,7 +350,7 @@ withDefaults(
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">Laboratorio clínico Biotek</h3>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Sistema de registro de pacientes y bitacora</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Sistema de registro de pacientes y bitácora</p>
                         
                         <a href="https://maps.app.goo.gl/btdcnCEd7i2tpbat8" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
                             <img class="w-20 h-20 object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300 rounded-full bg-white p-1 border border-gray-100" src="https://biotek.dinamycode.com/Biotek.png" alt="Laboratorio Biotek">
@@ -351,7 +427,7 @@ withDefaults(
                 <!-- Copyright Responsivo -->
                 <p>
                     &copy; {{ new Date().getFullYear() }} 
-                    <span class="hidden sm:inline">Carlos Ramirez. Todos los derechos reservados.</span>
+                    <span class="hidden sm:inline">Carlos Ramírez. Todos los derechos reservados.</span>
                     <span class="sm:hidden">Carlos R.</span>
                 </p>
 
