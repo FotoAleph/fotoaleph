@@ -46,7 +46,17 @@ withDefaults(
 
 <template>
     <Head title="Carlos Ramírez | Desarrollador de Software y Soluciones Web">
+
         <meta name="description" content="Especialista en desarrollo de software, automatización de procesos y soluciones digitales. Carlos Ramírez crea aplicaciones web a medida con Laravel, Vue y React." />
+        <meta property="og:title" content="Desarrollador de Software y Soluciones WEB"  />
+        <meta property="og:descrition" content="soluciones de software enfocadas en automatizar procesos empresariales y modernizar operaciones de negocio">
+        <meta property="og:image" content="https://fotoaleph.dinamycode.com/carlos_foto.jpg">
+        <meta property="og:image:type" content="image/jpg" />
+        <meta property="og:image:width" content="640" />
+        <meta property="og:image:height" content="1280" />
+        <meta property="og:url" content="https://fotoaleph.dinamycode.com" />
+        <meta property="og:type" content="website" />
+
     </Head>
 
     <!-- Contenedor Principal -->
@@ -116,18 +126,7 @@ withDefaults(
                         <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
                             Diseño sitios web, aplicaciones a medida y automatizaciones que mejoran la presencia digital, ordenan la operación y ayudan a convertir visitas en oportunidades reales.
                         </p>
-                        <div class="grid gap-3 sm:grid-cols-3 max-w-4xl">
-                            <div
-                                v-for="highlight in heroHighlights"
-                                :key="highlight"
-                                class="rounded-2xl border border-gray-200/80 dark:border-gray-700 bg-white/80 dark:bg-gray-800/70 px-4 py-4 text-left shadow-sm backdrop-blur-sm"
-                            >
-                                <div class="flex items-start gap-3">
-                                    <span class="mt-1 h-2.5 w-2.5 rounded-full bg-red-500"></span>
-                                    <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{{ highlight }}</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                     <!-- Nube de Palabras / Etiquetas Interactiva -->
@@ -209,6 +208,18 @@ withDefaults(
             
                         </div>
                     </div>
+                <div class="grid gap-3 sm:grid-cols-3 max-w-4xl">
+                            <div
+                                v-for="highlight in heroHighlights"
+                                :key="highlight"
+                                class="rounded-2xl border border-gray-200/80 dark:border-gray-700 bg-white/80 dark:bg-gray-800/70 px-4 py-4 text-left shadow-sm backdrop-blur-sm"
+                            >
+                                <div class="flex items-start gap-3">
+                                    <span class="mt-1 h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                                    <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{{ highlight }}</p>
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
                         </div>
@@ -281,7 +292,7 @@ withDefaults(
                 </div>
 
                 <!-- Grid de Mini Cards (1 col móvil, 2 cols tablet, 4 cols desktop) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-3 2xl:grid-cols-6 gap-1 md:gap-6 w-full">
                     
                     <!-- Mini Card 1: Vidrios y Estructuras JyM -->
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
@@ -309,7 +320,7 @@ withDefaults(
                         <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Diseño y desarrollo del sitio web</p>
                         
                         <a href="https://www.eventoscasaangel.com/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
-                            <img class="w-24 h-auto object-contain rounded drop-shadow-sm group-hover:scale-110 transition-transform duration-300" src="https://www.eventoscasaangel.com/IMGes/logo.jpg" alt="Casa Angel Eventos">
+                            <img class="w-24 h-auto object-contain rounded drop-shadow-sm group-hover:scale-110 transition-transform duration-300" src="https://www.eventoscasaangel.com/images/casaangel.svg" alt="Casa Angel Eventos">
                         </a>
                         
                         <div class="w-full pt-4 border-t border-gray-100 dark:border-gray-700 z-10">
@@ -328,7 +339,7 @@ withDefaults(
                         <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">Publicidad y campañas en redes</p>
                         
                         <a href="https://www.facebook.com/savatechnology/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10 text-blue-600 dark:text-blue-500">
-                            <svg class="w-16 h-16 fill-current group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.62 94.68">
+                            <svg class="w-24 h-16 fill-current group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.62 94.68">
                                 <path d="M0,81.42,0,79H.15a5.43,5.43,0,0,0,.59,1.45,1.85,1.85,0,0,0,1.59,1A1.51,1.51,0,0,0,3.44,81a1.58,1.58,0,0,0,.44-1.14,1.9,1.9,0,0,0-.1-.61,1.64,1.64,0,0,0-.26-.53,2,2,0,0,0-.47-.44,9,9,0,0,0-.94-.53c-.37-.19-.65-.34-.85-.47a2.78,2.78,0,0,1-.47-.39,1.89,1.89,0,0,1-.5-1.34,2.31,2.31,0,0,1,.19-.93A2.13,2.13,0,0,1,1,73.85a2.08,2.08,0,0,1,1.46-.57,2.1,2.1,0,0,1,.51,0,4.85,4.85,0,0,1,.62.22l.4.15.19,0q.19,0,.27-.3h.14l0,2.32H4.52a8,8,0,0,0-.27-.85A2.72,2.72,0,0,0,4,74.36a2.09,2.09,0,0,0-.63-.68,1.49,1.49,0,0,0-.79-.22,1.26,1.26,0,0,0-1,.45,1.27,1.27,0,0,0-.25.42,1.46,1.46,0,0,0-.09.49c0,.65.42,1.18,1.25,1.57l.82.4a3.67,3.67,0,0,1,1.37,1,2.24,2.24,0,0,1,.48,1.42,2.55,2.55,0,0,1-.21,1,2.25,2.25,0,0,1-.92,1,2.64,2.64,0,0,1-1.42.37,3.59,3.59,0,0,1-1.45-.3l-.43-.18-.16,0a.38.38,0,0,0-.39.28Z"></path>
                                 <path d="M14,81.44H10.18v-.13a1.6,1.6,0,0,0,.72-.18.7.7,0,0,0,.37-.63,1.9,1.9,0,0,0-.17-.64l-.1-.24-.56-1.38H7.88l-.31.81-.14.36a2.81,2.81,0,0,0-.27,1,.91.91,0,0,0,.1.4.85.85,0,0,0,.26.3,1.14,1.14,0,0,0,.58.19v.13H5.49v-.13A1.14,1.14,0,0,0,6,81.16a1.66,1.66,0,0,0,.46-.43,3.77,3.77,0,0,0,.36-.62c.12-.25.28-.63.47-1.13l2.14-5.5h.33l2.54,6.13a8.81,8.81,0,0,0,.45,1,1.59,1.59,0,0,0,.37.45.88.88,0,0,0,.32.16,3.1,3.1,0,0,0,.54.1ZM10.35,78,9.13,75,8,78Z"></path>
                                 <path d="M13.69,73.48h3.85v.13a2.12,2.12,0,0,0-.63.14.75.75,0,0,0-.29.27.8.8,0,0,0-.11.4,1.12,1.12,0,0,0,0,.27c0,.08.08.24.18.51l1.72,4.69,1.68-4.12a4,4,0,0,0,.35-1.26,1.42,1.42,0,0,0-.07-.42.7.7,0,0,0-.19-.29.55.55,0,0,0-.26-.14,1.15,1.15,0,0,0-.36,0v-.13h2.6v.13a1.53,1.53,0,0,0-.56.16,1.62,1.62,0,0,0-.45.39,3.57,3.57,0,0,0-.31.51c-.1.22-.25.55-.44,1L18,81.44H17.8l-2.33-6A5.68,5.68,0,0,0,14.74,74a1.13,1.13,0,0,0-.42-.29,1.91,1.91,0,0,0-.63-.09Z"></path>
@@ -364,6 +375,31 @@ withDefaults(
                             </a>
                         </div>
                     </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">JAD colombian</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">WEB site</p>
+                        
+                        <a href="https://jadcolombia.com/" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
+                            <img class="w-20 h-20 object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300 rounded-full bg-white p-1 border border-gray-100" src="https://jadcolombia.com/img/icon-trasparente.png" alt="JAD">
+                        </a>
+                                 
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <h3 class="font-bold text-gray-900 dark:text-white text-lg z-10">INNOVAR </h3> 
+                        <h2 class="font-bold text-gray-900 dark:text-white text-md mb-1 z-10"> SOLUCIONES FINANCIERAS</h2>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 z-10">WEB site</p>
+                        
+                        <a href="https://innovarsoluciones.com.co" target="_blank" rel="noopener noreferrer" class="flex-grow flex items-center justify-center mb-6 z-10">
+                            <img class="w-20 h-20 object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300 rounded-full bg-white p-1 border border-gray-100" src="https://innovarsoluciones.com.co/img/innovar.png" alt="Innovar">
+                        </a>
+                                 
+                    </div>
+
+           
 
                 </div>
             </article>
