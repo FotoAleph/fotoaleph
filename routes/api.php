@@ -16,6 +16,7 @@ Route::get('/redes-sociales/{socialable_type}/{socialable_id}', [SocialNetworkCo
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}/aleatorias', [SocialNetworkController::class, 'random']);
 
 
+
 Route::get('/direcciones/{direccionable_type}/{direccionable_id}', function ($direccionable_type, $direccionable_id) {
     $modelClass = match ($direccionable_type) {
         'tenant' => \App\Models\Tenant::class,

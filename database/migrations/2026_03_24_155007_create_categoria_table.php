@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
-            $table->integer('nivel')->default(0);
+            $table->morphs('categoriaable');
             $table->timestamps();
         });
     }
