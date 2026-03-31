@@ -18,7 +18,7 @@ class PublicTenantVitrinaController extends Controller
             $this->transform(
                 Vitrina::filtrar(
                     $this->filters($request),
-                    $tenant->vitrinas()->with(['tenant', 'categoria', 'grupo', 'nivel'])->get(),
+                    $tenant->vitrinas()->with(['tenant', 'categoria', 'grupo', 'nivel', 'multimedias'])->get(),
                 ),
             ),
         );
@@ -51,7 +51,9 @@ class PublicTenantVitrinaController extends Controller
             'id' => $vitrina->id,
             'tenant_id' => $vitrina->tenant_id,
             'tenant' => $vitrina->tenant?->razon_social,
-            'img' => $vitrina->imagen,
+            'img' => $vitrina->previewImageUrl(),
+            'img_detail' => $vitrina->detailImageUrl(),
+            'media_type' => $vitrina->coverMediaType(),
             'category' => $vitrina->categoria?->nombre,
             'group' => $vitrina->grupo?->nombre,
             'name' => $vitrina->nombre,

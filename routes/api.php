@@ -19,8 +19,8 @@ Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum')
 // Social networks routes
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}', [SocialNetworkController::class, 'index']);
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}/aleatorias', [SocialNetworkController::class, 'random']);
-Route::get('/vitrinas/tenant/{tenant}', [PublicTenantVitrinaController::class, 'byTenant']);
-Route::get('/vitrinas/sitio/{site}', [PublicTenantVitrinaController::class, 'bySite']);
+Route::get('/vitrinas/tenant/{tenant}', [PublicTenantVitrinaController::class, 'byTenant'])->middleware('tenant.connection');
+Route::get('/vitrinas/sitio/{site}', [PublicTenantVitrinaController::class, 'bySite'])->middleware('tenant.connection');
 
 Route::get('/direcciones/{direccionable_type}/{direccionable_id}', function ($direccionable_type, $direccionable_id) {
     $modelClass = match ($direccionable_type) {
@@ -42,7 +42,7 @@ Route::get('/direcciones/{direccionable_type}/{direccionable_id}', function ($di
     return response()->json($modelInstance->direcciones);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'tenant.connection'])->group(function () {
     Route::get('/tenants/{tenant}/vitrinas', [ManagedTenantVitrinaController::class, 'index']);
     Route::post('/tenants/{tenant}/vitrinas', [ManagedTenantVitrinaController::class, 'store']);
     Route::get('/tenants/{tenant}/vitrinas/{vitrina}', [ManagedTenantVitrinaController::class, 'show']);

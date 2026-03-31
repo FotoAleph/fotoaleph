@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Tenant;
 use App\Models\User;
+use App\Support\Tenants\TenantConnectionResolver;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(TenantConnectionResolver::class);
     }
 
     /**
@@ -26,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadMigrationsFrom(database_path('migrations/central'));
+
         $this->configureDefaults();
         $this->configureGates();
     }

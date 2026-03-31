@@ -15,10 +15,18 @@ class TenantSeeder extends Seeder
      */
     public function run(): void
     {
-        $dinamycode = Tenant::firstOrCreate(['razon_social' => 'Dinamycode']);
+        $dinamycode = Tenant::firstOrCreate(
+            ['razon_social' => 'Dinamycode'],
+            ['database_connection' => 'tenant_central'],
+        );
+        $dinamycode->forceFill(['database_connection' => 'tenant_central'])->save();
         $dinamycode->users()->syncWithoutDetaching([2]);
 
-        $fotoAleph = Tenant::firstOrCreate(['razon_social' => 'Fotoaleph']);
+        $fotoAleph = Tenant::firstOrCreate(
+            ['razon_social' => 'Fotoaleph'],
+            ['database_connection' => 'tenant_central'],
+        );
+        $fotoAleph->forceFill(['database_connection' => 'tenant_central'])->save();
         $fotoAleph->users()->syncWithoutDetaching([3]);
 
         $fotoAleph->direcciones()->firstOrCreate([
@@ -43,10 +51,18 @@ class TenantSeeder extends Seeder
             }
         }
 
-        $biotek = Tenant::firstOrCreate(['razon_social' => 'Biotek']);
+        $biotek = Tenant::firstOrCreate(
+            ['razon_social' => 'Biotek'],
+            ['database_connection' => 'tenant_central'],
+        );
+        $biotek->forceFill(['database_connection' => 'tenant_central'])->save();
         $biotek->users()->syncWithoutDetaching([1]);
 
-        $casaAngel = Tenant::firstOrCreate(['razon_social' => 'Casa Angel']);
+        $casaAngel = Tenant::firstOrCreate(
+            ['razon_social' => 'Casa Angel'],
+            ['database_connection' => 'tenant_casa_angel'],
+        );
+        $casaAngel->forceFill(['database_connection' => 'tenant_casa_angel'])->save();
         $this->syncSitio(
             $casaAngel,
             'Casa Angel',
@@ -54,7 +70,11 @@ class TenantSeeder extends Seeder
             'casaangel.com',
         );
 
-        $vidriosJym = Tenant::firstOrCreate(['razon_social' => 'Vidrios y Estructuras JyM']);
+        $vidriosJym = Tenant::firstOrCreate(
+            ['razon_social' => 'Vidrios y Estructuras JyM'],
+            ['database_connection' => 'tenant_jym'],
+        );
+        $vidriosJym->forceFill(['database_connection' => 'tenant_jym'])->save();
         $this->syncSitio(
             $vidriosJym,
             'Vidrios y Estructuras JyM',
@@ -62,7 +82,11 @@ class TenantSeeder extends Seeder
             'vidriosyestructurasjym.com',
         );
 
-        $sportBogota = Tenant::firstOrCreate(['razon_social' => 'Sport Bogota']);
+        $sportBogota = Tenant::firstOrCreate(
+            ['razon_social' => 'Sport Bogota'],
+            ['database_connection' => 'tenant_central'],
+        );
+        $sportBogota->forceFill(['database_connection' => 'tenant_central'])->save();
         $sportBogota->users()->syncWithoutDetaching([4]);
 
         $sportBogota->direcciones()->firstOrCreate([

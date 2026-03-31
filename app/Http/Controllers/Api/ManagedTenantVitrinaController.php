@@ -20,7 +20,7 @@ class ManagedTenantVitrinaController extends Controller
 
         return response()->json(
             $this->transform(
-                $tenant->vitrinas()->with(['tenant', 'categoria', 'grupo', 'nivel'])->latest()->get(),
+                $tenant->vitrinas()->with(['tenant', 'categoria', 'grupo', 'nivel', 'multimedias'])->latest()->get(),
             ),
         );
     }
@@ -32,21 +32,26 @@ class ManagedTenantVitrinaController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
-            'imagen' => 'nullable|string|max:255',
             'categoria' => 'nullable|string|max:255',
             'grupo' => 'nullable|string|max:255',
             'nivel' => 'nullable|integer|min:0',
+            'items' => 'nullable|array',
+            'items.*.multimedia_id' => 'required|integer|exists:multimedia,id',
+            'items.*.source_type' => 'nullable|string|max:255',
+            'items.*.source_id' => 'nullable|integer|min:1',
+            'items.*.source_connection' => 'nullable|string|max:255',
+            'items.*.orden' => 'nullable|integer|min:0',
+            'items.*.es_portada' => 'nullable|boolean',
         ]);
 
         $vitrina = $tenant->vitrinas()->create([
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'] ?? null,
-            'imagen' => $validated['imagen'] ?? null,
         ]);
 
         $this->syncRelations($vitrina, $validated);
 
-        return response()->json($this->transformOne($vitrina->fresh(['tenant', 'categoria', 'grupo', 'nivel'])), 201);
+        return response()->json($this->transformOne($vitrina->fresh(['tenant', 'categoria', 'grupo', 'nivel', 'multimedias'])), 201);
     }
 
     public function show(Tenant $tenant, Vitrina $vitrina): JsonResponse
@@ -54,7 +59,7 @@ class ManagedTenantVitrinaController extends Controller
         $this->ensureTenantMatch($tenant, $vitrina);
         $this->authorize('view', $vitrina);
 
-        return response()->json($this->transformOne($vitrina->load(['tenant', 'categoria', 'grupo', 'nivel'])));
+        return response()->json($this->transformOne($vitrina->load(['tenant', 'categoria', 'grupo', 'nivel', 'multimedias'])));
     }
 
     public function update(Request $request, Tenant $tenant, Vitrina $vitrina): JsonResponse
@@ -65,21 +70,26 @@ class ManagedTenantVitrinaController extends Controller
         $validated = $request->validate([
             'nombre' => 'sometimes|required|string|max:255',
             'descripcion' => 'nullable|string',
-            'imagen' => 'nullable|string|max:255',
             'categoria' => 'nullable|string|max:255',
             'grupo' => 'nullable|string|max:255',
             'nivel' => 'nullable|integer|min:0',
+            'items' => 'nullable|array',
+            'items.*.multimedia_id' => 'required|integer|exists:multimedia,id',
+            'items.*.source_type' => 'nullable|string|max:255',
+            'items.*.source_id' => 'nullable|integer|min:1',
+            'items.*.source_connection' => 'nullable|string|max:255',
+            'items.*.orden' => 'nullable|integer|min:0',
+            'items.*.es_portada' => 'nullable|boolean',
         ]);
 
         $vitrina->update([
             'nombre' => $validated['nombre'] ?? $vitrina->nombre,
             'descripcion' => array_key_exists('descripcion', $validated) ? $validated['descripcion'] : $vitrina->descripcion,
-            'imagen' => array_key_exists('imagen', $validated) ? $validated['imagen'] : $vitrina->imagen,
         ]);
 
         $this->syncRelations($vitrina, $validated);
 
-        return response()->json($this->transformOne($vitrina->fresh(['tenant', 'categoria', 'grupo', 'nivel'])));
+        return response()->json($this->transformOne($vitrina->fresh(['tenant', 'categoria', 'grupo', 'nivel', 'multimedias'])));
     }
 
     public function destroy(Tenant $tenant, Vitrina $vitrina): JsonResponse
@@ -118,6 +128,22 @@ class ManagedTenantVitrinaController extends Controller
                 'nivel' => $validated['nivel'],
             ]);
         }
+
+        if (array_key_exists('items', $validated)) {
+            $payload = collect($validated['items'] ?? [])
+                ->mapWithKeys(fn (array $item, int $index) => [
+                    $item['multimedia_id'] => [
+                        'source_type' => $item['source_type'] ?? null,
+                        'source_id' => $item['source_id'] ?? null,
+                        'source_connection' => $item['source_connection'] ?? null,
+                        'orden' => $item['orden'] ?? $index,
+                        'es_portada' => (bool) ($item['es_portada'] ?? false),
+                    ],
+                ])
+                ->all();
+
+            $vitrina->multimedias()->sync($payload);
+        }
     }
 
     private function transform(Collection $vitrinas): Collection
@@ -131,7 +157,9 @@ class ManagedTenantVitrinaController extends Controller
             'id' => $vitrina->id,
             'tenant_id' => $vitrina->tenant_id,
             'tenant' => $vitrina->tenant?->razon_social,
-            'img' => $vitrina->imagen,
+            'img' => $vitrina->previewImageUrl(),
+            'img_detail' => $vitrina->detailImageUrl(),
+            'media_type' => $vitrina->coverMediaType(),
             'category' => $vitrina->categoria?->nombre,
             'group' => $vitrina->grupo?->nombre,
             'name' => $vitrina->nombre,

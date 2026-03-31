@@ -3,6 +3,45 @@
 use Illuminate\Support\Str;
 use Pdo\Mysql;
 
+$sqliteConnection = static fn (string $database): array => [
+    'driver' => 'sqlite',
+    'url' => null,
+    'database' => $database,
+    'prefix' => '',
+    'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+    'busy_timeout' => null,
+    'journal_mode' => null,
+    'synchronous' => null,
+    'transaction_mode' => 'DEFERRED',
+];
+
+$mysqlConnection = static fn (
+    string $host,
+    string $port,
+    string $database,
+    string $username,
+    string $password,
+    ?string $url = null
+): array => [
+    'driver' => 'mysql',
+    'url' => $url,
+    'host' => $host,
+    'port' => $port,
+    'database' => $database,
+    'username' => $username,
+    'password' => $password,
+    'unix_socket' => env('DB_SOCKET', ''),
+    'charset' => env('DB_CHARSET', 'utf8mb4'),
+    'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+    'prefix' => '',
+    'prefix_indexes' => true,
+    'strict' => true,
+    'engine' => null,
+    'options' => extension_loaded('pdo_mysql') ? array_filter([
+        (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
+    ]) : [],
+];
+
 return [
 
     /*
@@ -113,6 +152,39 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
+
+        'tenant_central' => env('TENANT_CENTRAL_DB_CONNECTION', env('DB_CONNECTION', 'sqlite')) === 'sqlite'
+            ? $sqliteConnection(env('TENANT_CENTRAL_DB_DATABASE', env('DB_DATABASE', database_path('database.sqlite'))))
+            : $mysqlConnection(
+                env('TENANT_CENTRAL_DB_HOST', env('DB_HOST', '127.0.0.1')),
+                env('TENANT_CENTRAL_DB_PORT', env('DB_PORT', '3306')),
+                env('TENANT_CENTRAL_DB_DATABASE', env('DB_DATABASE', 'laravel')),
+                env('TENANT_CENTRAL_DB_USERNAME', env('DB_USERNAME', 'root')),
+                env('TENANT_CENTRAL_DB_PASSWORD', env('DB_PASSWORD', '')),
+                env('TENANT_CENTRAL_DB_URL', env('DB_URL'))
+            ),
+
+        'tenant_jym' => env('TENANT_JYM_DB_CONNECTION', env('DB_CONNECTION', 'sqlite')) === 'sqlite'
+            ? $sqliteConnection(env('TENANT_JYM_DB_DATABASE', database_path('tenant_jym.sqlite')))
+            : $mysqlConnection(
+                env('TENANT_JYM_DB_HOST', env('DB_HOST', '127.0.0.1')),
+                env('TENANT_JYM_DB_PORT', env('DB_PORT', '3306')),
+                env('TENANT_JYM_DB_DATABASE', 'tenant_jym'),
+                env('TENANT_JYM_DB_USERNAME', env('DB_USERNAME', 'root')),
+                env('TENANT_JYM_DB_PASSWORD', env('DB_PASSWORD', '')),
+                env('TENANT_JYM_DB_URL')
+            ),
+
+        'tenant_casa_angel' => env('TENANT_CASA_ANGEL_DB_CONNECTION', env('DB_CONNECTION', 'sqlite')) === 'sqlite'
+            ? $sqliteConnection(env('TENANT_CASA_ANGEL_DB_DATABASE', database_path('tenant_casa_angel.sqlite')))
+            : $mysqlConnection(
+                env('TENANT_CASA_ANGEL_DB_HOST', env('DB_HOST', '127.0.0.1')),
+                env('TENANT_CASA_ANGEL_DB_PORT', env('DB_PORT', '3306')),
+                env('TENANT_CASA_ANGEL_DB_DATABASE', 'tenant_casa_angel'),
+                env('TENANT_CASA_ANGEL_DB_USERNAME', env('DB_USERNAME', 'root')),
+                env('TENANT_CASA_ANGEL_DB_PASSWORD', env('DB_PASSWORD', '')),
+                env('TENANT_CASA_ANGEL_DB_URL')
+            ),
 
     ],
 

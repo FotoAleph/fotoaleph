@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Multimedia;
 use App\Models\Tenant;
 use App\Models\User;
 use App\Models\Vitrina;
@@ -81,10 +82,20 @@ class VitrinaApiTest extends TestCase
         $response = $this->postJson("/api/tenants/{$tenant->id}/vitrinas", [
             'nombre' => 'Nueva Vitrina',
             'descripcion' => 'Descripcion de prueba',
-            'imagen' => '/nueva.jpg',
             'categoria' => 'General',
             'grupo' => 'Rosa',
             'nivel' => 5,
+            'items' => [
+                [
+                    'multimedia_id' => Multimedia::create([
+                        'url' => '/nueva-grande.jpg',
+                        'preview_url' => '/nueva.jpg',
+                        'type' => 'image',
+                        'mime_type' => 'image/jpeg',
+                    ])->id,
+                    'es_portada' => true,
+                ],
+            ],
         ]);
 
         $response
@@ -124,7 +135,20 @@ class VitrinaApiTest extends TestCase
             'tenant_id' => $tenant->id,
             'nombre' => $nombre,
             'descripcion' => 'Descripcion de '.$nombre,
-            'imagen' => $imagen,
+        ]);
+
+        $multimedia = Multimedia::create([
+            'url' => $imagen,
+            'preview_url' => $imagen,
+            'type' => 'image',
+            'mime_type' => 'image/jpeg',
+        ]);
+
+        $vitrina->multimedias()->sync([
+            $multimedia->id => [
+                'orden' => 0,
+                'es_portada' => true,
+            ],
         ]);
 
         $vitrina->categoria()->create([

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('multimedia', function (Blueprint $table) {
             $table->id();
             $table->string('url');
-            $table->enum('type', ['image', 'video'])->default('image');
+            $table->string('preview_url')->nullable();
+            $table->string('type')->default('image');
             $table->string('mime_type')->nullable();
             $table->timestamps();
         });

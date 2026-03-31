@@ -11,7 +11,13 @@ class Tenant extends Model
 {
     protected $fillable = [
         'razon_social',
+        'database_connection',
     ];
+
+    public function databaseConnectionName(): string
+    {
+        return $this->database_connection ?: 'tenant_central';
+    }
 
     public function users(): BelongsToMany
     {

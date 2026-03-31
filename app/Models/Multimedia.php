@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphedByMany;
 
 class Multimedia extends Model
 {
@@ -11,6 +12,7 @@ class Multimedia extends Model
 
     protected $fillable = [
         'url',
+        'preview_url',
         'type',
         'mime_type',
     ];
@@ -20,13 +22,27 @@ class Multimedia extends Model
         'updated_at' => 'datetime',
     ];
 
-    /**
-     * Get all of the models that own multimedia files.
-     */
-    public function multimediable(): MorphToMany
+    public function vitrinas(): BelongsToMany
+    {
+        return $this->belongsToMany(Vitrina::class, 'vitrina_items')
+            ->withPivot(['source_type', 'source_id', 'source_connection', 'orden', 'es_portada'])
+            ->withTimestamps();
+    }
+
+    public function proyectos(): MorphedByMany
     {
         return $this->morphedByMany(
-            Model::class,
+            Proyecto::class,
+            'multimediable',
+            'multimediable',
+            'multimedia_id'
+        );
+    }
+
+    public function eventos(): MorphedByMany
+    {
+        return $this->morphedByMany(
+            Evento::class,
             'multimediable',
             'multimediable',
             'multimedia_id'

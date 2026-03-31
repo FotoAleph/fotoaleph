@@ -4,27 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Proyecto extends Model
+class Evento extends Model
 {
-    protected $connection = 'tenant_jym';
+    protected $connection = 'tenant_casa_angel';
 
     protected $fillable = [
-        'categoria_id',
+        'ocasion_id',
+        'tematica_id',
         'nombre',
         'descripcion',
+        'fecha_evento',
+        'ubicacion',
     ];
 
-    public function categoria(): BelongsTo
+    protected $casts = [
+        'fecha_evento' => 'datetime',
+    ];
+
+    public function ocasion(): BelongsTo
     {
-        return $this->belongsTo(JymCategoria::class, 'categoria_id');
+        return $this->belongsTo(Ocasion::class);
     }
 
-    public function niveles(): MorphMany
+    public function tematica(): BelongsTo
     {
-        return $this->morphMany(Nivel::class, 'nivelable');
+        return $this->belongsTo(Tematica::class);
     }
 
     public function multimedias(): MorphToMany
