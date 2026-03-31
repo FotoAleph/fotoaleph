@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Categoria extends Model
 {
@@ -11,4 +12,9 @@ class Categoria extends Model
         'descripcion',
         'nivel',
     ];
+
+    public function categoriaable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Grupo extends Model
 {
@@ -11,4 +12,9 @@ class Grupo extends Model
         'descripcion',
         'nivel',
     ];
+
+    public function grupoable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

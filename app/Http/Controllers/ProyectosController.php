@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proyectos;
+use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
-class ProyectosController extends Controller
+class ProyectoController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
+
 {
     /**
      * Run the migrations.
@@ -13,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('vitrinas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
-            $table->integer('nivel')->default(0);
+
             $table->timestamps();
         });
     }

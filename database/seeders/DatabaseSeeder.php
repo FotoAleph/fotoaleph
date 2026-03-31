@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@dinamycode.com',
@@ -27,13 +26,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'password' => bcrypt('dinamycodeDC*'),
         ]);
-        user::factory()->create([
+        User::factory()->create([
             'name' => 'Carlos Alberto Ramirez',
             'email' => 'fotoaleph@dinamycode.com',
             'role' => 'coordinador',
             'password' => bcrypt('dinamycodeDC*'),
         ]);
-        
+
         User::factory()->create([
             'name' => 'Sport Bogota',
             'email' => 'sportbogotafc@gmail.com',
@@ -41,10 +40,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('PassDinamycode!'),
         ]);
 
-
-    $this->call(SocialNetworkTypesSeeder::class);
-    $this->call(TenantSeeder::class);
-    $this->call(RoleSeeder::class);
-
+        $this->call(SocialNetworkTypesSeeder::class);
+        $this->call(TenantSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(VitrinaSeeder::class);
     }
 }
