@@ -186,6 +186,18 @@ return [
                 env('TENANT_CASA_ANGEL_DB_URL')
             ),
 
+            'tenant_sport_bogota' => env('TENANT_SPORT_BOGOTA_DB_CONNECTION', env('DB_CONNECTION', 'sqlite')) === 'sqlite'
+                ? $sqliteConnection(env('TENANT_SPORT_BOGOTA_DB_DATABASE', database_path('tenant_sport_bogota.sqlite')))
+                : $mysqlConnection(
+                    env('TENANT_SPORT_BOGOTA_DB_HOST', env('DB_HOST', '127.0.0.1')),
+                    env('TENANT_SPORT_BOGOTA_DB_PORT', env('DB_PORT', '3306')),
+                    env('TENANT_SPORT_BOGOTA_DB_DATABASE', 'tenant_sport_bogota'),
+                    env('TENANT_SPORT_BOGOTA_DB_USERNAME', env('DB_USERNAME', 'root')),
+                    env('TENANT_SPORT_BOGOTA_DB_PASSWORD', env('DB_PASSWORD', '')),
+                    env('TENANT_SPORT_BOGOTA_DB_URL')
+                ),
+
+
     ],
 
     /*

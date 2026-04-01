@@ -4,6 +4,7 @@ use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\PqrController;
 use App\Http\Controllers\SitioController;
@@ -17,11 +18,15 @@ Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('estudiantes/descargar/todas', [EstudianteController::class, 'downloadAll'])->name('estudiantes.download-all');
+    Route::get('estudiantes/{estudiante}/descargar', [EstudianteController::class, 'download'])->name('estudiantes.download');
+
     Route::resource('tenants', TenantController::class);
     Route::resource('pqrs', PqrController::class);
     Route::resource('cotizaciones', CotizacionController::class);
     Route::resource('users', UserController::class);
     Route::resource('sitios', SitioController::class);
+    Route::resource('estudiantes', EstudianteController::class)->except(['show']);
     Route::resource('grupos', GrupoController::class);
     Route::resource('categorias', CategoriaController::class);
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');

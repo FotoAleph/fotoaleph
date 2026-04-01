@@ -68,5 +68,20 @@ class AppServiceProvider extends ServiceProvider
 
             return $tenant->users()->where('user_id', $user->id)->exists();
         });
+
+        Gate::define('manage-sport-bogota-estudiantes', function (User $user): bool {
+            if ($user->role === 'admin') {
+                return true;
+            }
+
+            if ($user->role !== 'coordinador') {
+                return false;
+            }
+
+            return Tenant::query()
+                ->where('razon_social', 'Sport Bogota')
+                ->whereHas('users', fn ($query) => $query->where('users.id', $user->id))
+                ->exists();
+        });
     }
 }

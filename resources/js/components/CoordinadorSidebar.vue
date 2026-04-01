@@ -4,6 +4,7 @@ import {
     FolderTree,
     FileText,
     Globe,
+    GraduationCap,
     LayoutGrid,
     MessageSquare,
     Tags,
@@ -45,6 +46,11 @@ const mainNavItems: NavItem[] = [
         title: 'Sitios',
         href: '/sitios',
         icon: Globe,
+    },
+    {
+        title: 'Estudiantes',
+        href: '/estudiantes',
+        icon: GraduationCap,
     },
     {
         title: 'Grupos',

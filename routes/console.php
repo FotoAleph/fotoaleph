@@ -94,9 +94,11 @@ Artisan::command('tenancy:reset-demo', function () use ($runFreshCommand, $runSe
     $runFreshCommand->call($this, 'tenant_central', database_path('migrations/central'));
     $runFreshCommand->call($this, 'tenant_jym', database_path('migrations/tenant_jym'));
     $runFreshCommand->call($this, 'tenant_casa_angel', database_path('migrations/tenant_casa_angel'));
+    $runFreshCommand->call($this, 'tenant_sport_bogota', database_path('migrations/tenant_sport_bogota'));
 
     $runSeederCommand->call($this, 'tenant_central', \Database\Seeders\CentralDatabaseSeeder::class);
     $runSeederCommand->call($this, 'tenant_jym', \Database\Seeders\JymTenantSeeder::class);
     $runSeederCommand->call($this, 'tenant_casa_angel', \Database\Seeders\CasaAngelTenantSeeder::class);
+    $runSeederCommand->call($this, 'tenant_sport_bogota', \Database\Seeders\SportBogotaTenantSeeder::class);
     $runSeederCommand->call($this, 'tenant_central', \Database\Seeders\VitrinaCurationSeeder::class);
-})->purpose('Rebuild and reseed the central, JyM, Casa Angel, and vitrina demo data in order.');
+})->purpose('Rebuild and reseed central, JyM, Casa Angel, Sport Bogota, and vitrina demo data in order.');
