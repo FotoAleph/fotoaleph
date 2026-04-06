@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\ManagedTenantVitrinaController;
+use App\Http\Controllers\Api\PublicTenantEventController;
+use App\Http\Controllers\Api\PublicTenantProjectController;
 use App\Http\Controllers\Api\PublicTenantVitrinaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SocialNetworkController;
@@ -21,6 +23,10 @@ Route::get('/redes-sociales/{socialable_type}/{socialable_id}', [SocialNetworkCo
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}/aleatorias', [SocialNetworkController::class, 'random']);
 Route::get('/vitrinas/tenant/{tenant}', [PublicTenantVitrinaController::class, 'byTenant'])->middleware('tenant.connection');
 Route::get('/vitrinas/sitio/{site}', [PublicTenantVitrinaController::class, 'bySite'])->middleware('tenant.connection');
+Route::get('/proyectos/tenant/{tenant}', [PublicTenantProjectController::class, 'byTenant']);
+Route::get('/proyectos/sitio/{site}', [PublicTenantProjectController::class, 'bySite']);
+Route::get('/eventos/tenant/{tenant}', [PublicTenantEventController::class, 'byTenant']);
+Route::get('/eventos/sitio/{site}', [PublicTenantEventController::class, 'bySite']);
 
 Route::get('/direcciones/{direccionable_type}/{direccionable_id}', function ($direccionable_type, $direccionable_id) {
     $modelClass = match ($direccionable_type) {

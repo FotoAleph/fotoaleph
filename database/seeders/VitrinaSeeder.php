@@ -81,8 +81,6 @@ class VitrinaSeeder extends Seeder
             $evento = Evento::query()->firstOrCreate(
                 ['nombre' => Str::title($alt)],
                 [
-                    'ocasion_id' => $ocasion->id,
-                    'tematica_id' => $tematica->id,
                     'descripcion' => 'Proyecto: '.$projectName,
                 ],
             );

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\JymCategoria;
+use App\Models\JymGrupo;
 use App\Models\Multimedia;
 use App\Models\Proyecto;
 use Illuminate\Database\Seeder;
@@ -20,11 +21,18 @@ class JymTenantSeeder extends Seeder
                 ['descripcion' => $item['category']],
             );
 
+            $grupo = JymGrupo::query()->firstOrCreate(
+                ['nombre' => $item['group'] ?? 'General'],
+                ['descripcion' => $item['group'] ?? 'General'],
+            );
+
             $proyecto = Proyecto::query()->firstOrCreate(
                 ['nombre' => $item['name']],
                 [
                     'categoria_id' => $categoria->id,
+                    'grupo_id' => $grupo->id,
                     'descripcion' => $item['description'],
+                    'publicar_en_vitrina' => false,
                 ],
             );
 

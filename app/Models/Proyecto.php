@@ -13,13 +13,24 @@ class Proyecto extends Model
 
     protected $fillable = [
         'categoria_id',
+        'grupo_id',
         'nombre',
         'descripcion',
+        'publicar_en_vitrina',
+    ];
+
+    protected $casts = [
+        'publicar_en_vitrina' => 'boolean',
     ];
 
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(JymCategoria::class, 'categoria_id');
+    }
+
+    public function grupo(): BelongsTo
+    {
+        return $this->belongsTo(JymGrupo::class, 'grupo_id');
     }
 
     public function niveles(): MorphMany
@@ -36,5 +47,10 @@ class Proyecto extends Model
             'multimediable_id',
             'multimedia_id'
         )->withTimestamps();
+    }
+
+    public function primaryMedia(): ?Multimedia
+    {
+        return $this->multimedias->first();
     }
 }

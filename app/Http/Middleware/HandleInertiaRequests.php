@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -40,6 +41,7 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'auth' => [
                 'user' => $request->user(),
+                'tenants' => fn () => $this->sharedTenants($request),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'translations' => function () {
@@ -47,6 +49,27 @@ class HandleInertiaRequests extends Middleware
             return file_get_contents(lang_path(app()->getLocale() . '.json'));
         });
     },];
+    }
+
+    private function sharedTenants(Request $request): array
+    {
+        $user = $request->user();
+
+        if (! $user) {
+            return [];
+        }
+
+        $query = Tenant::query()->select(['id', 'razon_social', 'database_connection'])->orderBy('razon_social');
+
+        if ($user->role !== 'admin') {
+            $query->whereHas('users', fn ($tenantQuery) => $tenantQuery->where('users.id', $user->id));
+        }
+
+        return $query->get()->map(fn (Tenant $tenant) => [
+            'id' => $tenant->id,
+            'razon_social' => $tenant->razon_social,
+            'database_connection' => $tenant->databaseConnectionName(),
+        ])->all();
     }
 
 }

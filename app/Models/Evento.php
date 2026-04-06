@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Evento extends Model
@@ -11,27 +10,18 @@ class Evento extends Model
     protected $connection = 'tenant_casa_angel';
 
     protected $fillable = [
-        'ocasion_id',
-        'tematica_id',
         'nombre',
         'descripcion',
         'fecha_evento',
         'ubicacion',
+        'codigo',
+        'publicar_en_vitrina',
     ];
 
     protected $casts = [
         'fecha_evento' => 'datetime',
+        'publicar_en_vitrina' => 'boolean',
     ];
-
-    public function ocasion(): BelongsTo
-    {
-        return $this->belongsTo(Ocasion::class);
-    }
-
-    public function tematica(): BelongsTo
-    {
-        return $this->belongsTo(Tematica::class);
-    }
 
     public function multimedias(): MorphToMany
     {
@@ -42,5 +32,10 @@ class Evento extends Model
             'multimediable_id',
             'multimedia_id'
         )->withTimestamps();
+    }
+
+    public function primaryMedia(): ?Multimedia
+    {
+        return $this->multimedias->first();
     }
 }

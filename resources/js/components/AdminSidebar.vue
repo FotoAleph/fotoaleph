@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
 import {
     Building,
-    FolderTree,
     FileText,
-    Globe,
     GraduationCap,
     LayoutGrid,
     MessageSquare,
     Settings,
-    Tags,
     Users
 } from 'lucide-vue-next';
 import AppLogo from '@/components/AppLogo.vue';
@@ -28,7 +26,33 @@ import {
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
-const mainNavItems: NavItem[] = [
+const page = usePage();
+
+const tenantLinks = computed<NavItem[]>(() => {
+    const tenants = ((page.props.auth as any)?.tenants ?? []) as Array<{ id: number; razon_social: string; database_connection: string }>;
+
+    return tenants.flatMap((tenant) => {
+        if (tenant.database_connection === 'tenant_jym') {
+            return [{ title: `JyM: ${tenant.razon_social}`, href: route('tenant-projects.index', { tenant: tenant.id }), icon: FileText }];
+        }
+
+        if (tenant.database_connection === 'tenant_casa_angel') {
+            return [{ title: `Casa Angel: ${tenant.razon_social}`, href: route('tenant-events.index', { tenant: tenant.id }), icon: FileText }];
+        }
+
+        if (tenant.database_connection === 'tenant_biotek') {
+            return [{ title: `Biotek: ${tenant.razon_social}`, href: route('biotek-students.index', { tenant: tenant.id }), icon: GraduationCap }];
+        }
+
+        if (tenant.database_connection === 'tenant_sport_bogota') {
+            return [{ title: `Sport Bogota: ${tenant.razon_social}`, href: '/estudiantes', icon: GraduationCap }];
+        }
+
+        return [];
+    });
+});
+
+const mainNavItems = computed<NavItem[]>(() => [
     {
         title: 'Dashboard',
         href: dashboard(),
@@ -45,26 +69,6 @@ const mainNavItems: NavItem[] = [
         icon: Building,
     },
     {
-        title: 'Sitios',
-        href: '/sitios',
-        icon: Globe,
-    },
-    {
-        title: 'Estudiantes',
-        href: '/estudiantes',
-        icon: GraduationCap,
-    },
-    {
-        title: 'Grupos',
-        href: '/grupos',
-        icon: FolderTree,
-    },
-    {
-        title: 'Categorías',
-        href: '/categorias',
-        icon: Tags,
-    },
-    {
         title: 'PQRs',
         href: '/pqrs',
         icon: MessageSquare,
@@ -74,7 +78,8 @@ const mainNavItems: NavItem[] = [
         href: '/cotizaciones',
         icon: FileText,
     },
-];
+    ...tenantLinks.value,
+]);
 
 const footerNavItems: NavItem[] = [
     {

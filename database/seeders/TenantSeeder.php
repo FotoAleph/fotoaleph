@@ -53,10 +53,17 @@ class TenantSeeder extends Seeder
 
         $biotek = Tenant::firstOrCreate(
             ['razon_social' => 'Biotek'],
-            ['database_connection' => 'tenant_central'],
+            ['database_connection' => 'tenant_biotek'],
         );
-        $biotek->forceFill(['database_connection' => 'tenant_central'])->save();
+        $biotek->forceFill(['database_connection' => 'tenant_biotek'])->save();
         $biotek->users()->syncWithoutDetaching([1]);
+
+        $this->syncSitio(
+            $biotek,
+            'Biotek',
+            'Talleres y carnetizacion Biotek',
+            'biotek.com',
+        );
 
         $casaAngel = Tenant::firstOrCreate(
             ['razon_social' => 'Casa Angel'],
@@ -84,15 +91,22 @@ class TenantSeeder extends Seeder
 
         $sportBogota = Tenant::firstOrCreate(
             ['razon_social' => 'Sport Bogota'],
-            ['database_connection' => 'tenant_central'],
+            ['database_connection' => 'tenant_sport_bogota'],
         );
-        $sportBogota->forceFill(['database_connection' => 'tenant_central'])->save();
+        $sportBogota->forceFill(['database_connection' => 'tenant_sport_bogota'])->save();
         $sportBogota->users()->syncWithoutDetaching([4]);
 
         $sportBogota->direcciones()->firstOrCreate([
             'nomenclatura' => 'Calle 123 #45-67',
             'codigo_postal' => '110111',
         ]);
+
+        $this->syncSitio(
+            $sportBogota,
+            'Sport Bogota',
+            'Carnetizacion Sport Bogota',
+            'sportbogota.com',
+        );
     }
 
     private function syncSitio(Tenant $tenant, string $name, string $description, string $url): void

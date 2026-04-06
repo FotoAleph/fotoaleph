@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected function configureGates(): void
     {
-        Gate::define('manage-tenant-vitrinas', function (User $user, Tenant $tenant): bool {
+        Gate::define('manage-tenant', function (User $user, Tenant|string $tenant): bool {
             if ($user->role === 'admin') {
                 return true;
             }
@@ -66,22 +66,23 @@ class AppServiceProvider extends ServiceProvider
                 return false;
             }
 
-            return $tenant->users()->where('user_id', $user->id)->exists();
+            $tenantId = $tenant instanceof Tenant
+                ? $tenant->getKey()
+                : Tenant::query()->where('razon_social', $tenant)->value('id');
+
+            if (! $tenantId) {
+                return false;
+            }
+
+            return $user->tenant()->where('tenants.id', $tenantId)->exists();
+        });
+
+        Gate::define('manage-tenant-vitrinas', function (User $user, Tenant $tenant): bool {
+            return Gate::forUser($user)->allows('manage-tenant', $tenant);
         });
 
         Gate::define('manage-sport-bogota-estudiantes', function (User $user): bool {
-            if ($user->role === 'admin') {
-                return true;
-            }
-
-            if ($user->role !== 'coordinador') {
-                return false;
-            }
-
-            return Tenant::query()
-                ->where('razon_social', 'Sport Bogota')
-                ->whereHas('users', fn ($query) => $query->where('users.id', $user->id))
-                ->exists();
+            return Gate::forUser($user)->allows('manage-tenant', 'Sport Bogota');
         });
     }
 }

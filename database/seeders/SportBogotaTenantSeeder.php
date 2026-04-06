@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\Multimedia;
 use App\Models\Estudiante;
+use App\Models\Multimedia;
+use Illuminate\Database\Seeder;
 
 class SportBogotaTenantSeeder extends Seeder
 {
@@ -14,7 +13,6 @@ class SportBogotaTenantSeeder extends Seeder
      */
     public function run(): void
     {
-
         $students = [
             ['nombre' => 'Aron Fernandez', 'categoria' => '2019', 'foto' => '/storage/img/sport_bogota/estudiantes/AronFernandez.jpg'],
             ['nombre' => 'Juan Esteban Caicedo Ortiz', 'categoria' => '2015-16', 'foto' => '/storage/img/sport_bogota/estudiantes/_DSC6452.JPG'],
@@ -26,7 +24,13 @@ class SportBogotaTenantSeeder extends Seeder
         ];
 
         foreach ($students as $studentData) {
-            $multimediaId = null;
+            $estudiante = Estudiante::query()->updateOrCreate(
+                [
+                    'nombre' => $studentData['nombre'],
+                    'categoria' => $studentData['categoria'],
+                ],
+                [],
+            );
 
             if (!empty($studentData['foto'])) {
                 $multimedia = Multimedia::on('tenant_sport_bogota')->firstOrCreate(
@@ -40,14 +44,11 @@ class SportBogotaTenantSeeder extends Seeder
                     ],
                 );
 
-                $multimediaId = $multimedia->id;
+                $estudiante->multimedias()->sync([$multimedia->id]);
+                continue;
             }
 
-            Estudiante::query()->create([
-                'nombre' => $studentData['nombre'],
-                'categoria' => $studentData['categoria'],
-                'foto_url' => $multimediaId,
-            ]);
+            $estudiante->multimedias()->sync([]);
         }
     }
 
@@ -59,7 +60,5 @@ class SportBogotaTenantSeeder extends Seeder
             'gif' => 'image/gif',
             default => 'image/jpeg',
         };
-
-
- }
+    }
 }

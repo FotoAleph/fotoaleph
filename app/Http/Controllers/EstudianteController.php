@@ -23,24 +23,13 @@ class EstudianteController extends Controller
         $this->authorize('viewAny', Estudiante::class);
 
         $filters = $this->validatedFilters($request);
-        $query = $this->buildFilteredQuery($filters);
+        $query = $this->buildFilteredQuery($filters)->with('multimedias');
 
         $estudiantes = $query->paginate((int) ($filters['per_page'] ?? 10))->withQueryString();
 
-        $mediaIds = $estudiantes->getCollection()
-            ->pluck('foto_url')
-            ->filter()
-            ->unique()
-            ->values();
-
-        $multimedia = Multimedia::on('tenant_sport_bogota')
-            ->whereIn('id', $mediaIds)
-            ->get(['id', 'url', 'preview_url'])
-            ->keyBy('id');
-
         $estudiantes->setCollection(
-            $estudiantes->getCollection()->map(function (Estudiante $estudiante) use ($multimedia) {
-                $foto = $estudiante->foto_url ? $multimedia->get((int) $estudiante->foto_url) : null;
+            $estudiantes->getCollection()->map(function (Estudiante $estudiante) {
+                $foto = $estudiante->primaryMedia();
 
                 $estudiante->setAttribute('foto_src', $foto?->preview_url ?? $foto?->url);
 
@@ -64,7 +53,7 @@ class EstudianteController extends Controller
     {
         $this->authorize('view', $estudiante);
 
-        $foto = $this->resolveFotoById($estudiante->foto_url);
+        $foto = $this->resolveFoto($estudiante);
 
         abort_if($foto === null, 404, 'El estudiante no tiene imagen registrada.');
 
@@ -83,9 +72,9 @@ class EstudianteController extends Controller
         $this->authorize('viewAny', Estudiante::class);
 
         $filters = $this->validatedFilters($request);
-        $query = $this->buildFilteredQuery($filters);
+        $query = $this->buildFilteredQuery($filters)->with('multimedias');
 
-        $estudiantes = $query->get(['id', 'nombre', 'foto_url']);
+        $estudiantes = $query->get(['id', 'nombre']);
 
         $zipPath = tempnam(sys_get_temp_dir(), 'sport_bogota_estudiantes_');
 
@@ -104,7 +93,7 @@ class EstudianteController extends Controller
         $added = 0;
 
         foreach ($estudiantes as $estudiante) {
-            $foto = $this->resolveFotoById($estudiante->foto_url);
+            $foto = $this->resolveFoto($estudiante);
 
             if ($foto === null) {
                 continue;
@@ -155,28 +144,12 @@ class EstudianteController extends Controller
             'foto' => 'nullable|string|max:255',
         ]);
 
-        $multimediaId = null;
-
-        if (! empty($validated['foto'])) {
-            $multimedia = Multimedia::on('tenant_sport_bogota')->firstOrCreate(
-                [
-                    'url' => $validated['foto'],
-                    'preview_url' => $validated['foto'],
-                    'type' => 'image',
-                ],
-                [
-                    'mime_type' => $this->guessMimeType($validated['foto']),
-                ],
-            );
-
-            $multimediaId = $multimedia->id;
-        }
-
-        Estudiante::query()->create([
+        $estudiante = Estudiante::query()->create([
             'nombre' => $validated['nombre'],
             'categoria' => $validated['categoria'],
-            'foto_url' => $multimediaId,
         ]);
+
+        $this->syncFoto($estudiante, $validated['foto'] ?? null);
 
         return redirect()->route('estudiantes.index')->with('success', 'Estudiante creado exitosamente.');
     }
@@ -185,13 +158,7 @@ class EstudianteController extends Controller
     {
         $this->authorize('update', $estudiante);
 
-        $foto = null;
-
-        if ($estudiante->foto_url) {
-            $foto = Multimedia::on('tenant_sport_bogota')
-                ->whereKey($estudiante->foto_url)
-                ->first(['id', 'url', 'preview_url']);
-        }
+        $foto = $this->resolveFoto($estudiante);
 
         $estudiante->setAttribute('foto_src', $foto?->preview_url ?? $foto?->url);
 
@@ -210,28 +177,12 @@ class EstudianteController extends Controller
             'foto' => 'nullable|string|max:255',
         ]);
 
-        $multimediaId = null;
-
-        if (! empty($validated['foto'])) {
-            $multimedia = Multimedia::on('tenant_sport_bogota')->firstOrCreate(
-                [
-                    'url' => $validated['foto'],
-                    'preview_url' => $validated['foto'],
-                    'type' => 'image',
-                ],
-                [
-                    'mime_type' => $this->guessMimeType($validated['foto']),
-                ],
-            );
-
-            $multimediaId = $multimedia->id;
-        }
-
         $estudiante->update([
             'nombre' => $validated['nombre'],
             'categoria' => $validated['categoria'],
-            'foto_url' => $multimediaId,
         ]);
+
+        $this->syncFoto($estudiante, $validated['foto'] ?? null);
 
         return redirect()->route('estudiantes.index')->with('success', 'Estudiante actualizado exitosamente.');
     }
@@ -281,15 +232,37 @@ class EstudianteController extends Controller
             ->thenReturn();
     }
 
-    private function resolveFotoById(?int $fotoId): ?Multimedia
+    private function resolveFoto(Estudiante $estudiante): ?Multimedia
     {
-        if (! $fotoId) {
-            return null;
+        if ($estudiante->relationLoaded('multimedias')) {
+            return $estudiante->primaryMedia();
         }
 
-        return Multimedia::on('tenant_sport_bogota')
-            ->whereKey($fotoId)
-            ->first(['id', 'url', 'preview_url']);
+        return $estudiante->multimedias()->first(['multimedia.id', 'url', 'preview_url']);
+    }
+
+    private function syncFoto(Estudiante $estudiante, ?string $path): void
+    {
+        $path = trim((string) $path);
+
+        if ($path === '') {
+            $estudiante->multimedias()->sync([]);
+
+            return;
+        }
+
+        $multimedia = Multimedia::on('tenant_sport_bogota')->firstOrCreate(
+            [
+                'url' => $path,
+                'preview_url' => $path,
+                'type' => 'image',
+            ],
+            [
+                'mime_type' => $this->guessMimeType($path),
+            ],
+        );
+
+        $estudiante->multimedias()->sync([$multimedia->id]);
     }
 
     private function resolveAbsolutePath(string $url): ?string
