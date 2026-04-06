@@ -47,7 +47,14 @@
 
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Link, useForm } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { Link, useForm,usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+const role = computed(() => page.props.auth?.user?.role);
+
+const canDelete = computed(() => role.value === 'admin');
+
 
 const props = defineProps({
     estudiante: Object,
