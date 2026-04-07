@@ -28,26 +28,6 @@ Route::get('/proyectos/sitio/{site}', [PublicTenantProjectController::class, 'by
 Route::get('/eventos/tenant/{tenant}', [PublicTenantEventController::class, 'byTenant']);
 Route::get('/eventos/sitio/{site}', [PublicTenantEventController::class, 'bySite']);
 
-Route::get('/direcciones/{direccionable_type}/{direccionable_id}', function ($direccionable_type, $direccionable_id) {
-    $modelClass = match ($direccionable_type) {
-        'tenant' => Tenant::class,
-        'user' => User::class,
-        default => null,
-    };
-
-    if (! $modelClass) {
-        return response()->json(['error' => 'Tipo de modelo no válido'], 400);
-    }
-
-    $modelInstance = $modelClass::find($direccionable_id);
-
-    if (! $modelInstance) {
-        return response()->json(['error' => 'Modelo no encontrado'], 404);
-    }
-
-    return response()->json($modelInstance->direcciones);
-});
-
 Route::middleware(['auth:sanctum', 'tenant.connection'])->group(function () {
     Route::get('/tenants/{tenant}/vitrinas', [ManagedTenantVitrinaController::class, 'index']);
     Route::post('/tenants/{tenant}/vitrinas', [ManagedTenantVitrinaController::class, 'store']);

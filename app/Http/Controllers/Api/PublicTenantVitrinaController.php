@@ -41,7 +41,7 @@ class PublicTenantVitrinaController extends Controller
             'categoria' => $request->query('categoria'),
             'grupo' => $request->query('grupo'),
             'direccion_fecha' => $request->query('direccion_fecha', 'desc'),
-            'direccion_nivel' => $request->query('direccion_nivel', 'asc'),
+            'direccion_nivel' => $request->query('direccion_nivel', 'desc'),
         ];
     }
 
@@ -54,17 +54,13 @@ class PublicTenantVitrinaController extends Controller
             'img' => $vitrina->previewImageUrl(),
             'img_detail' => $vitrina->detailImageUrl(),
             'media_type' => $vitrina->coverMediaType(),
-            'items' => $vitrina->multimedias->map(fn ($media) => [
-                'url' => $media->url,
-                'preview_url' => $media->preview_url,
-                'type' => $media->type,
-            ])->values(),
             'category' => $vitrina->categoria?->nombre,
             'group' => $vitrina->grupo?->nombre,
             'name' => $vitrina->nombre,
             'description' => $vitrina->descripcion,
             'date' => $vitrina->created_at?->toISOString(),
             'level' => $vitrina->nivel?->nivel,
-        ])->values();
+        ])
+        ->values();
     }
 }

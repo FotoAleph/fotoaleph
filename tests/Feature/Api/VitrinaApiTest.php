@@ -71,6 +71,48 @@ class VitrinaApiTest extends TestCase
             ]);
     }
 
+    public function test_it_orders_public_vitrinas_by_nivel_from_query_string(): void
+    {
+        $tenant = Tenant::create(['razon_social' => 'Casa Angel']);
+
+        $this->createVitrina($tenant, 'Nivel 3', '/nivel-3.jpg', 'General', 'A', 3);
+        $this->createVitrina($tenant, 'Nivel 1', '/nivel-1.jpg', 'General', 'A', 1);
+        $this->createVitrina($tenant, 'Nivel 2', '/nivel-2.jpg', 'General', 'A', 2);
+
+        $response = $this->getJson("/api/vitrinas/tenant/{$tenant->id}?direccion_nivel=asc");
+
+        $response
+            ->assertOk()
+            ->assertJsonCount(3)
+            ->assertJsonPath('0.name', 'Nivel 1')
+            ->assertJsonPath('0.level', 1)
+            ->assertJsonPath('1.name', 'Nivel 2')
+            ->assertJsonPath('1.level', 2)
+            ->assertJsonPath('2.name', 'Nivel 3')
+            ->assertJsonPath('2.level', 3);
+    }
+
+    public function test_it_orders_public_vitrinas_by_nivel_desc_from_query_string(): void
+    {
+        $tenant = Tenant::create(['razon_social' => 'Casa Angel']);
+
+        $this->createVitrina($tenant, 'Nivel 1', '/nivel-1.jpg', 'General', 'A', 1);
+        $this->createVitrina($tenant, 'Nivel 3', '/nivel-3.jpg', 'General', 'A', 3);
+        $this->createVitrina($tenant, 'Nivel 2', '/nivel-2.jpg', 'General', 'A', 2);
+
+        $response = $this->getJson("/api/vitrinas/tenant/{$tenant->id}?direccion_nivel=desc");
+
+        $response
+            ->assertOk()
+            ->assertJsonCount(3)
+            ->assertJsonPath('0.name', 'Nivel 3')
+            ->assertJsonPath('0.level', 3)
+            ->assertJsonPath('1.name', 'Nivel 2')
+            ->assertJsonPath('1.level', 2)
+            ->assertJsonPath('2.name', 'Nivel 1')
+            ->assertJsonPath('2.level', 1);
+    }
+
     public function test_coordinator_assigned_to_tenant_can_create_vitrinas(): void
     {
         $user = User::factory()->create(['role' => 'coordinador']);
