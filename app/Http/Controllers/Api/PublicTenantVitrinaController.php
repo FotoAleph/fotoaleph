@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Sitio;
 use App\Models\Tenant;
 use App\Models\Vitrina;
+use App\Support\Vitrinas\VitrinaInteractionTracker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class PublicTenantVitrinaController extends Controller
 {
+    public function interact(Vitrina $vitrina, VitrinaInteractionTracker $tracker): JsonResponse
+    {
+        return response()->json($tracker->record($vitrina));
+    }
+
     public function byTenant(Request $request, Tenant $tenant): JsonResponse
     {
         return response()->json(

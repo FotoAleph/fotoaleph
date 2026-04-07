@@ -38,15 +38,16 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
-        
-        if (! Schema::connection('tenant_biotek')->hasTable('multimediable')) {
-            Schema::connection('tenant_biotek')->create('multimediable', function (Blueprint $table) {
+
+        if (! Schema::connection('tenant_biotek')->hasTable('estudiante_multimedia')) {
+            Schema::connection('tenant_biotek')->create('estudiante_multimedia', function (Blueprint $table) {
                 $table->id();
-                $table->morphs('multimediable');
-                $table->foreignId('multimedia_id')->constrained('multimedia')->onDelete('cascade'); 
+                $table->foreignId('estudiante_id')->constrained('estudiantes')->onDelete('cascade');
+                $table->foreignId('multimedia_id')->constrained('multimedia')->onDelete('cascade');
                 $table->timestamps();
             });
         }
+
         if (! Schema::connection('tenant_biotek')->hasTable('estudiantes_talleres')) {
             Schema::connection('tenant_biotek')->create('estudiantes_talleres', function (Blueprint $table) {
                 $table->id();
@@ -60,7 +61,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::connection('tenant_biotek')->dropIfExists('estudiantes_talleres');
-        Schema::connection('tenant_biotek')->dropIfExists('multimediable');
+        Schema::connection('tenant_biotek')->dropIfExists('estudiante_multimedia');
         Schema::connection('tenant_biotek')->dropIfExists('estudiantes');
         Schema::connection('tenant_biotek')->dropIfExists('talleres');
         Schema::connection('tenant_biotek')->dropIfExists('multimedia');

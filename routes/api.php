@@ -23,6 +23,7 @@ Route::get('/redes-sociales/{socialable_type}/{socialable_id}', [SocialNetworkCo
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}/aleatorias', [SocialNetworkController::class, 'random']);
 Route::get('/vitrinas/tenant/{tenant}', [PublicTenantVitrinaController::class, 'byTenant'])->middleware('tenant.connection');
 Route::get('/vitrinas/sitio/{site}', [PublicTenantVitrinaController::class, 'bySite'])->middleware('tenant.connection');
+Route::post('/vitrinas/{vitrina}/interacciones', [PublicTenantVitrinaController::class, 'interact']);
 Route::get('/proyectos/tenant/{tenant}', [PublicTenantProjectController::class, 'byTenant']);
 Route::get('/proyectos/sitio/{site}', [PublicTenantProjectController::class, 'bySite']);
 Route::get('/eventos/tenant/{tenant}', [PublicTenantEventController::class, 'byTenant']);

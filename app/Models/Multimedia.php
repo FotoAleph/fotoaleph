@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphedByMany;
 
 class Multimedia extends Model
 {
@@ -29,23 +28,27 @@ class Multimedia extends Model
             ->withTimestamps();
     }
 
-    public function proyectos(): MorphedByMany
+    public function proyectos(): BelongsToMany
     {
-        return $this->morphedByMany(
-            Proyecto::class,
-            'multimediable',
-            'multimediable',
-            'multimedia_id'
-        );
+        return $this->belongsToMany(Proyecto::class, 'multimedia_proyecto')
+            ->withTimestamps();
     }
 
-    public function eventos(): MorphedByMany
+    public function eventos(): BelongsToMany
     {
-        return $this->morphedByMany(
-            Evento::class,
-            'multimediable',
-            'multimediable',
-            'multimedia_id'
-        );
+        return $this->belongsToMany(Evento::class, 'evento_multimedia')
+            ->withTimestamps();
+    }
+
+    public function estudiantes(): BelongsToMany
+    {
+        return $this->belongsToMany(Estudiante::class, 'estudiante_multimedia')
+            ->withTimestamps();
+    }
+
+    public function biotekEstudiantes(): BelongsToMany
+    {
+        return $this->belongsToMany(BiotekEstudiante::class, 'estudiante_multimedia')
+            ->withTimestamps();
     }
 }

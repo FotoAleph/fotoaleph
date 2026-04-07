@@ -58,15 +58,15 @@ class TenantEventoController extends Controller
 
         $this->syncMedia($evento, $validated['media_urls'] ?? null);
 
-        $evento->load('multimedias');
+        $evento->load(['multimedias', 'ocasion', 'tematica']);
 
         $this->vitrinaSynchronizer->sync(
             $tenant,
             $evento,
             $evento->nombre,
             $evento->descripcion,
-            null,
-            null,
+            $evento->ocasion?->nombre,
+            $evento->tematica?->nombre,
             $evento->multimedias,
             $evento->publicar_en_vitrina,
         );
@@ -106,15 +106,15 @@ class TenantEventoController extends Controller
 
         $this->syncMedia($evento, $validated['media_urls'] ?? null);
 
-        $evento->load('multimedias');
+        $evento->load(['multimedias', 'ocasion', 'tematica']);
 
         $this->vitrinaSynchronizer->sync(
             $tenant,
             $evento,
             $evento->nombre,
             $evento->descripcion,
-            null,
-            null,
+            $evento->ocasion?->nombre,
+            $evento->tematica?->nombre,
             $evento->multimedias,
             $evento->publicar_en_vitrina,
         );
@@ -126,15 +126,15 @@ class TenantEventoController extends Controller
     {
         $this->authorizeTenant($tenant);
 
-        $evento->load('multimedias');
+        $evento->load(['multimedias', 'ocasion', 'tematica']);
 
         $this->vitrinaSynchronizer->sync(
             $tenant,
             $evento,
             $evento->nombre,
             $evento->descripcion,
-            null,
-            null,
+            $evento->ocasion?->nombre,
+            $evento->tematica?->nombre,
             $evento->multimedias,
             false,
         );

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class BiotekEstudiante extends Model
 {
@@ -18,15 +17,10 @@ class BiotekEstudiante extends Model
         'identificacion',
     ];
 
-    public function multimedias(): MorphToMany
+    public function multimedias(): BelongsToMany
     {
-        return $this->morphToMany(
-            Multimedia::class,
-            'multimediable',
-            'multimediable',
-            'multimediable_id',
-            'multimedia_id'
-        )->withTimestamps();
+        return $this->belongsToMany(Multimedia::class, 'estudiante_multimedia')
+            ->withTimestamps();
     }
 
     public function talleres(): BelongsToMany

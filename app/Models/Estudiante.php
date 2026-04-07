@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Estudiante extends Model
 {
@@ -16,15 +16,10 @@ class Estudiante extends Model
 
     protected $table = 'estudiantes';
 
-    public function multimedias(): MorphToMany
+    public function multimedias(): BelongsToMany
     {
-        return $this->morphToMany(
-            Multimedia::class,
-            'multimediable',
-            'multimediable',
-            'multimediable_id',
-            'multimedia_id'
-        )->withTimestamps();
+        return $this->belongsToMany(Multimedia::class, 'estudiante_multimedia')
+            ->withTimestamps();
     }
 
     public function primaryMedia(): ?Multimedia

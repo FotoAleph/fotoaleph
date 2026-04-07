@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Proyecto extends Model
 {
@@ -38,15 +38,10 @@ class Proyecto extends Model
         return $this->morphMany(Nivel::class, 'nivelable');
     }
 
-    public function multimedias(): MorphToMany
+    public function multimedias(): BelongsToMany
     {
-        return $this->morphToMany(
-            Multimedia::class,
-            'multimediable',
-            'multimediable',
-            'multimediable_id',
-            'multimedia_id'
-        )->withTimestamps();
+        return $this->belongsToMany(Multimedia::class, 'multimedia_proyecto')
+            ->withTimestamps();
     }
 
     public function primaryMedia(): ?Multimedia

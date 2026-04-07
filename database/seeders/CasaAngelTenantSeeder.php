@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Color;
 use App\Models\Evento;
 use App\Models\Multimedia;
 use App\Models\Ocasion;
@@ -30,12 +31,36 @@ class CasaAngelTenantSeeder extends Seeder
                 ['descripcion' => Str::title((string) $item['tematica'])],
             );
 
+            $colorName = $this->inferColorName(implode(' ', array_filter([
+                (string) ($item['alt'] ?? ''),
+                (string) ($item['tematica'] ?? ''),
+                $projectName,
+            ])));
+
+            $color = $colorName
+                ? Color::query()->firstOrCreate(
+                    ['nombre' => $colorName],
+                    ['descripcion' => $colorName],
+                )
+                : null;
+
             $evento = Evento::query()->firstOrCreate(
                 ['nombre' => Str::title($alt)],
                 [
+                    'ocasion_id' => $ocasion->id,
+                    'tematica_id' => $tematica->id,
+                    'color_id' => $color?->id,
                     'descripcion' => 'Proyecto: '.$projectName.'. Ocasión: '.Str::title((string) $item['ocasion']).'. Temática: '.Str::title((string) $item['tematica']).'.',
+                    'publicar_en_vitrina' => true,
                 ],
             );
+
+            $evento->forceFill([
+                'ocasion_id' => $evento->ocasion_id ?: $ocasion->id,
+                'tematica_id' => $evento->tematica_id ?: $tematica->id,
+                'color_id' => $evento->color_id ?: $color?->id,
+                'publicar_en_vitrina' => true,
+            ])->save();
 
             if ($imagePath === '') {
                 continue;
@@ -78,5 +103,22 @@ class CasaAngelTenantSeeder extends Seeder
             'gif' => 'image/gif',
             default => 'image/jpeg',
         };
+    }
+
+    private function inferColorName(string $text): ?string
+    {
+        $haystack = Str::lower($text);
+
+        foreach ([
+            'rosa', 'rosado', 'rojo', 'azul', 'verde', 'dorado', 'plateado', 'blanco',
+            'negro', 'lila', 'morado', 'violeta', 'amarillo', 'naranja', 'coral',
+            'beige', 'marfil', 'champagne', 'cobre', 'fucsia', 'turquesa',
+        ] as $color) {
+            if (Str::contains($haystack, $color)) {
+                return Str::title($color);
+            }
+        }
+
+        return null;
     }
 }

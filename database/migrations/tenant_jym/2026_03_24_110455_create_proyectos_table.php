@@ -36,19 +36,21 @@ return new class extends Migration
                 $table->string('url');
                 $table->string('preview_url')->nullable();
                 $table->string('type')->default('image');
+                $table->string('aspect_ratio')->nullable();
                 $table->string('mime_type')->nullable();
                 $table->timestamps();
             });
         }
 
-        if (! Schema::connection('tenant_jym')->hasTable('multimediable')) {
-            Schema::connection('tenant_jym')->create('multimediable', function (Blueprint $table) {
+        if (! Schema::connection('tenant_jym')->hasTable('multimedia_proyecto')) {
+            Schema::connection('tenant_jym')->create('multimedia_proyecto', function (Blueprint $table) {
                 $table->id();
+                $table->foreignId('proyecto_id')->constrained('proyectos')->onDelete('cascade');
                 $table->foreignId('multimedia_id')->constrained('multimedia')->onDelete('cascade');
-                $table->morphs('multimediable');
                 $table->timestamps();
             });
         }
+        
     }
 
     /**
@@ -56,9 +58,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::connection('tenant_jym')->dropIfExists('multimediable');
-        Schema::connection('tenant_jym')->dropIfExists('proyectos');
+        Schema::connection('tenant_jym')->dropIfExists('multimedia_proyecto');
         Schema::connection('tenant_jym')->dropIfExists('multimedia');
+        Schema::connection('tenant_jym')->dropIfExists('proyectos');
         Schema::connection('tenant_jym')->dropIfExists('categorias');
     }
 };

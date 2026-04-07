@@ -12,6 +12,11 @@ class Ocasion extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
+        'nivel',
+    ];
+
+    protected $casts = [
+        'nivel' => 'integer',
     ];
 
     public function eventos(): HasMany
