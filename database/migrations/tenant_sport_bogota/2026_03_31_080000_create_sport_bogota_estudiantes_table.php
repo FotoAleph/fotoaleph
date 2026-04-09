@@ -23,7 +23,8 @@ return new class extends Migration
             Schema::connection('tenant_sport_bogota')->create('estudiantes', function (Blueprint $table) {
                 $table->id();
                 $table->string('categoria');
-                $table->string('nombre');
+                $table->string('nombres');
+                $table->string('apellidos');
                 $table->timestamps();
             });
         }

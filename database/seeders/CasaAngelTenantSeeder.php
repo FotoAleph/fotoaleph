@@ -74,8 +74,29 @@ class CasaAngelTenantSeeder extends Seeder
                 ],
                 [
                     'mime_type' => $this->guessMimeType($imagePath),
+                    'alt' => sprintf(
+                        'Evento %s del %s foto %s',
+                        $evento->nombre,
+                        $evento->fecha_evento?->toDateString() ?? now()->toDateString(),
+                        basename($imagePath),
+                    ),
+                    'orientacion' => $this->inferOrientation($imagePath),
+                    'cantidad' => 0,
+                    'nivel' => 0,
                 ],
             );
+
+            $multimedia->forceFill([
+                'alt' => $multimedia->alt ?: sprintf(
+                    'Evento %s del %s foto %s',
+                    $evento->nombre,
+                    $evento->fecha_evento?->toDateString() ?? now()->toDateString(),
+                    basename($imagePath),
+                ),
+                'orientacion' => $multimedia->orientacion ?: $this->inferOrientation($imagePath),
+                'cantidad' => max(0, (int) ($multimedia->cantidad ?? 0)),
+                'nivel' => max(0, (int) ($multimedia->nivel ?? 0)),
+            ])->save();
 
             $evento->multimedias()->syncWithoutDetaching([$multimedia->id]);
         }
@@ -120,5 +141,12 @@ class CasaAngelTenantSeeder extends Seeder
         }
 
         return null;
+    }
+
+    private function inferOrientation(string $path): string
+    {
+        return Str::contains(Str::lower($path), ['9-16', 'vertical'])
+            ? 'vertical'
+            : 'horizontal';
     }
 }

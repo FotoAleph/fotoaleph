@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\ManagedTenantVitrinaController;
+use App\Http\Controllers\Api\CasaAngelEventCatalogController;
+use App\Http\Controllers\Api\CasaAngelMuestrarioController;
+use App\Http\Controllers\Api\JymCatalogController;
 use App\Http\Controllers\Api\PublicTenantEventController;
 use App\Http\Controllers\Api\PublicTenantProjectController;
 use App\Http\Controllers\Api\PublicTenantVitrinaController;
@@ -28,6 +31,14 @@ Route::get('/proyectos/tenant/{tenant}', [PublicTenantProjectController::class, 
 Route::get('/proyectos/sitio/{site}', [PublicTenantProjectController::class, 'bySite']);
 Route::get('/eventos/tenant/{tenant}', [PublicTenantEventController::class, 'byTenant']);
 Route::get('/eventos/sitio/{site}', [PublicTenantEventController::class, 'bySite']);
+Route::get('/casa-angel/eventos', [CasaAngelEventCatalogController::class, 'index']);
+Route::get('/casa-angel/eventos/{evento}', [CasaAngelEventCatalogController::class, 'show']);
+Route::patch('/casa-angel/eventos/{evento}/multimedia/{multimedia}/cantidad', [CasaAngelEventCatalogController::class, 'updateCantidad']);
+Route::get('/casa-angel/muestrario', [CasaAngelMuestrarioController::class, 'index']);
+Route::post('/casa-angel/muestrario/{multimedia}/level', [CasaAngelMuestrarioController::class, 'incrementLevel']);
+Route::get('/jym/muestrario', [JymCatalogController::class, 'index']);
+Route::get('/jym/proyectos/{proyecto}', [JymCatalogController::class, 'show']);
+Route::patch('/jym/muestrario/{multimedia}/level', [JymCatalogController::class, 'updateLevel']);
 
 Route::middleware(['auth:sanctum', 'tenant.connection'])->group(function () {
     Route::get('/tenants/{tenant}/vitrinas', [ManagedTenantVitrinaController::class, 'index']);

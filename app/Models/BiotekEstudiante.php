@@ -19,7 +19,7 @@ class BiotekEstudiante extends Model
 
     public function multimedias(): BelongsToMany
     {
-        return $this->belongsToMany(Multimedia::class, 'estudiante_multimedia')
+        return $this->belongsToMany(Multimedia::class, 'estudiante_multimedia', 'estudiante_id', 'multimedia_id')
             ->withTimestamps();
     }
 

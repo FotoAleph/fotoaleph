@@ -21,9 +21,11 @@ class JymTenantSeeder extends Seeder
                 ['descripcion' => $item['category']],
             );
 
+            $groupName = $item['group'] ?? $this->inferGroupName($item);
+
             $grupo = JymGrupo::query()->firstOrCreate(
-                ['nombre' => $item['group'] ?? 'General'],
-                ['descripcion' => $item['group'] ?? 'General'],
+                ['nombre' => $groupName],
+                ['descripcion' => $groupName],
             );
 
             $proyecto = Proyecto::query()->firstOrCreate(
@@ -32,9 +34,15 @@ class JymTenantSeeder extends Seeder
                     'categoria_id' => $categoria->id,
                     'grupo_id' => $grupo->id,
                     'descripcion' => $item['description'],
+                    'materiales' => $this->inferMateriales(implode(' ', array_filter([$groupName, $item['name'], $item['description']]))),
                     'publicar_en_vitrina' => false,
                 ],
             );
+
+            $proyecto->forceFill([
+                'grupo_id' => $proyecto->grupo_id ?: $grupo->id,
+                'materiales' => $proyecto->materiales ?: $this->inferMateriales(implode(' ', array_filter([$groupName, $item['name'], $item['description']]))),
+            ])->save();
 
             $multimedia = Multimedia::query()->firstOrCreate(
                 [
@@ -44,8 +52,17 @@ class JymTenantSeeder extends Seeder
                 ],
                 [
                     'mime_type' => $this->guessMimeType($item['detail'] ?? $item['img']),
+                    'alt' => sprintf('Proyecto %s foto %s', $item['name'], basename((string) ($item['detail'] ?? $item['img']))),
+                    'orientacion' => $this->inferOrientation((string) ($item['detail'] ?? $item['img'])),
+                    'nivel' => 0,
                 ],
             );
+
+            $multimedia->forceFill([
+                'alt' => $multimedia->alt ?: sprintf('Proyecto %s foto %s', $item['name'], basename((string) ($item['detail'] ?? $item['img']))),
+                'orientacion' => $multimedia->orientacion ?: $this->inferOrientation((string) ($item['detail'] ?? $item['img'])),
+                'nivel' => max(0, (int) ($multimedia->nivel ?? 0)),
+            ])->save();
 
             $proyecto->multimedias()->syncWithoutDetaching([$multimedia->id]);
         }
@@ -59,6 +76,50 @@ class JymTenantSeeder extends Seeder
             'gif' => 'image/gif',
             default => 'image/jpeg',
         };
+    }
+
+    private function inferGroupName(array $item): string
+    {
+        return trim((string) ($item['name'] ?? 'General')) ?: 'General';
+    }
+
+    private function inferOrientation(string $path): string
+    {
+        $normalized = Str::lower($path);
+
+        if (Str::contains($normalized, '/1-1/')) {
+            return 'cuadrada';
+        }
+
+        if (Str::contains($normalized, ['9-16', 'vertical'])) {
+            return 'vertical';
+        }
+
+        return 'horizontal';
+    }
+
+    private function inferMateriales(string $text): array
+    {
+        $haystack = Str::lower($text);
+        $materiales = [];
+
+        foreach ([
+            'Acero inoxidable' => ['acero inoxidable', 'acero'],
+            'Herrajes' => ['herraje', 'herrajes'],
+            'Vidrio Templado' => ['vidrio templado', 'vidrio'],
+            'Vidrio Laminado' => ['vidrio laminado'],
+            'Aluminio' => ['aluminio'],
+            'Estructura Metalica' => ['metalica', 'metálica', 'metal'],
+        ] as $material => $keywords) {
+            foreach ($keywords as $keyword) {
+                if (Str::contains($haystack, $keyword)) {
+                    $materiales[] = $material;
+                    break;
+                }
+            }
+        }
+
+        return array_values(array_unique($materiales !== [] ? $materiales : ['Vidrio Templado']));
     }
 
     private function galleryItems(): array

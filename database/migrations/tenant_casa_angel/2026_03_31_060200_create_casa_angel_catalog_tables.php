@@ -35,15 +35,11 @@ return new class extends Migration
 
         Schema::connection('tenant_casa_angel')->create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ocasion_id')->nullable()->constrained('ocasiones')->nullOnDelete();
-            $table->foreignId('tematica_id')->nullable()->constrained('tematicas')->nullOnDelete();
-            $table->foreignId('color_id')->nullable()->constrained('colores')->nullOnDelete();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->timestamp('fecha_evento')->nullable();
             $table->string('ubicacion')->nullable();
             $table->string('codigo')->nullable();
-            $table->boolean('publicar_en_vitrina')->default(false);
             $table->timestamps();
         });
 
@@ -54,10 +50,12 @@ return new class extends Migration
             $table->string('type')->default('image');
             $table->string('mime_type')->nullable();
             $table->string('aspect_ratio')->nullable();
+            $table->string('alt')->nullable();
+            $table->unsignedInteger('nivel')->default(0);
             $table->timestamps();
         });
 
-        Schema::connection('tenant_casa_angel')->create('vitrinas', function (Blueprint $table) {
+        Schema::connection('tenant_casa_angel')->create('muestrarios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->foreignId('ocasion_id')->nullable()->constrained('ocasiones')->nullOnDelete();
@@ -73,14 +71,23 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evento_id')->constrained('eventos')->onDelete('cascade');
             $table->foreignId('multimedia_id')->constrained('multimedia')->onDelete('cascade');
+            $table->unsignedTinyInteger('cantidad')->default(0);
             $table->timestamps();
         });
+
+        Schema::connection('tenant_casa_angel')->create('muestrarios_etiquetas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('muestrario_id')->constrained('muestrarios')->onDelete('cascade');
+            $table->string('keyword');
+            $table->timestamps();
+        });
+
     }
 
     public function down(): void
     {
         Schema::connection('tenant_casa_angel')->dropIfExists('evento_multimedia');
-        Schema::connection('tenant_casa_angel')->dropIfExists('vitrinas');
+        Schema::connection('tenant_casa_angel')->dropIfExists('muestrarios');
         Schema::connection('tenant_casa_angel')->dropIfExists('multimedia');
         Schema::connection('tenant_casa_angel')->dropIfExists('eventos');
         Schema::connection('tenant_casa_angel')->dropIfExists('tematicas');

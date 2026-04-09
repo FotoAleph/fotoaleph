@@ -16,10 +16,12 @@ class Proyecto extends Model
         'grupo_id',
         'nombre',
         'descripcion',
-        'publicar_en_vitrina',
+        'materiales',
+
     ];
 
     protected $casts = [
+        'materiales' => 'array',
         'publicar_en_vitrina' => 'boolean',
     ];
 

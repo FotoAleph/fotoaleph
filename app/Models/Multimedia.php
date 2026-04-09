@@ -14,11 +14,18 @@ class Multimedia extends Model
         'preview_url',
         'type',
         'mime_type',
+        'aspect_ratio',
+        'alt',
+        'orientacion',
+        'cantidad',
+        'nivel',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'cantidad' => 'integer',
+        'nivel' => 'integer',
     ];
 
     public function vitrinas(): BelongsToMany
@@ -48,7 +55,7 @@ class Multimedia extends Model
 
     public function biotekEstudiantes(): BelongsToMany
     {
-        return $this->belongsToMany(BiotekEstudiante::class, 'estudiante_multimedia')
+        return $this->belongsToMany(BiotekEstudiante::class, 'estudiante_multimedia', 'multimedia_id', 'estudiante_id')
             ->withTimestamps();
     }
 }

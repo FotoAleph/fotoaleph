@@ -23,8 +23,47 @@ return new class extends Migration
         if(!Schema::connection('tenant_biotek')->hasTable('talleres')){
             Schema::connection('tenant_biotek')->create('talleres', function (Blueprint $table) {
                 $table->id();
-                $table->string('fecha');
-                $table->text('duracion')->nullable();
+                $table->date('fecha');
+                $table->unsignedInteger('duration_seconds');
+                $table->string('codigo')->unique();
+                $table->timestamps();
+            });
+        }
+        if(!Schema::connection('tenant_biotek')->hasTable('preguntas')){
+            Schema::connection('tenant_biotek')->create('preguntas', function (Blueprint $table) {
+                $table->id();
+                $table->text('texto');
+                $table->string('tipo')->default('seleccion_unica');
+                $table->unsignedInteger('nivel')->default(1);
+                $table->timestamps();
+            });
+        }
+        if(!Schema::connection('tenant_biotek')->hasTable('opciones')){
+            Schema::connection('tenant_biotek')->create('opciones', function (Blueprint $table) {
+                $table->id();
+                $table->text('texto');
+                $table->boolean('es_correcta')->default(false);
+                $table->foreignId('pregunta_id')->constrained('preguntas')->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
+        if(!Schema::connection('tenant_biotek')->hasTable('intentos')){
+            Schema::connection('tenant_biotek')->create('intentos', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('taller_id')->constrained('talleres')->onDelete('cascade');
+                $table->foreignId('estudiante_id')->constrained('estudiantes')->onDelete('cascade');
+                $table->unsignedInteger('intento')->default(1);
+                $table->timestamps();
+            });
+        }
+
+        if(!Schema::connection('tenant_biotek')->hasTable('respuestas')){
+            Schema::connection('tenant_biotek')->create('respuestas', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('estudiante_id')->constrained('estudiantes')->onDelete('cascade');
+                $table->foreignId('pregunta_id')->constrained('preguntas')->onDelete('cascade');
+                $table->foreignId('opcion_id')->constrained('opciones')->onDelete('cascade');
+                $table->foreignId('intento_id')->constrained('intentos')->onDelete('cascade');
                 $table->timestamps();
             });
         }
@@ -56,6 +95,16 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
+        if (! Schema::connection('tenant_biotek')->hasTable('carnets')) {
+            Schema::connection('tenant_biotek')->create('carnets', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('estudiante_id')->constrained('estudiantes')->onDelete('cascade');
+                $table->date('fecha_expedicion')->nullable();
+                $table->date('fecha_vencimiento')->nullable();
+                $table->string('numero')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void
@@ -65,5 +114,10 @@ return new class extends Migration
         Schema::connection('tenant_biotek')->dropIfExists('estudiantes');
         Schema::connection('tenant_biotek')->dropIfExists('talleres');
         Schema::connection('tenant_biotek')->dropIfExists('multimedia');
+        Schema::connection('tenant_biotek')->dropIfExists('carnets');
+        Schema::connection('tenant_biotek')->dropIfExists('respuestas');
+        Schema::connection('tenant_biotek')->dropIfExists('intentos');
+        Schema::connection('tenant_biotek')->dropIfExists('opciones');
+        Schema::connection('tenant_biotek')->dropIfExists('preguntas');
     }
 };
