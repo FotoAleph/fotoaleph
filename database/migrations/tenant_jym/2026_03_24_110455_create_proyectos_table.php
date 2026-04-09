@@ -64,6 +64,18 @@ return new class extends Migration
             });
         }
         
+        if (! Schema::connection('tenant_jym')->hasTable('materiales')) {
+            Schema::connection('tenant_jym')->create('materiales', function (Blueprint $table) {
+                $table->id();
+                $table->string('nombre');
+                $table->string('descripcion')->nullable();
+                $table->string('tipo')->nullable();
+                $table->foreignId('multimedia_id')->nullable()->constrained('multimedia')->nullOnDelete();
+                $table->morphs('materialeable');
+                $table->timestamps();
+            });
+        }
+        
     }
 
     /**
@@ -71,6 +83,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::connection('tenant_jym')->dropIfExists('materiales');
         Schema::connection('tenant_jym')->dropIfExists('multimedia_proyecto');
         Schema::connection('tenant_jym')->dropIfExists('multimedia');
         Schema::connection('tenant_jym')->dropIfExists('proyectos');
