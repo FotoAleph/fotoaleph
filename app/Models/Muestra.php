@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 
 class Muestra extends Model
 {
+
+    private const API_CACHE_VERSION_KEY = 'tenant:casa_angel:api:muestrarios:index:version';
 
             // $table->id();
             // $table->string('nombre');
@@ -30,7 +34,42 @@ class Muestra extends Model
         'fecha_inicio' => 'datetime',
         'fecha_fin' => 'datetime',
     ];
+
     protected $table = 'muestrarios';
+
+    protected static function booted(): void
+    {
+        static::saved(function (): void {
+            self::bustApiCache();
+        });
+
+        static::deleted(function (): void {
+            self::bustApiCache();
+        });
+    }
+
+    public static function apiCacheKey(array $query = []): string
+    {
+        $queryHash = $query === []
+            ? 'all'
+            : sha1(http_build_query($query));
+
+        return sprintf(
+            'tenant:casa_angel:api:muestrarios:index:v%d:%s',
+            self::apiCacheVersion(),
+            $queryHash,
+        );
+    }
+
+    public static function bustApiCache(): void
+    {
+        Cache::forever(self::API_CACHE_VERSION_KEY, self::apiCacheVersion() + 1);
+    }
+
+    private static function apiCacheVersion(): int
+    {
+        return max(1, (int) Cache::get(self::API_CACHE_VERSION_KEY, 1));
+    }
 
     public function ocasion()
     {
@@ -47,9 +86,9 @@ class Muestra extends Model
         return $this->belongsTo(Color::class);
     }
 
-    public function multimedia()
+    public function multimedia(): BelongsTo
     {
-        return $this->belongsTo(Multimedia::class);
+        return $this->belongsTo(CaMultimedia::class, 'multimedia_id');
     }
     
 }

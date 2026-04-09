@@ -36,7 +36,6 @@ return new class extends Migration
                 $table->foreignId('grupo_id')->nullable()->constrained('grupos')->nullOnDelete();
                 $table->string('nombre');
                 $table->text('descripcion')->nullable();           
-                $table->boolean('publicar_en_vitrina')->default(false);
                 $table->timestamps();
             });
         }

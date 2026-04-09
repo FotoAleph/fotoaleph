@@ -63,8 +63,7 @@ class CasaAngelEventCatalogController extends Controller
             'img' => $media->preview_url ?: $media->url,
             'img_detail' => $media->url,
             'media_type' => $media->type,
-            'horientacion' => $media->orientacion,
-            'orientacion' => $media->orientacion,
+            'aspect_ratio' => $media->aspect_ratio,
             'name' => $filename,
             'alt' => $media->alt ?: sprintf(
                 'Evento %s del %s foto %s',

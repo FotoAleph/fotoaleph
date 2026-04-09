@@ -7,14 +7,21 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Grupo extends Model
 {
+
+    protected $connection = 'tenant_jym';
+
     protected $fillable = [
         'nombre',
         'descripcion',
         'nivel',
     ];
-
-    public function grupoable(): MorphTo
+    
+    public function proyectos()
     {
-        return $this->morphTo();
+        return $this->hasMany(Proyecto::class, 'grupo_id');
     }
+
+    protected $casts = [
+        'nivel' => 'integer',
+    ];
 }
