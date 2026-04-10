@@ -17,23 +17,25 @@ class CasaAngelTenantSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->galleryItems() as $item) {
-            $projectName = $this->decodeProject($item['proyecto']);
-            $alt = trim((string) ($item['alt'] ?? 'Vitrina Casa Angel'));
-            $imagePath = trim((string) ($item['foto'] ?? ''));
+            $normalizedItem = $this->normalizeItem($item);
+            $projectName = $normalizedItem['project'];
+            $alt = $normalizedItem['name'];
+            $imagePath = $normalizedItem['url'];
+            $previewPath = $normalizedItem['preview_url'];
 
             $ocasion = Ocasion::query()->firstOrCreate(
-                ['nombre' => Str::title((string) $item['ocasion'])],
-                ['descripcion' => Str::title((string) $item['ocasion'])],
+                ['nombre' => $normalizedItem['ocasion']],
+                ['descripcion' => $normalizedItem['ocasion']],
             );
 
             $tematica = Tematica::query()->firstOrCreate(
-                ['nombre' => Str::title((string) $item['tematica'])],
-                ['descripcion' => Str::title((string) $item['tematica'])],
+                ['nombre' => $normalizedItem['tematica']],
+                ['descripcion' => $normalizedItem['tematica']],
             );
 
             $colorName = $this->inferColorName(implode(' ', array_filter([
-                (string) ($item['alt'] ?? ''),
-                (string) ($item['tematica'] ?? ''),
+                $alt,
+                $normalizedItem['tematica'],
                 $projectName,
             ])));
 
@@ -47,27 +49,28 @@ class CasaAngelTenantSeeder extends Seeder
             $evento = Evento::query()->firstOrCreate(
                 ['nombre' => Str::title($alt)],
                 [
-
-                    'descripcion' => 'Proyecto: '.$projectName.'. Ocasión: '.Str::title((string) $item['ocasion']).'. Temática: '.Str::title((string) $item['tematica']).'.',
-                    'publicar_en_vitrina' => true,
+                    'descripcion' => 'Proyecto: '.$projectName.'. Ocasión: '.$normalizedItem['ocasion'].'. Temática: '.$normalizedItem['tematica'].'.',
+                    'fecha_evento' => $normalizedItem['fecha_evento'],
+                    'entregado' => $normalizedItem['entregado'],
+                    'codigo' => $normalizedItem['codigo'],
                 ],
             );
 
             $evento->forceFill([
-                'ocasion_id' => $evento->ocasion_id ?: $ocasion->id,
-                'tematica_id' => $evento->tematica_id ?: $tematica->id,
-                'color_id' => $evento->color_id ?: $color?->id,
-                'publicar_en_vitrina' => true,
+                'descripcion' => $evento->descripcion ?: 'Proyecto: '.$projectName.'. Ocasión: '.$normalizedItem['ocasion'].'. Temática: '.$normalizedItem['tematica'].'.',
+                'fecha_evento' => $evento->fecha_evento ?: $normalizedItem['fecha_evento'],
+                'entregado' => (bool) ($evento->entregado ?: $normalizedItem['entregado']),
+                'codigo' => $evento->codigo ?: $normalizedItem['codigo'],
             ])->save();
 
             if ($imagePath === '') {
                 continue;
             }
 
-            $multimedia = Multimedia::query()->firstOrCreate(
+            $multimedia = Multimedia::on('tenant_casa_angel')->firstOrCreate(
                 [
                     'url' => $imagePath,
-                    'preview_url' => $imagePath,
+                    'preview_url' => $previewPath,
                     'type' => 'image',
                 ],
                 [
@@ -78,8 +81,7 @@ class CasaAngelTenantSeeder extends Seeder
                         $evento->fecha_evento?->toDateString() ?? now()->toDateString(),
                         basename($imagePath),
                     ),
-                    'orientacion' => $this->inferOrientation($imagePath),
-                    'cantidad' => 0,
+                    'aspect_ratio' => $this->inferAspectRatio($imagePath),
                     'nivel' => 0,
                 ],
             );
@@ -91,12 +93,12 @@ class CasaAngelTenantSeeder extends Seeder
                     $evento->fecha_evento?->toDateString() ?? now()->toDateString(),
                     basename($imagePath),
                 ),
-                'orientacion' => $multimedia->orientacion ?: $this->inferOrientation($imagePath),
-                'cantidad' => max(0, (int) ($multimedia->cantidad ?? 0)),
+                'preview_url' => $multimedia->preview_url ?: $previewPath,
+                'aspect_ratio' => $multimedia->aspect_ratio ?: $this->inferAspectRatio($imagePath),
                 'nivel' => max(0, (int) ($multimedia->nivel ?? 0)),
             ])->save();
 
-            $evento->multimedias()->syncWithoutDetaching([$multimedia->id]);
+            $evento->multimedias()->syncWithoutDetaching([$multimedia->id => ['cantidad' => 0]]);
         }
     }
 
@@ -112,6 +114,35 @@ class CasaAngelTenantSeeder extends Seeder
         $decoded = base64_decode(strtr($value, '-_', '+/'), true);
 
         return $decoded !== false ? Str::title(str_replace(['_', '-'], ' ', $decoded)) : Str::title($value);
+    }
+
+    private function normalizeItem(array $item): array
+    {
+        $name = trim((string) ($item['alt'] ?? $item['nombre'] ?? 'Vitrina Casa Angel'));
+        $projectKey = trim((string) ($item['proyecto'] ?? ''));
+        $code = trim((string) ($item['codigo'] ?? ''));
+        $projectSource = $projectKey !== '' ? $projectKey : ($code !== '' ? $code : $name);
+
+        return [
+            'project' => $projectKey !== ''
+                ? $this->decodeProject($projectSource)
+                : Str::title(str_replace(['-', '_'], ' ', $projectSource)),
+            'name' => $name,
+            'url' => trim((string) ($item['foto'] ?? $item['url'] ?? '')),
+            'preview_url' => trim((string) ($item['url_preview'] ?? $item['preview'] ?? $item['foto'] ?? $item['url'] ?? '')),
+            'ocasion' => Str::title(trim((string) ($item['ocasion'] ?? 'General')) ?: 'General'),
+            'tematica' => Str::title(trim((string) ($item['tematica'] ?? 'General')) ?: 'General'),
+            'fecha_evento' => $this->normalizeDate($item['fecha'] ?? null),
+            'entregado' => Str::lower(trim((string) ($item['estado'] ?? ''))) === 'entregado',
+            'codigo' => $code !== '' ? $code : null,
+        ];
+    }
+
+    private function normalizeDate(mixed $value): ?string
+    {
+        $date = trim((string) $value);
+
+        return $date !== '' ? $date : null;
     }
 
     private function guessMimeType(string $path): string
@@ -141,10 +172,10 @@ class CasaAngelTenantSeeder extends Seeder
         return null;
     }
 
-    private function inferOrientation(string $path): string
+    private function inferAspectRatio(string $path): string
     {
         return Str::contains(Str::lower($path), ['9-16', 'vertical'])
-            ? 'vertical'
-            : 'horizontal';
+            ? '9:16'
+            : '16:9';
     }
 }

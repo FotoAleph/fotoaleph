@@ -10,8 +10,9 @@ class Estudiante extends Model
     protected $connection = 'tenant_sport_bogota';
 
     protected $fillable = [
-        'nombre',
         'categoria',
+        'nombres',
+        'apellidos',
     ];
 
     protected $table = 'estudiantes';

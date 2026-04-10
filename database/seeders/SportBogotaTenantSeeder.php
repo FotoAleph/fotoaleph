@@ -24,9 +24,12 @@ class SportBogotaTenantSeeder extends Seeder
         ];
 
         foreach ($students as $studentData) {
+            [$nombres, $apellidos] = $this->splitName($studentData['nombre']);
+
             $estudiante = Estudiante::query()->updateOrCreate(
                 [
-                    'nombre' => $studentData['nombre'],
+                    'nombres' => $nombres,
+                    'apellidos' => $apellidos,
                     'categoria' => $studentData['categoria'],
                 ],
                 [],
@@ -60,5 +63,18 @@ class SportBogotaTenantSeeder extends Seeder
             'gif' => 'image/gif',
             default => 'image/jpeg',
         };
+    }
+
+    private function splitName(string $fullName): array
+    {
+        $parts = preg_split('/\s+/', trim($fullName)) ?: [];
+
+        if (count($parts) <= 1) {
+            return [$fullName, ''];
+        }
+
+        $lastName = array_pop($parts);
+
+        return [implode(' ', $parts), $lastName];
     }
 }

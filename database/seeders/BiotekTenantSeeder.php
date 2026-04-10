@@ -12,10 +12,10 @@ class BiotekTenantSeeder extends Seeder
     public function run(): void
     {
         $taller = Taller::query()->firstOrCreate([
-            'nombre' => 'Taller de fotografia cientifica',
-            'fecha' => '2026-04-06',
+            'codigo' => 'BTK-FOTOCI-20260406',
         ], [
-            'duracion' => '2 horas',
+            'fecha' => '2026-04-06',
+            'duration_seconds' => 7200,
         ]);
 
         $estudiante = BiotekEstudiante::query()->firstOrCreate([
@@ -25,14 +25,7 @@ class BiotekTenantSeeder extends Seeder
             'apellidos' => 'Cortes',
         ]);
 
-        $estudiante->talleres()->sync([
-            $taller->id => [
-                'pago' => 120000,
-                'abono' => 50000,
-                'debe' => 70000,
-                'saldo_total' => 70000,
-            ],
-        ]);
+        $estudiante->talleres()->syncWithoutDetaching([$taller->id]);
 
         $multimedia = Multimedia::on('tenant_biotek')->firstOrCreate([
             'url' => '/storage/img/biotek/estudiantes/laura-cortes.jpg',

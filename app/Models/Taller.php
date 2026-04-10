@@ -12,15 +12,19 @@ class Taller extends Model
     protected $table = 'talleres';
 
     protected $fillable = [
-        'nombre',
+        'codigo',
         'fecha',
-        'duracion',
+        'duration_seconds',
+    ];
+
+    protected $casts = [
+        'fecha' => 'date',
+        'duration_seconds' => 'integer',
     ];
 
     public function estudiantes(): BelongsToMany
     {
         return $this->belongsToMany(BiotekEstudiante::class, 'estudiantes_talleres', 'taller_id', 'estudiante_id')
-            ->withPivot(['pago', 'abono', 'debe', 'saldo_total'])
             ->withTimestamps();
     }
 }
