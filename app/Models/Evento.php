@@ -15,6 +15,7 @@ class Evento extends Model
         'nombre',
         'descripcion',
         'fecha_evento',
+        'entregado',
         'ubicacion',
         'codigo',
   

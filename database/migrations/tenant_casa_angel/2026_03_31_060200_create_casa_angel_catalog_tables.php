@@ -37,7 +37,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->timestamp('fecha_evento')->nullable();
+            $table->date('fecha_evento')->nullable();
+            $table->boolean('entregado')->default(false);
             $table->string('ubicacion')->nullable();
             $table->string('codigo')->nullable();
             $table->timestamps();

@@ -47,9 +47,7 @@ class CasaAngelTenantSeeder extends Seeder
             $evento = Evento::query()->firstOrCreate(
                 ['nombre' => Str::title($alt)],
                 [
-                    'ocasion_id' => $ocasion->id,
-                    'tematica_id' => $tematica->id,
-                    'color_id' => $color?->id,
+
                     'descripcion' => 'Proyecto: '.$projectName.'. Ocasión: '.Str::title((string) $item['ocasion']).'. Temática: '.Str::title((string) $item['tematica']).'.',
                     'publicar_en_vitrina' => true,
                 ],

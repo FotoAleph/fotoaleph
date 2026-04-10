@@ -36,7 +36,7 @@ class JymTenantSeeder extends Seeder
                 'categoria_id' => $categoria->id,
                 'grupo_id' => $grupo->id,
                 'descripcion' => $item['description'],
-                'publicar_en_vitrina' => false,
+
             ];
 
             if ($hasProyectoMateriales) {
@@ -87,9 +87,6 @@ class JymTenantSeeder extends Seeder
                     'nivel' => max(0, (int) ($multimedia->nivel ?? 0)),
                 ];
 
-                if ($hasMultimediaOrientacion) {
-                    $mediaUpdatePayload['orientacion'] = $multimedia->orientacion ?: $this->inferOrientation((string) $detailUrl);
-                }
 
                 $multimedia->forceFill($mediaUpdatePayload)->save();
 
