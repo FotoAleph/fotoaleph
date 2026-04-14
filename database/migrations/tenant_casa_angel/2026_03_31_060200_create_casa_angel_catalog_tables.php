@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->date('fecha_evento')->nullable();
-            $table->boolean('entregado')->default(false);
+            $table->date('entregado')->nullable();
             $table->string('ubicacion')->nullable();
             $table->string('codigo')->nullable();
             $table->timestamps();
@@ -52,7 +52,7 @@ return new class extends Migration
             $table->string('mime_type')->nullable();
             $table->string('aspect_ratio')->nullable();
             $table->string('alt')->nullable();
-            $table->unsignedInteger('nivel')->default(0);
+           
             $table->timestamps();
         });
 

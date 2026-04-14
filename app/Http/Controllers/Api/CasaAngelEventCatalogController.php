@@ -18,6 +18,7 @@ class CasaAngelEventCatalogController extends Controller
                 'id' => $evento->id,
                 'name' => $evento->nombre,
                 'description' => $evento->descripcion,
+                'entregado' => $evento->entregado,
                 'date' => $evento->fecha_evento?->toISOString(),
             ]),
         );
