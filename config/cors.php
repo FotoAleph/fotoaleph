@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 $allowedOrigins = array_values(array_filter(array_map(
     static fn (string $origin): string => trim($origin),
-    explode(',', (string) env('CORS_ALLOWED_ORIGINS', 'http://localhost,http://localhost:3000,http://127.0.0.1,http://127.0.0.1:3000'))
+    explode(',', (string) env('CORS_ALLOWED_ORIGINS', 'http://localhost,http://localhost:3000,http://127.0.0.1,http://127.0.0.1:3000,http://localhost:4321,http://127.0.0.1:4321,http://localhost:5173'))
 )));
 
 $allowedMethods = array_values(array_filter(array_map(

@@ -69,7 +69,6 @@ return new class extends Migration
                 $table->string('nombre');
                 $table->string('descripcion')->nullable();
                 $table->string('tipo')->nullable();
-                $table->foreignId('multimedia_id')->nullable()->constrained('multimedia')->nullOnDelete();
                 $table->morphs('materialeable');
                 $table->timestamps();
             });

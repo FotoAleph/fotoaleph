@@ -12,60 +12,55 @@ use Illuminate\Support\Collection;
 
 class JymCatalogController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
-        $rows = $this->projectRows(
-            Proyecto::query()->with(['categoria', 'grupo', 'multimedias'])
-                ->get()
-        );
+        $proyectos = Proyecto::query()->with(['categoria', 'grupo', 'multimedias'])->get();
 
-        if ($request->filled('category')) {
-            $rows = $rows->where('category', (string) $request->string('category'));
-        }
-
-        if ($request->filled('group')) {
-            $rows = $rows->where('group', (string) $request->string('group'));
-        }
-
-        if ($request->filled('material')) {
-            $material = (string) $request->string('material');
-            $rows = $rows->filter(fn (array $row) => in_array($material, $row['materiales'], true));
-        }
-
-        $orderBy = $request->string('ordenar_por', 'level')->toString();
-        $direction = strtolower($request->string('direccion', 'desc')->toString()) === 'asc';
-
-        $rows = $orderBy === 'date'
-            ? $rows->sortBy('date', options: SORT_REGULAR, descending: ! $direction)
-            : $rows->sortBy('level', options: SORT_REGULAR, descending: ! $direction);
-
-        return response()->json($rows->values());
-    }
-
-    public function show(Proyecto $proyecto): JsonResponse
-    {
-        $proyecto->load(['categoria', 'grupo', 'multimedias']);
-
-        $sameGroup = $proyecto->grupo_id
-            ? Proyecto::query()->with(['categoria', 'grupo', 'multimedias'])->where('grupo_id', $proyecto->grupo_id)->get()
-            : collect();
-
-        $sameCategory = $proyecto->categoria_id
-            ? Proyecto::query()->with(['categoria', 'grupo', 'multimedias'])->where('categoria_id', $proyecto->categoria_id)->get()
-            : collect();
-
-        return response()->json([
-            'project' => [
+        return response()->json($proyectos->map(function (Proyecto $proyecto) {
+            return [
                 'id' => $proyecto->id,
                 'name' => $proyecto->nombre,
                 'description' => $proyecto->descripcion,
                 'category' => $proyecto->categoria?->nombre,
                 'group' => $proyecto->grupo?->nombre,
                 'materiales' => $proyecto->materiales ?? [],
-            ],
-            'mismo_proyecto' => $this->projectRows(collect([$proyecto]))->values(),
-            'mismo_grupo' => $this->projectRows($sameGroup)->values(),
-            'misma_categoria' => $this->projectRows($sameCategory)->values(),
+                'multimedias' => $proyecto->multimedias->where('type', 'image')->take(4)->map(function (Multimedia $media) {
+                    return [
+                        'id' => $media->id,
+                        'img' => $media->preview_url ?: $media->url,
+                        'img_detail' => $media->url,
+                        'media_type' => $media->type,
+                        'orientacion' => $media->orientacion,
+                        'date' => $media->created_at?->toISOString(),
+                        'level' => (int) ($media->nivel ?? 0),
+                    ];
+                }) ,
+            ];
+        }));
+    }
+
+    public function show(Proyecto $proyecto): JsonResponse
+    {
+        $proyecto->load(['categoria', 'grupo', 'multimedias']);
+
+        return response()->json([
+            'id' => $proyecto->id,
+            'name' => $proyecto->nombre,
+            'description' => $proyecto->descripcion,
+             'category' => $proyecto->categoria?->nombre,
+                'group' => $proyecto->grupo?->nombre,
+                'materiales' => $proyecto->materiales ?? [],
+                'multimedias' => $proyecto->multimedias->take(6)->map(function (Multimedia $media) {
+                    return [
+                        'id' => $media->id,
+                        'img' => $media->preview_url ?: $media->url,
+                        'img_detail' => $media->url,
+                        'media_type' => $media->type,
+                        'orientacion' => $media->orientacion,
+                        'date' => $media->created_at?->toISOString(),
+                        'level' => (int) ($media->nivel ?? 0),
+                    ];
+                }) ,
         ]);
     }
 
@@ -88,6 +83,123 @@ class JymCatalogController extends Controller
         ]);
     }
 
+    public function indexByGroup(): JsonResponse
+    {
+            $grupos = Proyecto::whereNotNull('grupo_id')->with(['categoria', 'grupo', 'multimedias'])->get()
+            ->groupBy('grupo_id');
+            return response()->json($grupos->map(function ($proyectos, $grupoId) {
+                $grupoName = $proyectos->first()->grupo?->nombre ?? 'Sin categoría';
+                $grupoDescription = $proyectos->first()->grupo?->descripcion ?? 'Sin descripción';
+                return [
+                    'id' => $grupoId,
+                    'name' => $grupoName,
+                    'description' => $grupoDescription,
+                    'proyectos' => $proyectos->take(5)->map(function (Proyecto $proyecto) {
+                        return [
+                            'id' => $proyecto->id,
+                            'name' => $proyecto->nombre,
+                            'description' => $proyecto->descripcion,
+                            'category' => $proyecto->grupo?->nombre,
+                            'group' => $proyecto->grupo?->nombre,
+                            'materiales' => $proyecto->materiales ?? [],
+                            'multimedias' => $proyecto->multimedias->take(3)->map(function (Multimedia $media) {
+                                return [
+                                    'id' => $media->id,
+                                    'img' => $media->preview_url ?: $media->url,
+                                    'img_detail' => $media->url,
+                                    'media_type' => $media->type,
+                                    'orientacion' => $media->orientacion,
+                                    'date' => $media->created_at?->toISOString(),
+                                    'level' => (int) ($media->nivel ?? 0),
+                                ];
+                            }),
+                        ];
+                    })->values(),
+                ];
+            })->values());
+
+    }
+
+    public function showByGroup(string $grupo): JsonResponse
+    {
+        $proyectos = Proyecto::where('grupo_id', $grupo)->with(['categoria', 'grupo', 'multimedias'])->get();
+        return response()->json($proyectos->map(function (Proyecto $proyecto) {
+            return [
+                'id' => $proyecto->id,
+                'name' => $proyecto->nombre,
+                'description' => $proyecto->descripcion,
+                'category' => $proyecto->categoria?->nombre,
+                'group' => $proyecto->grupo?->nombre,
+                'materiales' => $proyecto->materiales ?? [],
+                'multimedias' => $proyecto->multimedias->take(6),
+            ];
+        }));
+    }
+    public function indexByCategory(): JsonResponse
+    {
+           $categorias = Proyecto::whereNotNull('categoria_id')->with(['categoria', 'grupo', 'multimedias'])->get()
+            ->groupBy('categoria_id');
+            return response()->json($categorias->map(function ($proyectos, $categoriaId) {
+                $categoriaName = $proyectos->first()->categoria?->nombre ?? 'Sin categoría';
+                $categoriaDescription = $proyectos->first()->categoria?->descripcion ?? 'Sin descripción';
+                return [
+                    'id' => $categoriaId,
+                    'name' => $categoriaName,
+                    'description' => $categoriaDescription,
+                    'proyectos' => $proyectos->take(5)->map(function (Proyecto $proyecto) {
+                        return [
+                            'id' => $proyecto->id,
+                            'name' => $proyecto->nombre,
+                            'description' => $proyecto->descripcion,
+                            'category' => $proyecto->categoria?->nombre,
+                            'group' => $proyecto->grupo?->nombre,
+                            'materiales' => $proyecto->materiales ?? [],
+                            'multimedias' => $proyecto->multimedias->take(3)->map(function (Multimedia $media) {
+                                return [
+                                    'id' => $media->id,
+                                    'img' => $media->preview_url ?: $media->url,
+                                    'img_detail' => $media->url,
+                                    'media_type' => $media->type,
+                                    'orientacion' => $media->orientacion,
+                                    'date' => $media->created_at?->toISOString(),
+                                    'level' => (int) ($media->nivel ?? 0),
+                                ];
+                            }),
+                        ];
+                    })->values(),
+                ];
+            })->values());
+
+    }
+
+    public function showByCategory(string $categoria): JsonResponse
+    {
+        $proyectos = Proyecto::where('categoria_id', $categoria)->with(['categoria', 'grupo', 'multimedias'])->get();
+
+        return response()->json($proyectos->map(function (Proyecto $proyecto) {
+            return [
+                'id' => $proyecto->id,
+                'name' => $proyecto->nombre,
+                'description' => $proyecto->descripcion,
+                'category' => $proyecto->categoria?->nombre,
+                'group' => $proyecto->grupo?->nombre,
+                'materiales' => $proyecto->materiales ?? [],
+                'multimedias' => $proyecto->multimedias->take(6)->map(function (Multimedia $media) {
+                    return [
+                        'id' => $media->id,
+                        'img' => $media->preview_url ?: $media->url,
+                        'img_detail' => $media->url,
+                        'media_type' => $media->type,
+                        'orientacion' => $media->orientacion,
+                        'date' => $media->created_at?->toISOString(),
+                        'level' => (int) ($media->nivel ?? 0),
+                    ];
+                }) ,
+            ];
+        }));
+    }
+
+    
     private function projectRows(iterable $projects): Collection
     {
         return collect($projects)

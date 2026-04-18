@@ -43,6 +43,7 @@ class Proyecto extends Model
     public function multimedias(): BelongsToMany
     {
         return $this->belongsToMany(Multimedia::class, 'multimedia_proyecto')
+            ->orderBy('multimedia.nivel', 'desc')
             ->withTimestamps();
     }
 

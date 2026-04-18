@@ -26,8 +26,12 @@ Route::get('/redes-sociales/{socialable_type}/{socialable_id}/aleatorias', [Soci
 Route::get('/casa-angel/eventos', [CasaAngelEventCatalogController::class, 'index']);
 Route::get('/casa-angel/muestrario', [CasaAngelMuestrarioController::class, 'index']);
 Route::post('/casa-angel/muestrario/{multimedia}/level', [CasaAngelMuestrarioController::class, 'incrementLevel']);
-Route::get('/jym/muestrario', [JymCatalogController::class, 'index']);
+Route::get('/jym/proyectos', [JymCatalogController::class, 'index']);
 Route::get('/jym/proyectos/{proyecto}', [JymCatalogController::class, 'show']);
+Route::get('/jym/grupos/', [JymCatalogController::class, 'indexByGroup']);
+Route::get('/jym/grupos/{grupo}', [JymCatalogController::class, 'showByGroup']);
+Route::get('/jym/categorias/', [JymCatalogController::class, 'indexByCategory']);
+Route::get('/jym/categorias/{categoria}', [JymCatalogController::class, 'showByCategory']);
 Route::patch('/jym/muestrario/{multimedia}/level', [JymCatalogController::class, 'updateLevel']);
 Route::middleware(['auth:sanctum', 'tenant.connection'])->group(function () {
 Route::get('/casa-angel/eventos/{evento}', [CasaAngelEventCatalogController::class, 'show']);
