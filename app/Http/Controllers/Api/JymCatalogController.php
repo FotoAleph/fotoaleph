@@ -56,7 +56,7 @@ class JymCatalogController extends Controller
                         'img' => $media->preview_url ?: $media->url,
                         'img_detail' => $media->url,
                         'media_type' => $media->type,
-                        'orientacion' => $media->orientacion,
+                        'orientacion' => $media->aspect_ratio,
                         'date' => $media->created_at?->toISOString(),
                         'level' => (int) ($media->nivel ?? 0),
                     ];
