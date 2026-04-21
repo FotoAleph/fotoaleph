@@ -50,7 +50,7 @@ class JymCatalogController extends Controller
              'category' => $proyecto->categoria?->nombre,
                 'group' => $proyecto->grupo?->nombre,
                 'materiales' => $proyecto->materiales ?? [],
-                'multimedias' => $proyecto->multimedias->take(6)->map(function (Multimedia $media) {
+                'multimedias' => $proyecto->multimedias->where('type', 'image')->take(6)->map(function (Multimedia $media) {
                     return [
                         'id' => $media->id,
                         'img' => $media->preview_url ?: $media->url,
@@ -102,7 +102,7 @@ class JymCatalogController extends Controller
                             'category' => $proyecto->grupo?->nombre,
                             'group' => $proyecto->grupo?->nombre,
                             'materiales' => $proyecto->materiales ?? [],
-                            'multimedias' => $proyecto->multimedias->take(3)->map(function (Multimedia $media) {
+                            'multimedias' => $proyecto->multimedias->where('type', 'image')->take(3)->map(function (Multimedia $media) {
                                 return [
                                     'id' => $media->id,
                                     'img' => $media->preview_url ?: $media->url,
@@ -154,7 +154,7 @@ class JymCatalogController extends Controller
                             'category' => $proyecto->categoria?->nombre,
                             'group' => $proyecto->grupo?->nombre,
                             'materiales' => $proyecto->materiales ?? [],
-                            'multimedias' => $proyecto->multimedias->take(3)->map(function (Multimedia $media) {
+                            'multimedias' => $proyecto->multimedias->where('type', 'image')->take(3)->map(function (Multimedia $media) {
                                 return [
                                     'id' => $media->id,
                                     'img' => $media->preview_url ?: $media->url,
