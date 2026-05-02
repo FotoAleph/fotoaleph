@@ -18,4 +18,13 @@ class WelcomeController extends Controller
             'canRegister' => Features::enabled(Features::registration()),
         ]);
     }
+
+    public function contacto()
+    {
+         $fotoAleph = Tenant::where('razon_social', 'Fotoaleph')->first();
+        return Inertia::render('Contacto', [
+            'socialNetworks' => $fotoAleph->aleatoriasRedesSociales(),
+            'canRegister' => Features::enabled(Features::registration()),
+        ]);
+    }
 }
