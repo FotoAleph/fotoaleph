@@ -62,55 +62,6 @@ withDefaults(
 
     </Head>
 
-    <!-- Contenedor Principal -->
-    <div
-        class="min-h-screen relative bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-sans selection:bg-green-500 selection:text-white pb-12 overflow-hidden">
-
-        <!-- Cabecera de Navegación Mejorada (Efecto Cristal) -->
-        <header
-            class="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-800/50 transition-all">
-
-            <!-- Marca / Logo Izquierda -->
-            <div class="flex items-center gap-3">
-                <div
-                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-950 to-red-300 flex items-center justify-center text-white font-bold text-xl shadow-sm">
-                    <img src="img/logo-car.PNG" alt="CAR">
-                </div>
-                <span class="font-extrabold text-xl tracking-tight hidden sm:block">Carlos<span
-                        class="text-red-600">Ramírez</span></span>
-            </div>
-
-            <!-- Navegación Interna (Secciones) -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
-                <a href="#inicio" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Inicio</a>
-                <a href="#proyectos"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Proyectos</a>
-                <a href="#experiencia"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Experiencia</a>
-                <a href="#contacto"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Contacto</a>
-            </nav>
-
-            <!-- Acciones Derecha (Auth) -->
-            <div class="flex items-center gap-4">
-
-                <Link v-if="$page.props.auth?.user" :href="dashboard()"
-                    class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                    {{ $page.props.auth?.user.name }}
-                </Link>
-                <template v-else>
-                    <Link :href="login()"
-                        class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                        Iniciar sesión
-                    </Link>
-                    <Link v-if="canRegister" :href="register()"
-                        class="hidden sm:inline-block px-4 py-1.5 rounded-md text-sm font-medium bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors shadow-sm">
-                        Registrarse
-                    </Link>
-                </template>
-            </div>
-        </header>
-
         <!-- Contenido Principal -->
         <main
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 flex flex-col items-center justify-center relative z-10">
@@ -121,27 +72,27 @@ withDefaults(
 
                 <!-- Forma Gráfica (Fondo en móvil, Izquierda en Desktop) -->
                 <div
-                    class="absolute inset-0 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15  dark:opacity-100 lg:opacity-60 pointer-events-none z-0 lg:order-2">
-                    <img src="favicon.svg" alt="CA">
+                    class="absolute inset-0 lg:relative lg:inset-auto lg:w-3/8 flex items-center justify-center opacity-15 lg:opacity-50 pointer-events-none z-0 lg:order-2">
+                    <img src="dina.svg" alt="CA">
                 </div>
 
                 <!-- Texto (Izquierda en Desktop, Centrado en Móvil) -->
-                <div class="w-full lg:w-3/5 lg:pr-12 text-center lg:text-left relative z-10 lg:order-1 pt-12 lg:pt-0">
+                <div class="w-full lg:w-5/8 lg:pr-12 text-center lg:text-left relative z-10 lg:order-1 pt-12 lg:pt-0">
                     <h1
                         class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
                         Soluciones Digitales <br class="hidden md:block lg:hidden xl:block" />
                         <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 dark:from-red-400 dark:to-red-500">Orientadas
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-pink-700 dark:from-cyan-400 dark:to-cyan-500">Orientadas
                             a Resultados</span>
                     </h1>
 
-                    <div class="space-y-5 mb-10 relative z-10">
-                        <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
+                    <div class="space-y-5 mb-10 relative  dark:bg-blue-800/50 md:dark:bg-transparent  p-4 rounded-md z-10">
+                        <p class="text-base md:text-lg text-gray-700 dark:text-yellow-50 leading-relaxed max-w-3xl">
                             Desarrollo software y soluciones digitales con un objetivo claro: que la tecnología se
                             traduzca en
                             resultados medibles para el negocio.
                         </p>
-                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                        <p class="text-sm md:text-base text-gray-600 dark:text-yellow-100  leading-relaxed max-w-3xl">
                             Diseño sitios web, aplicaciones a medida y automatizaciones que mejoran la presencia
                             digital,
                             ordenan la operación y ayudan a convertir visitas en oportunidades reales.
