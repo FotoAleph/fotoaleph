@@ -23,7 +23,7 @@ const products = [
 </script>
 
 <template>
-    <Head title="Productos | DinamyCode" />
+    <Head title="Productos | DinamyCode" description="Asambli gestor de reuniones y asambleas de copropietarios - Lissapp reportes y control de pacientes y resultados" />
 
     <HomeLayout :can-register="canRegister" :social-networks="socialNetworks">
         <section class="mx-auto grid max-w-7xl gap-10 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8 lg:pt-20">
@@ -50,6 +50,20 @@ const products = [
                     </div>
                 </div>
             </div>
+        </section>
+        <section>
+            <iframe
+                class="mx-auto mt-10 h-[400px] w-full rounded-md border-0"
+                src="https://asambli.dinamycode.com/"
+                title="Video de ejemplo"
+                allowfullscreen></iframe>
+        </section>
+        <section>
+            <iframe
+                class="mx-auto mt-10 h-[400px] w-full rounded-md border-0"
+                src="https://lissapp.dinamycode.com/"
+                title="Video de ejemplo"
+                allowfullscreen></iframe>
         </section>
     </HomeLayout>
 </template>
