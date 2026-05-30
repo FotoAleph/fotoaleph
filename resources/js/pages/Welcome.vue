@@ -73,21 +73,25 @@ withDefaults(
             <!-- Marca / Logo Izquierda -->
             <div class="flex items-center gap-3">
                 <div
-                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-950 to-red-300 flex items-center justify-center text-white font-bold text-xl shadow-sm">
-                    <img src="img/logo-car.PNG" alt="CAR">
+                    class="w-10 h-10 rounded-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
+            <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
+            <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
+            <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
+        </svg>                   
                 </div>
-                <span class="font-extrabold text-xl tracking-tight hidden sm:block">Carlos<span
-                        class="text-red-600">Ramírez</span></span>
+                <span class="font-extrabold text-xl text-cyan-500 tracking-tight hidden sm:block">dinamy<span
+                        class="text-pink-500">Code</span></span>
             </div>
 
             <!-- Navegación Interna (Secciones) -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
-                <a href="#inicio" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Inicio</a>
-                <a href="#proyectos"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Proyectos</a>
-                <a href="#experiencia"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Experiencia</a>
-                <a href="#contacto"
+                <a href="https://dinamycode.com" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Inicio</a>
+                <a href="https://dinamycode.com/productos/"
+                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Productos</a>
+                <a href="https://dinamycode.com/servicios"
+                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Servcios</a>
+                <a href="https://dinamycode.com/contacto"
                     class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Contacto</a>
             </nav>
 
@@ -113,249 +117,12 @@ withDefaults(
 
         <!-- Contenido Principal -->
         <main
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 flex flex-col items-center justify-center relative z-10">
+            class="max-w-7xl mx-auto p-4 md:p-8 flex flex-col items-center justify-center relative z-10">
 
-            <!-- SECCIÓN HERO Y NUBE DE ETIQUETAS -->
-            <section id="inicio"
-                class="w-full mb-24 relative flex flex-col lg:flex-row items-center justify-between min-h-[50vh] lg:min-h-0 scroll-mt-32">
 
-                <!-- Forma Gráfica (Fondo en móvil, Izquierda en Desktop) -->
-                <div
-                    class="absolute inset-0 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15  dark:opacity-100 lg:opacity-60 pointer-events-none z-0 lg:order-2">
-                    <img src="favicon.svg" alt="CA">
-                </div>
-
-                <!-- Texto (Izquierda en Desktop, Centrado en Móvil) -->
-                <div class="w-full lg:w-3/5 lg:pr-12 text-center lg:text-left relative z-10 lg:order-1 pt-12 lg:pt-0">
-                    <h1
-                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
-                        Soluciones Digitales <br class="hidden md:block lg:hidden xl:block" />
-                        <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 dark:from-red-400 dark:to-red-500">Orientadas
-                            a Resultados</span>
-                    </h1>
-
-                    <div class="space-y-5 mb-10 relative z-10">
-                        <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
-                            Desarrollo software y soluciones digitales con un objetivo claro: que la tecnología se
-                            traduzca en
-                            resultados medibles para el negocio.
-                        </p>
-                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
-                            Diseño sitios web, aplicaciones a medida y automatizaciones que mejoran la presencia
-                            digital,
-                            ordenan la operación y ayudan a convertir visitas en oportunidades reales.
-                        </p>
-
-                    </div>
-
-                    <!-- Nube de Palabras / Etiquetas Interactiva -->
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-3 md:gap-4 relative z-10">
-                        <span
-                            class="px-5 py-2 rounded-full bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-red-200 dark:border-red-800/50">Laravel</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-blue-200 dark:border-blue-800/50">React</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-emerald-200 dark:border-emerald-800/50">Vue.js</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-orange-200 dark:border-orange-800/50">Svelte</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-purple-200 dark:border-purple-800/50">Automatización</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-yellow-200 dark:border-yellow-800/50">SEO</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-indigo-200 dark:border-indigo-800/50">Sistemas
-                            Empresariales</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-teal-200 dark:border-teal-800/50">Escalabilidad</span>
-                        <span
-                            class="px-5 py-2 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-gray-300 dark:border-gray-700">Código
-                            Limpio</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Grid Asimétrico (Estilo Bento Box) -->
-            <div id="proyectos"
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full auto-rows-min scroll-mt-32">
-
-                <!-- Tarjeta 1: Dinamycode (Destacada, ocupa 2 columnas y 2 filas) -->
-                <div
-                    class="md:col-span-2 lg:col-span-2 lg:row-span-2 bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:shadow-xl duration-500 group relative">
-                    <!-- Efecto de resplandor sutil -->
-                    <div
-                        class="absolute -top-32 -right-32 w-96 h-96 bg-green-400/10 dark:bg-green-500/10 rounded-full blur-3xl pointer-events-none">
-                    </div>
-
-                    <div class="p-8 md:p-10 flex flex-col justify-around h-full">
-                        <div class="flex-1 flex flex-col justify-center relative z-10">
-                            <span
-                                class="inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold rounded-full w-fit mb-6 tracking-wide uppercase border border-green-200 dark:border-green-800/50">
-                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                Proyecto Principal
-                            </span>
-                            <h2
-                                class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-                                Dinamycode</h2>
-
-                            <div class="text-gray-600 dark:text-gray-300 text-sm md:text-base leading-relaxed mb-8">
-                                <p>
-                                    En Dinamycode desarrollo soluciones de software enfocadas en automatizar procesos
-                                    empresariales y modernizar operaciones digitales, con especial atención al contexto
-                                    real de
-                                    las empresas colombianas.
-                                </p>
-
-                                <div v-show="showFullDinamycode" class="mt-4 space-y-4">
-                                    <p>
-                                        El proyecto nace del cruce entre ingeniería de software, trabajo colaborativo y
-                                        la
-                                        intención de construir tecnología útil, clara y sostenible para la operación
-                                        diaria.
-                                    </p>
-                                    <div
-                                        class="rounded-2xl bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700 p-4">
-                                        <p
-                                            class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-3">
-                                            En qué estamos trabajando
-                                        </p>
-                                        <ul class="space-y-2">
-                                            <li v-for="highlight in dinamycodeHighlights" :key="highlight"
-                                                class="flex items-start gap-3">
-                                                <span class="mt-1.5 h-2 w-2 rounded-full bg-green-500"></span>
-                                                <span>{{ highlight }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <p>
-                                        El objetivo es reducir fricción operativa, mejorar el control de los procesos y
-                                        acelerar
-                                        la transformación digital con herramientas pensadas para la eficiencia y la toma
-                                        de
-                                        decisiones basada en datos.
-                                    </p>
-                                </div>
-
-                                <button @click="showFullDinamycode = !showFullDinamycode"
-                                    class="mt-3 text-green-600 dark:text-green-400 font-semibold hover:text-green-800 dark:hover:text-green-300 focus:outline-none transition-colors inline-flex items-center gap-1">
-                                    {{ showFullDinamycode ? 'Ver menos' : 'Ver más...' }}
-                                    <svg :class="{ 'rotate-180': showFullDinamycode }"
-                                        class="w-4 h-4 transition-transform duration-300" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="grid items-center justify-center relative z-10 lg:pl-6 mt-auto mb-auto gap-0">
-                            <a href="https://dinamycode.com" target="_blank" rel="noopener noreferrer"
-                                class="block w-full overflow-hidden rounded-2xl border p-2 dark:border-gray-600 shadow-lg hover:scale-[1.03] transition-transform duration-500 ring-4 ring-white dark:ring-gray-800">
-                                <img class="w-full object-cover aspect-auto lg:h-full lg:object-cover"
-                                    src="https://dinamycode.com/img/dinamycode_title.png" loading="lazy"
-                                    alt="Dinamycode Logo">
-                            </a>
-                            <div class="flex w-full justify-end gap-3 p-3 mt-1">
-                                <a href="https://www.linkedin.com/company/dinamycode/" target="_blank"
-                                    rel="noopener noreferrer" aria-label="Lindin de Dinamycode"
-                                    class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path
-                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z">
-                                        </path>
-                                    </svg>
-                                </a>
-                                <a href="https://wa.me/573132635848" target="_blank" rel="noopener noreferrer"
-                                    class="w-9 h-9 rounded-full border border-gray-200 dark:border-white/15 flex items-center justify-center hover:border-gray-400 dark:hover:border-white/50 transition-colors">
-                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                        <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-                                    </svg>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="grid gap-3 sm:grid-cols-3 max-w-4xl">
-                            <div v-for="highlight in heroHighlights" :key="highlight"
-                                class="rounded-2xl border border-gray-200/80 dark:border-gray-700 bg-white/80 dark:bg-gray-800/70 px-4 py-4 text-left shadow-sm backdrop-blur-sm">
-                                <div class="flex items-start gap-3">
-                                    <span class="mt-1 h-2.5 w-2.5 rounded-full bg-red-500"></span>
-                                    <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{{ highlight }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Tarjeta 2: Github (Bloque oscuro, arriba derecha) -->
-                <div
-                    class="md:col-span-1 lg:col-span-1 bg-[#0d1117] rounded-[2rem] shadow-lg overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:shadow-2xl duration-500 relative group border border-gray-800">
-                    <div
-                        class="absolute top-0 right-0 p-32 bg-blue-500/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none transition-all group-hover:bg-blue-500/10">
-                    </div>
-
-                    <div class="p-8 relative z-10 flex-grow flex flex-col">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="p-3 bg-white/5 rounded-xl backdrop-blur-md border border-white/10">
-                                <!-- Icono de GitHub -->
-                                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <h2 class="text-xl font-bold text-white tracking-wide">GitHub</h2>
-                        </div>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-5">
-                            Mi GitHub reúne proyectos personales, pruebas y desarrollos en distintas etapas. No todo
-                            está
-                            terminado, pero sí refleja cómo pienso, experimento y construyo.
-                        </p>
-                        <ul class="space-y-3 text-sm text-gray-300">
-                            <li v-for="highlight in githubHighlights" :key="highlight" class="flex items-start gap-3">
-                                <span class="mt-1 h-2 w-2 rounded-full bg-blue-400"></span>
-                                <span>{{ highlight }}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Tarjeta 3: Framework (Bloque de acento, abajo derecha) -->
-                <div
-                    class="md:col-span-1 lg:col-span-1 bg-gradient-to-br from-red-600 to-red-800 dark:from-red-700 dark:to-red-950 rounded-[2rem] shadow-lg overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:shadow-2xl duration-500 relative text-white">
-                    <!-- Patrón de puntos decorativo -->
-                    <div class="absolute inset-0 opacity-10"
-                        style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;">
-                    </div>
-
-                    <div class="p-8 relative z-10 flex-grow flex flex-col justify-center">
-                        <div class="mb-5">
-                            <span
-                                class="inline-block px-3 py-1 bg-white/10 text-white border border-white/20 text-xs font-bold rounded-full tracking-wider uppercase backdrop-blur-sm">Framework
-                                Favorito</span>
-                        </div>
-                        <h2 class="text-2xl font-bold text-white tracking-wide mb-4">Laravel</h2>
-                        <p class="text-red-100 text-sm leading-relaxed mb-5">
-                            Tengo debilidad por Laravel porque me permite construir con rapidez, orden y buena base
-                            técnica,
-                            aunque siempre procuro elegir la herramienta según lo que necesite el proyecto.
-                        </p>
-                        <ul class="space-y-3 text-sm text-red-50">
-                            <li v-for="highlight in laravelHighlights" :key="highlight" class="flex items-start gap-3">
-                                <span class="mt-1 h-2 w-2 rounded-full bg-white"></span>
-                                <span>{{ highlight }}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
 
             <!-- SECCIÓN DE EXPERIENCIA (Estilo Mini-Cards) -->
-            <article id="experiencia" class="w-full mt-32 relative z-10 scroll-mt-32">
+            <article id="experiencia" class="w-full mt-16 relative z-10 scroll-mt-32">
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">Experiencia</h2>
                     <p class="text-gray-600 dark:text-gray-400 text-lg">
@@ -528,6 +295,73 @@ withDefaults(
 
                 </div>
             </article>
+
+
+
+            <!-- SECCIÓN HERO Y NUBE DE ETIQUETAS -->
+            <section id="inicio"
+                class="w-full p-2 mt-4 relative flex flex-col lg:flex-row items-center justify-between min-h-[50vh] lg:min-h-0 scroll-mt-32">
+
+                <!-- Forma Gráfica (Fondo en móvil, Izquierda en Desktop) -->
+                <div
+                    class="absolute inset-0 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15  dark:opacity-100 lg:opacity-60 pointer-events-none z-0 lg:order-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
+            <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
+            <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
+            <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
+        </svg>
+                </div>
+
+                <!-- Texto (Izquierda en Desktop, Centrado en Móvil) -->
+                <div class="w-full lg:w-3/5 lg:pr-12 text-center lg:text-left relative z-10 lg:order-1 pt-12 lg:pt-0">
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
+                        Soluciones Digitales <br class="hidden md:block lg:hidden xl:block" />
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 dark:from-red-400 dark:to-red-500">Orientadas
+                            a Resultados</span>
+                    </h1>
+
+                    <div class="space-y-5 mb-10 relative z-10">
+                        <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl">
+                            Desarrollo software y soluciones digitales con un objetivo claro: que la tecnología se
+                            traduzca en
+                            resultados medibles para el negocio.
+                        </p>
+                        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                            Diseño sitios web, aplicaciones a medida y automatizaciones que mejoran la presencia
+                            digital,
+                            ordenan la operación y ayudan a convertir visitas en oportunidades reales.
+                        </p>
+
+                    </div>
+
+                    <!-- Nube de Palabras / Etiquetas Interactiva -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-3 md:gap-4 relative z-10">
+                        <span
+                            class="px-5 py-2 rounded-full bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-red-200 dark:border-red-800/50">Laravel</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-blue-200 dark:border-blue-800/50">React</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-emerald-200 dark:border-emerald-800/50">Vue.js</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-orange-200 dark:border-orange-800/50">Svelte</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-purple-200 dark:border-purple-800/50">Automatización</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-yellow-200 dark:border-yellow-800/50">SEO</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-indigo-200 dark:border-indigo-800/50">Sistemas
+                            Empresariales</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-teal-200 dark:border-teal-800/50">Escalabilidad</span>
+                        <span
+                            class="px-5 py-2 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 font-semibold text-sm hover:scale-110 hover:-translate-y-1 transition-all cursor-default shadow-sm border border-gray-300 dark:border-gray-700">Código
+                            Limpio</span>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- SECCIÓN DE CONTACTO (Call to Action) -->
             <section id="contacto" class="w-full mt-32 mb-16 relative z-10 scroll-mt-32">
