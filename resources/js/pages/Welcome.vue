@@ -71,17 +71,16 @@ withDefaults(
             class="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/80 border-b border-gray-200/50 dark:border-gray-800/50 transition-all">
 
             <!-- Marca / Logo Izquierda -->
-            <div class="flex items-center gap-3">
-                <div
-                    class="w-10 h-10 rounded-xl">
-        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
-            <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
-            <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
-            <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
-        </svg>                   
-                </div>
-                <span class="font-extrabold text-xl text-cyan-500 tracking-tight hidden sm:block">dinamy<span
-                        class="text-pink-500">Code</span></span>
+            <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="w-12 h-12" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
+                        <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
+                        <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
+                        <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
+                    </svg>                   
+                <p class="tracking-tight font-extrabold text-xl hidden sm:flex">
+                    <span class="text-cyan-500">dinamy</span>
+                    <span class="text-pink-500">Code</span>
+                </p>
             </div>
 
             <!-- Navegación Interna (Secciones) -->
