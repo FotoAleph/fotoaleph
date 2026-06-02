@@ -16,7 +16,7 @@ return new class extends Migration
             $table->morphs('socialable');
             $table->string('name');
             $table->string('url');
-            $table->string('icon')->nullable();
+            $table->longText('icon')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('redes_sociales');
     }
 };

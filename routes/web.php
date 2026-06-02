@@ -19,8 +19,9 @@ use Laravel\Fortify\Features;
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 Route::get('migrate', function () {
-    Artisan::call('migrate --force');
-    Artisan::call('db:seed --force');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('migrate:refresh --seed --force');
     return 'Migrated';
 });
 

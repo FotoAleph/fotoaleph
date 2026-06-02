@@ -39,7 +39,6 @@ class CentralDatabaseSeeder extends Seeder
             'password' => bcrypt('PassDinamycode!'),
         ]);
 
-        $this->call(SocialNetworkTypesSeeder::class);
         $this->call(TenantSeeder::class);
         $this->call(RoleSeeder::class);
     }
