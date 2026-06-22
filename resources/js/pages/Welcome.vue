@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import { dashboard, login, register } from '@/routes';
 
+const page = usePage<{ auth?: { user?: { name: string } } }>();
+const user = computed(() => page.props.auth?.user);
+const userName = computed(() => user.value?.name ?? 'Usuario');
+const isAuthenticated = computed(() => !!user.value);
 
 // Declaramos la variable reactiva para el botón "Ver más"
 const showFullDinamycode = ref(false);
@@ -53,12 +57,13 @@ withDefaults(
         <meta property="og:title" content="Desarrollador de Software y Soluciones WEB" />
         <meta property="og:descrition"
             content="soluciones de software enfocadas en automatizar procesos empresariales y modernizar operaciones de negocio">
-        <meta property="og:image" content="https://fotoaleph.dinamycode.com/carlos_foto.jpg">
+        <meta property="og:image" content="https://business.dinamycode.com/carlos_foto.jpg">
         <meta property="og:image:type" content="image/jpg" />
         <meta property="og:image:width" content="640" />
         <meta property="og:image:height" content="1280" />
-        <meta property="og:url" content="https://fotoaleph.dinamycode.com" />
+        <meta property="og:url" content="https://business.dinamycode.com" />
         <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://business.dinamycode.com/" />
 
     </Head>
 
@@ -97,9 +102,9 @@ withDefaults(
             <!-- Acciones Derecha (Auth) -->
             <div class="flex items-center gap-4">
 
-                <Link v-if="$page.props.auth?.user" :href="dashboard()"
-                    class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 border border-transparent">
-                    {{ $page.props.auth?.user.name }}
+                <Link v-if="isAuthenticated" :href="dashboard()"
+                    class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors hover:bg.Gray-200 dark:hover:bg-gray-800 border border-transparent">
+                    {{ userName }}
                 </Link>
                 <template v-else>
                     <Link :href="login()"
@@ -303,12 +308,12 @@ withDefaults(
 
                 <!-- Forma Gráfica (Fondo en móvil, Izquierda en Desktop) -->
                 <div
-                    class="absolute inset-0 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15  dark:opacity-100 lg:opacity-60 pointer-events-none z-0 lg:order-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
-            <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
-            <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
-            <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
-        </svg>
+                    class="absolute inset-0 p-2 lg:relative lg:inset-auto lg:w-2/5 flex items-center justify-center opacity-15  dark:opacity-20 lg:opacity-60 pointer-events-none z-0 lg:order-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
+                            <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
+                            <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
+                            <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
+                        </svg>
                 </div>
 
                 <!-- Texto (Izquierda en Desktop, Centrado en Móvil) -->
