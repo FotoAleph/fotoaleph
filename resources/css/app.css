@@ -59,6 +59,8 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+    --color-brand-d: var(--brand-d);
+    --color-brand-c: var(--brand-c);
 }
 
 /*
@@ -124,6 +126,8 @@
     --sidebar-border: hsl(0 0% 91%);
     --sidebar-ring: hsl(217.2 91.2% 59.8%);
     --sidebar: hsl(0 0% 98%);
+    --brand-d: #0ff;
+    --brand-c:#ec008c;
 }
 
 .dark {

@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { dashboard, login, register } from '@/routes';
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
 
 const page = usePage<{ auth?: { user?: { name: string } } }>();
 const user = computed(() => page.props.auth?.user);
@@ -77,26 +78,22 @@ withDefaults(
 
             <!-- Marca / Logo Izquierda -->
             <div class="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="w-12 h-12" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 47 41">
-                        <path id="Mesa-de-trabajo1" d="M0 0h46.327v40.564H0z" style="fill:none"/>
-                        <path id="dinamy" d="M21.939 6.63v22.156h.687q1.433 0 2.06.578.628.578.628 1.512 0 .914-.618 1.491t-2.07.578h-4.709v-1.014q-1.374.832-2.874 1.258a11.3 11.3 0 0 1-3.11.426q-4.532 0-7.299-2.709-2.766-2.708-2.766-6.746 0-4.22 2.904-7.203t7.083-2.983q1.57 0 3.08.497 1.51.496 2.982 1.491v-5.174h-.687q-1.452 0-2.07-.578t-.618-1.491q0-.933.618-1.512.618-.578 2.07-.578zm-4.022 17.652q0-2.577-1.746-4.362t-4.277-1.785q-2.51 0-4.258 1.785-1.746 1.785-1.746 4.301 0 2.292 1.57 3.764 1.569 1.471 4.434 1.471 2.845 0 4.434-1.471t1.589-3.703" style="fill:#00aeef;fill-rule:nonzero"/>
-                        <path id="Code" d="M40.772 16.455q.698-.663 1.433-.664.83 0 1.367.597t.537 1.981v2.503q0 1.403-.537 1.991t-1.404.588q-.792 0-1.338-.455-.396-.342-.622-1.394-.226-1.053-1.093-1.564-1.527-.91-3.902-.91-2.733 0-4.383 1.612-1.65 1.611-1.65 4.077 0 2.276 1.584 3.593t5.26 1.318q2.413 0 3.94-.493.905-.303 1.716-1.033t1.47-.73q.791 0 1.367.588.575.588.575 1.384 0 1.29-1.753 2.446-2.601 1.725-7.616 1.725-4.505 0-7.013-1.877-3.393-2.522-3.393-6.902 0-4.152 2.752-6.873t7.183-2.721q1.602 0 2.979.303a10.3 10.3 0 0 1 2.545.91Z" style="fill:#ec008c;fill-rule:nonzero"/>
-                    </svg>                   
+                <AppLogoIcon class="size-8 w-8 h-8"  />
                 <p class="tracking-tight font-extrabold text-xl hidden sm:flex">
-                    <span class="text-cyan-500">dinamy</span>
-                    <span class="text-pink-500">Code</span>
+                    <span class="text-brand-d">dinamy</span>
+                    <span class="text-brand-c">Code</span>
                 </p>
             </div>
 
             <!-- Navegación Interna (Secciones) -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
-                <a href="https://dinamycode.com" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Inicio</a>
+                <a href="https://dinamycode.com" class="hover:text-brand-c dark:hover:text-brand-d transition-colors">Inicio</a>
                 <a href="https://dinamycode.com/productos/"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Productos</a>
+                    class="hover:text-brand-c dark:hover:text-brand-d transition-colors">Productos</a>
                 <a href="https://dinamycode.com/servicios"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Servcios</a>
+                    class="hover:text-brand-c dark:hover:text-brand-d transition-colors">Servcios</a>
                 <a href="https://dinamycode.com/contacto"
-                    class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Contacto</a>
+                    class="hover:text-brand-c dark:hover:text-brand-d transition-colors">Contacto</a>
             </nav>
 
             <!-- Acciones Derecha (Auth) -->
@@ -161,7 +158,7 @@ withDefaults(
                             <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Coordinador</p>
                             <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Jairo Pulido</p>
                             <a href="tel:+573124491072"
-                                class="inline-block mt-2 px-4 py-1.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-medium rounded-full hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">
+                                class="inline-block mt-2 px-4 py-1.5 bg-brand-d/10 text-brand-c dark:text-brand-d text-sm font-medium rounded-full hover:bg-brand-c/60 transition-colors">
                                 📞 312 4491072
                             </a>
                         </div>
@@ -187,7 +184,7 @@ withDefaults(
                             <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Coordinador</p>
                             <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Ruben Salgado</p>
                             <a href="tel:+573142502033"
-                                class="inline-block mt-2 px-4 py-1.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-medium rounded-full hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">
+                               class="inline-block mt-2 px-4 py-1.5 bg-brand-d/10 text-brand-c dark:text-brand-d text-sm font-medium rounded-full hover:bg-brand-c/60 transition-colors">
                                 📞 314 2502033
                             </a>
                         </div>
@@ -228,7 +225,7 @@ withDefaults(
                             <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Coordinador</p>
                             <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Andres Rojas</p>
                             <a href="tel:+573173671746"
-                                class="inline-block mt-2 px-4 py-1.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-medium rounded-full hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">
+                                class="inline-block mt-2 px-4 py-1.5 bg-brand-d/10 text-brand-c dark:text-brand-d text-sm font-medium rounded-full hover:bg-brand-c/60 transition-colors">
                                 📞 317 3671746
                             </a>
                         </div>
@@ -255,7 +252,7 @@ withDefaults(
                             <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Coordinador</p>
                             <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Claudia Buitrago</p>
                             <a href="tel:+573207001403"
-                                class="inline-block mt-2 px-4 py-1.5 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-medium rounded-full hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">
+                                class="inline-block mt-2 px-4 py-1.5 bg-brand-d/10 text-brand-c dark:text-brand-d text-sm font-medium rounded-full hover:bg-brand-c/60 transition-colors">
                                 📞 320 7001403
                             </a>
                         </div>
@@ -381,7 +378,7 @@ withDefaults(
 
                     <div class="relative z-10 max-w-2xl mx-auto">
                         <span
-                            class="inline-block px-3 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-bold rounded-full tracking-wider uppercase mb-4 border border-green-200 dark:border-green-800/50">
+                            class="inline-block px-3 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-brand-d text-xs font-bold rounded-full tracking-wider uppercase mb-4 border border-green-200 dark:border-green-800/50">
                             Contacto
                         </span>
                         <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">¿Listo para
