@@ -7,6 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -33,17 +35,17 @@ class User extends Authenticatable
         ];
     }
 
-    public function redesSociales()
+    public function redesSociales(): MorphMany
     {
         return $this->morphMany(SocialNetwork::class, 'socialable');
     }
 
-    public function aleatoriasRedesSociales()
+    public function aleatoriasRedesSociales(): MorphMany
     {
         return $this->morphMany(SocialNetwork::class, 'socialable')->inRandomOrder()->limit(2);
     }
 
-    public function tenant()
+    public function tenant(): BelongsToMany
     {
         return $this->belongsToMany(Tenant::class);
     }

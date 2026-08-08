@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class SocialNetwork extends Model
 {
+    protected $table = 'redes_sociales';
+
     protected $fillable = [
         'socialable_id',
         'socialable_type',
@@ -13,9 +17,12 @@ class SocialNetwork extends Model
         'url',
     ];
 
-    protected $table = 'redes_sociales';
+    public function socialable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 
-    public function socialNetworkType()
+    public function socialNetworkType(): BelongsTo
     {
         return $this->belongsTo(SocialNetworkType::class);
     }

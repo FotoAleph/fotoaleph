@@ -49,14 +49,8 @@ class Tenant extends Model
         return $this->morphMany(SocialNetwork::class, 'socialable');
     }
 
-    public function aleatoriasRedesSociales()
+    public function aleatoriasRedesSociales(): MorphMany
     {
-        return $this->morphMany(SocialNetwork::class, 'socialable')->with('socialNetworkType')->inRandomOrder()->limit(2)->get()->map(function ($network) {
-            return [
-                'name' => $network->socialNetworkType->name ?? '',
-                'url' => $network->url,
-                'icon' => '🏴‍☠️' // Placeholder for the icon, replace with actual icon logic if needed
-            ];
-        });
+        return $this->morphMany(SocialNetwork::class, 'socialable')->inRandomOrder()->limit(2);
     }
 }

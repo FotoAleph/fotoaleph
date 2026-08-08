@@ -36,6 +36,15 @@ const laravelHighlights = [
     'Tiene un ecosistema maduro y una comunidad que acelera el desarrollo.',
 ];
 
+const socialIconAssets = import.meta.glob('../assets/social-networks/*.svg', {
+    eager: true,
+    import: 'default',
+    query: '?url',
+}) as Record<string, string>;
+
+const socialIconSrc = (icon: string) => {
+    return socialIconAssets[`../assets/social-networks/${icon}`] ?? '';
+};
 
 withDefaults(
     defineProps<{
@@ -441,8 +450,9 @@ withDefaults(
                 <div class="flex items-center gap-3 pr-3 border-r border-gray-300 dark:border-gray-700">
                     <div v-for="network in socialNetworks" :key="network.name">
                         <a :href="network.url" target="_blank" rel="noopener noreferrer"
-                            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
-                            v-html="network.icon">
+                            class="block transition-opacity duration-300 hover:opacity-75">
+                            <img v-if="socialIconSrc(network.icon)" :src="socialIconSrc(network.icon)"
+                                :alt="network.name" class="h-5 w-5 dark:invert" loading="lazy">
                         </a>
                     </div>
                 </div>
