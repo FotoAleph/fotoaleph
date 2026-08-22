@@ -12,6 +12,7 @@ $runMigrationCommand = function (string $command, string $database, string $path
         '--database' => $database,
         '--path' => $path,
         '--realpath' => true,
+        '--force' => true,
     ]);
 
     $this->output->write(Artisan::output());

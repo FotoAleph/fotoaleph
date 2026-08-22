@@ -15,19 +15,27 @@ use App\Http\Controllers\TenantProyectoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
-Route::get('migrate', function () {
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    Artisan::call('optimize:clear');
-    Artisan::call('migrate:fresh', [
-        '--force' => true,
-       '--seed' => true,
-    ]);
+Route::get('aguacate', function () {
+    foreach ([
+        'tenancy:migrate-central',
+        'tenancy:migrate-jym',
+        'tenancy:migrate-casa-angel',
+        'tenancy:migrate-biotek',
+        'tenancy:migrate-sport-bogota',
+        'tenancy:seed-central',
+        'tenancy:seed-jym',
+        'tenancy:seed-casa-angel',
+        'tenancy:seed-biotek',
+        'tenancy:seed-sport-bogota',
+        'tenancy:seed-vitrinas',
+    ] as $command) {
+        Artisan::call($command);
+    }
+
     return 'Migrated';
 });
 
