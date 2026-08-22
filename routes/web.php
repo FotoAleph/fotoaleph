@@ -21,7 +21,10 @@ Route::get('/', [WelcomeController::class, 'index'])->name('home');
 Route::get('migrate', function () {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
-    Artisan::call('migrate:refresh --seed --force');
+    Artisan::call('migrate:fresh', [
+        '--force' => true,
+        '--seed' => true,
+    ]);
     return 'Migrated';
 });
 
