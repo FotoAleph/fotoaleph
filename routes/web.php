@@ -24,8 +24,11 @@ Route::get('migrate', function () {
     Artisan::call('route:clear');
     Artisan::call('view:clear');
     Artisan::call('optimize:clear');
-    $Migrated =  Artisan::call('migrate:status');
-    return $Migrated;
+    Artisan::call('migrate:fresh', [
+        '--force' => true,
+       '--seed' => true,
+    ]);
+    return 'Migrated';
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
