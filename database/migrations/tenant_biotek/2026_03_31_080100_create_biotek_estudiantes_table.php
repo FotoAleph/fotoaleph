@@ -29,6 +29,17 @@ return new class extends Migration
                 $table->timestamps();
             });
         }
+
+        if (! Schema::connection('tenant_biotek')->hasTable('estudiantes')) {
+            Schema::connection('tenant_biotek')->create('estudiantes', function (Blueprint $table) {
+                $table->id();
+                $table->string('nombres');
+                $table->string('apellidos');
+                $table->string('identificacion')->unique();
+                $table->timestamps();
+            });
+        }
+
         if(!Schema::connection('tenant_biotek')->hasTable('preguntas')){
             Schema::connection('tenant_biotek')->create('preguntas', function (Blueprint $table) {
                 $table->id();
@@ -68,16 +79,6 @@ return new class extends Migration
             });
         }
 
-        if (! Schema::connection('tenant_biotek')->hasTable('estudiantes')) {
-            Schema::connection('tenant_biotek')->create('estudiantes', function (Blueprint $table) {
-                $table->id();
-                $table->string('nombres');
-                $table->string('apellidos');
-                $table->string('identificacion')->unique();
-                $table->timestamps();
-            });
-        }
-
         if (! Schema::connection('tenant_biotek')->hasTable('estudiante_multimedia')) {
             Schema::connection('tenant_biotek')->create('estudiante_multimedia', function (Blueprint $table) {
                 $table->id();
@@ -109,15 +110,15 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::connection('tenant_biotek')->dropIfExists('estudiantes_talleres');
-        Schema::connection('tenant_biotek')->dropIfExists('estudiante_multimedia');
-        Schema::connection('tenant_biotek')->dropIfExists('estudiantes');
-        Schema::connection('tenant_biotek')->dropIfExists('talleres');
-        Schema::connection('tenant_biotek')->dropIfExists('multimedia');
         Schema::connection('tenant_biotek')->dropIfExists('carnets');
         Schema::connection('tenant_biotek')->dropIfExists('respuestas');
         Schema::connection('tenant_biotek')->dropIfExists('intentos');
+        Schema::connection('tenant_biotek')->dropIfExists('estudiantes_talleres');
+        Schema::connection('tenant_biotek')->dropIfExists('estudiante_multimedia');
+        Schema::connection('tenant_biotek')->dropIfExists('estudiantes');
         Schema::connection('tenant_biotek')->dropIfExists('opciones');
         Schema::connection('tenant_biotek')->dropIfExists('preguntas');
+        Schema::connection('tenant_biotek')->dropIfExists('talleres');
+        Schema::connection('tenant_biotek')->dropIfExists('multimedia');
     }
 };
