@@ -70,7 +70,11 @@ class CasaAngelTenantSeeder extends Seeder
                 'aspect_ratio' => $multimedia->aspect_ratio ?: (isset($item['orientacion']) ? $this->orientationClassToAspectRatio($item['orientacion']) : null),
             ])->save();
 
-            $evento->multimedias()->syncWithoutDetaching([$multimedia->id => ['cantidad' => $item['cantidad'] ?? 0]]);
+            $cantidad = is_numeric($item['cantidad'] ?? null)
+                ? (int) $item['cantidad']
+                : 0;
+
+            $evento->multimedias()->syncWithoutDetaching([$multimedia->id => ['cantidad' => $cantidad]]);
         }
     }
 
