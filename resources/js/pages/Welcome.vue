@@ -244,7 +244,7 @@ withDefaults(
                     <div
                         class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hover:-translate-y-2 hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group">
                         <div
-                            class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                            class="absolute inset-0 b-linear-to-b from-transparent to-gray-50/50 dark:to-gray-900/50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
                         <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1 z-10">Laboratorio clínico Biotek
                         </h3>
@@ -252,7 +252,7 @@ withDefaults(
                             bitácora</p>
 
                         <a href="https://maps.app.goo.gl/btdcnCEd7i2tpbat8" target="_blank" rel="noopener noreferrer"
-                            class="flex-grow flex items-center justify-center mb-6 z-10">
+                            class="grow flex items-center justify-center mb-6 z-10">
                             <img class="w-20 h-20 object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300 rounded-full bg-white p-1 border border-gray-100"
                                 src="https://biotek.dinamycode.com/Biotek.png" alt="Laboratorio Biotek">
                         </a>
