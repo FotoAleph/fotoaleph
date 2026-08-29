@@ -199,7 +199,20 @@ class JymCatalogController extends Controller
         }));
     }
 
-    
+    public function sendMessage(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'email', 'max:255'],
+            'message' => ['required', 'string'],
+        ]);
+
+        // Send the email using the validated data
+        \Mail::to('info@dinamycode.com')->send(new \App\Mail\JymMessage($validated));
+
+        return response()->json(['message' => 'Message sent successfully']);
+    }
+
     private function projectRows(iterable $projects): Collection
     {
         return collect($projects)

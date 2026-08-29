@@ -30,6 +30,7 @@ Route::get('/casa-angel/eventos', [CasaAngelEventCatalogController::class, 'inde
 Route::get('/casa-angel/muestrario', [CasaAngelMuestrarioController::class, 'index']);
 Route::post('/casa-angel/muestrario/{multimedia}/level', [CasaAngelMuestrarioController::class, 'incrementLevel']);
 Route::get('/jym/proyectos', [JymCatalogController::class, 'index']);
+Route::post('/jym/mensajes', [JymCatalogController::class, 'sendMessage']);
 Route::get('/jym/proyectos/{proyecto}', [JymCatalogController::class, 'show']);
 Route::get('/jym/grupos/', [JymCatalogController::class, 'indexByGroup']);
 Route::get('/jym/grupos/{grupo}', [JymCatalogController::class, 'showByGroup']);
