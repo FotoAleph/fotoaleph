@@ -8,12 +8,17 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 $runMigrationCommand = function (string $command, string $database, string $path): void {
-    Artisan::call($command, [
+    $arguments = [
         '--database' => $database,
         '--path' => $path,
         '--realpath' => true,
-        '--force' => true,
-    ]);
+    ];
+
+    if ($command !== 'migrate:status') {
+        $arguments['--force'] = true;
+    }
+
+    Artisan::call($command, $arguments);
 
     $this->output->write(Artisan::output());
 };
