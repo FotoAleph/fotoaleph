@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\MensajeController;
 use App\Http\Controllers\Api\ManagedTenantVitrinaController;
 use App\Http\Controllers\Api\CasaAngelEventCatalogController;
 use App\Http\Controllers\Api\CasaAngelMuestrarioController;
@@ -23,6 +24,17 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
+// Public message endpoint
+Route::post('/mensajes', [MensajeController::class, 'sendMessage']);
+
+// Protected message routes (admin/authenticated users)
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/mensajes', [MensajeController::class, 'index']);
+    Route::get('/mensajes/{id}', [MensajeController::class, 'show']);
+    Route::patch('/mensajes/{id}', [MensajeController::class, 'update']);
+    Route::delete('/mensajes/{id}', [MensajeController::class, 'destroy']);
+});
+
 
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}', [SocialNetworkController::class, 'index']);
 Route::get('/redes-sociales/{socialable_type}/{socialable_id}/aleatorias', [SocialNetworkController::class, 'random']);
@@ -30,7 +42,6 @@ Route::get('/casa-angel/eventos', [CasaAngelEventCatalogController::class, 'inde
 Route::get('/casa-angel/muestrario', [CasaAngelMuestrarioController::class, 'index']);
 Route::post('/casa-angel/muestrario/{multimedia}/level', [CasaAngelMuestrarioController::class, 'incrementLevel']);
 Route::get('/jym/proyectos', [JymCatalogController::class, 'index']);
-Route::post('/jym/mensajes', [JymCatalogController::class, 'sendMessage']);
 Route::get('/jym/proyectos/{proyecto}', [JymCatalogController::class, 'show']);
 Route::get('/jym/grupos/', [JymCatalogController::class, 'indexByGroup']);
 Route::get('/jym/grupos/{grupo}', [JymCatalogController::class, 'showByGroup']);
