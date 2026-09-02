@@ -24,12 +24,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
+Route::get('/mensajes', [MensajeController::class, 'index']);
+
 // Public message endpoint
 Route::post('/mensajes', [MensajeController::class, 'sendMessage']);
 
 // Protected message routes (admin/authenticated users)
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/mensajes', [MensajeController::class, 'index']);
     Route::get('/mensajes/{id}', [MensajeController::class, 'show']);
     Route::patch('/mensajes/{id}', [MensajeController::class, 'update']);
     Route::delete('/mensajes/{id}', [MensajeController::class, 'destroy']);

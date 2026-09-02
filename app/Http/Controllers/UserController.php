@@ -27,6 +27,17 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function show(User $user): Response
+    {
+        $this->authorize('view', $user);
+
+        return Inertia::render('Users/Show', [
+            'user' => $user,
+        ]);
+    }   
+
+
     /**
      * Show the form for creating a new user.
      */
