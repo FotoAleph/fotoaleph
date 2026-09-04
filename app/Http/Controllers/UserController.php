@@ -31,6 +31,7 @@ class UserController extends Controller
     public function show(User $user): Response
     {
         $this->authorize('view', $user);
+        $user->load('tenant');
 
         return Inertia::render('Users/Show', [
             'user' => $user,
