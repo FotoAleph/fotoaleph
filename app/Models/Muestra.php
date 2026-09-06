@@ -11,15 +11,6 @@ class Muestra extends Model
 
     private const API_CACHE_VERSION_KEY = 'tenant:casa_angel:api:muestrarios:index:version';
 
-            // $table->id();
-            // $table->string('nombre');
-            // $table->foreignId('ocasion_id')->nullable()->constrained('ocasiones')->nullOnDelete();
-            // $table->foreignId('tematica_id')->nullable()->constrained('tematicas')->nullOnDelete();
-            // $table->foreignId('color_id')->nullable()->constrained('colores')->nullOnDelete();
-            // $table->text('descripcion')->nullable();
-            // $table->foreignId('multimedia_id')->nullable()->constrained('multimedia')->nullOnDelete();
-            // $table->unsignedInteger('nivel')->default(0);
-            // $table->timestamps();
     protected $connection = 'tenant_casa_angel';
     protected $fillable = [
         'nombre',
