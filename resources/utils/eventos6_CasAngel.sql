@@ -6225,7 +6225,7 @@ INSERT INTO `Eunice` (`Foto`, `orientacion`, `cant`) VALUES
 -- Estructura de tabla para la tabla `Eventos`
 --
 
-CREATE TABLE `Eventos` (
+CREATE TABLE `temporary_events` (
   `id_event` int(11) NOT NULL,
   `N_Event` varchar(32) NOT NULL,
   `Fecha` date NOT NULL,
@@ -6239,7 +6239,7 @@ CREATE TABLE `Eventos` (
 -- Volcado de datos para la tabla `Eventos`
 --
 
-INSERT INTO `Eventos` (`id_event`, `N_Event`, `Fecha`, `Codigo`, `grande`, `mediano`, `Estado`) VALUES
+INSERT INTO `temporary_events` (`id_event`, `N_Event`, `Fecha`, `Codigo`, `grande`, `mediano`, `Estado`) VALUES
 (1, 'Azul_llanito', '2019-11-02', 'Azul_llanito', '/Azul_llanito/Fotos/resources/images/large/', '/Azul_llanito/Fotos/resources/images/medium/', 'Entregado'),
 (2, 'Angela', '2019-11-02', 'Angela', '/Angela/Fotos/resources/images/large/', '/Angela/Fotos/resources/images/medium/', 'Entregado'),
 (3, 'Prueba', '2019-09-01', 'CdePrueba', '/Nidia/Fotos/resources/images/medium/', '/Nidia/Fotos/resources/images/medium/', 'Entregado'),
@@ -69490,7 +69490,7 @@ ALTER TABLE `Clientes`
 --
 -- Indices de la tabla `Eventos`
 --
-ALTER TABLE `Eventos`
+ALTER TABLE `temporary_events`
   ADD PRIMARY KEY (`id_event`),
   ADD UNIQUE KEY `N_Event` (`N_Event`);
 
@@ -69527,7 +69527,7 @@ ALTER TABLE `Clientes`
 --
 -- AUTO_INCREMENT de la tabla `Eventos`
 --
-ALTER TABLE `Eventos`
+ALTER TABLE `temporary_events`
   MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
 
 --
