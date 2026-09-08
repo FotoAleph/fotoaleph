@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Evento;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Policies\CasaAngelEventPolicy;
 use App\Support\Tenants\TenantConnectionResolver;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
@@ -57,6 +59,8 @@ class AppServiceProvider extends ServiceProvider
 
     protected function configureGates(): void
     {
+        Gate::policy(Evento::class, CasaAngelEventPolicy::class);
+
         Gate::define('manage-tenant', function (User $user, Tenant|string $tenant): bool {
             if ($user->role === 'admin') {
                 return true;

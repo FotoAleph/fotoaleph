@@ -11,14 +11,13 @@ class Evento extends Model
     protected $connection = 'tenant_casa_angel';
 
     protected $fillable = [
-
+        'user_id',
         'nombre',
         'descripcion',
         'fecha_evento',
         'entregado',
         'ubicacion',
         'codigo',
-  
     ];
 
     protected $casts = [

@@ -51,7 +51,7 @@ Route::get('/jym/categorias/', [JymCatalogController::class, 'indexByCategory'])
 Route::get('/jym/categorias/{categoria}', [JymCatalogController::class, 'showByCategory']);
 Route::patch('/jym/muestrario/{multimedia}/level', [JymCatalogController::class, 'updateLevel']);
 Route::middleware(['auth:sanctum'])->group(function () {
-Route::get('/casa-angel/eventos/{evento}', [CasaAngelEventCatalogController::class, 'show']);
+Route::apiResource('/casa-angel/eventos', CasaAngelEventCatalogController::class);
 Route::patch('/casa-angel/eventos/{evento}/multimedia/{multimedia}/cantidad', [CasaAngelEventCatalogController::class, 'updateCantidad']);
 Route::resource('/jym/admin/proyectos', JymProyectoCotroller::class)->except(['create', 'edit']);
 Route::resource('/jym/admin/grupos', JymGroupController::class)->except(['create', 'edit']);
