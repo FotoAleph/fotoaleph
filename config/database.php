@@ -208,6 +208,17 @@ return [
                 env('TENANT_SPORT_BOGOTA_DB_URL')
             ),
 
+'legacy_casa_angel' => [
+    'driver'   => 'mysql',
+    'host'     => env('DB_HOST', '127.0.0.1'),
+    'port'     => env('DB_PORT', '3306'),
+    'database' => 'legacy_casa_angel',
+    'username' => env('DB_USERNAME'),
+    'password' => env('DB_PASSWORD'),
+    'charset'  => 'utf8mb4',
+    'collation'=> 'utf8mb4_unicode_ci',
+],
+
 
     ],
 
