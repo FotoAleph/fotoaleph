@@ -21,8 +21,20 @@ class CasaAngelEventCatalogController extends Controller
         $query = Evento::query();
 
         if ($request->user()->isCliente()) {
-            $query->where('user_id', $request->user()->id);
+
+            return response()->json([$request->user()->eventos(fn (Evento $evento) => [
+                'id' => $evento->id,
+                'name' => $evento->nombre,
+                'description' => $evento->descripcion,
+                'entregado' => $evento->entregado,
+                'date' => $evento->fecha_evento?->toISOString(),
+            ])], 200);
+
         }
+
+
+
+        
 
         return response()->json(
             $query->paginate(10)->through(fn (Evento $evento) => [

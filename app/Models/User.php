@@ -50,6 +50,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Tenant::class);
     }
 
+
+    public function eventos(): BelongsToMany
+    {
+        return $this->belongsToMany(Evento::class);
+    }
+
     // Métodos helper para roles
     public function isAdmin(): bool
     {
